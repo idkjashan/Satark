@@ -1,0 +1,233 @@
+# Golden strings per identifier type (CONTRACTS §8, LLD build step 2). Loaded by
+# tests/unit/test_extract_golden.py: every `positive` string must produce >=1 entity of that
+# type from ExtractorPipeline.regex(); every `negative` string must produce none.
+#
+# party.name and domain have no patterns of their own (party.name: LLM/near-a-reg-no only;
+# domain: derived from url/email only) so they are not regex-golden-tested here; see
+# test_extract_pipeline.py for those.
+
+upi.vpa:
+  positive:
+    - "Pay rajesh.vip@okaxis now to confirm"
+    - "send to merchant.pay@ybl asap"
+    - "ramesh123@paytm for the payment"
+  negative:
+    - "my email is rajesh@gmail.com"      # a dotted TLD after @, not a VPA
+    - "contact john.doe@yahoo.com"
+
+upi.uri:
+  positive:
+    - "upi://pay?pa=test@okaxis&pn=Test&am=100"
+    - "Scan this upi://pay?pa=scammer@ybl&pn=Scammer&am=5000&cu=INR"
+    - "upi://pay?pa=fraud.vip@paytm&pn=Fraud"
+  negative:
+    - "normal text with no uri at all"
+    - "just a website https://example.com"
+
+sebi.reg_no:
+  positive:
+    - "SEBI Registered Investment Adviser Rajesh Sharma (INA000012345) can help"
+    - "RA: Sharma Research INH000012345 providing calls"
+    - "broker code INZ000000003 verified on the register"
+  negative:
+    - "reliance isin INE002A01018 traded today"   # ISIN (letter in the body), not a broker reg no
+    - "INR 50000 is the amount due"               # a currency amount, not a registration number
+
+pan:
+  positive:
+    - "PAN: AAACP1234Q filed for KYC"
+    - "submit your pan ABCPE1234F with the form"
+    - "company pan XYZCA5678L on record"
+  negative:
+    - "card number 4111111111111111 was charged"
+    - "aadhaar 234123412346 shared by mistake"
+
+aadhaar:
+  positive:
+    - "mera aadhaar 2341 2341 2346 hai"
+    - "aadhaar no 234123412346 sent for verification"
+    - "आधार संख्या 234123412346 है"
+  negative:
+    - "pan ABCPE1234F only, nothing else"
+    - "my otp is 482913"
+
+card.number:
+  positive:
+    - "card number 4111111111111111 was used"
+    - "card 4532015112830366 was charged twice"
+    - "debit card 4916 1234 5678 9012 blocked"
+  negative:
+    - "aadhaar 234123412346 shared by mistake"
+    - "otp is 482913 valid for 10 minutes"
+
+otp:
+  positive:
+    - "your otp is 482913, valid 10 min"
+    - "OTP: 7734 for login, do not share"
+    - "ओटीपी 5566 है, किसी को न बताएं"
+  negative:
+    - "balance is 123456 rupees only"
+    - "order id 998877 confirmed"
+
+demat.bo_id:
+  positive:
+    - "your demat boid 1234567890123456 is linked"
+    - "client id IN30012345678901 for demat transfer"
+    - "beneficiary id 9988776655443322 noted"
+  negative:
+    - "phone 9876543210 for contact"
+    - "account 123456789012 for neft"
+
+bank.account_no:
+  positive:
+    - "send to a/c 123456789012 now"
+    - "account no 98765432109 for neft transfer"
+    - "khata number 112233445566 diya hai"
+  negative:
+    - "aadhaar 234123412346 shared by mistake"
+    - "call 9876543210 for support"
+
+bank.ifsc:
+  positive:
+    - "IFSC SBIN0001234 branch Mumbai"
+    - "ifsc: HDFC0000123 for the transfer"
+    - "neft code ICIC0001122 required"
+  negative:
+    - "inr 50000 only due today"
+    - "pan ABCPE1234F on file"
+
+user.name:
+  positive:
+    - "Dear Ramesh ji, your KYC is pending"
+    - "Hello Suresh, please verify now"
+    - "Namaste Geeta, your account is flagged"
+  negative:
+    - "random text with Ramesh inside it"
+    - "no greeting here, just Suresh mentioned"
+
+phone:
+  positive:
+    - "call 9876543210 now for details"
+    - "+91 98765 43210 will contact you"
+    - "dial 1800-22-7575 for the helpline"
+  negative:
+    - "aadhaar 234123412346 shared by mistake"
+    - "card 4111111111111111 was charged"
+
+sms.header:
+  positive:
+    - "VM-HDFCBK-S: your otp is 1234"
+    - "AX-ICICIB-T: account debited Rs 500"
+    - "Some preamble text\nJM-SEBINFO-G: investor alert issued"
+  negative:
+    - "VMHDFCBKS no dashes in this one"
+    - "just plain text, no header at all"
+
+email:
+  positive:
+    - "contact rajesh@gmail.com now for help"
+    - "mail your complaint to support@sebi.gov.in"
+    - "write to advisor.help@outlook.com today"
+  negative:
+    - "rajesh.vip@okaxis is the payment id"
+    - "no email address here at all"
+
+url:
+  positive:
+    - "visit http://tradeking-pro.in/offer now"
+    - "check www.fakebroker.xyz/login urgently"
+    - "go to zerodha.com for details"
+    - "visit bit.ly/abc."  # trailing sentence period must not become part of the url
+    - "http://tradeking-pro.in/offer। अभी join करें"  # trailing Hindi danda (।)
+  negative:
+    - "no link here at all"
+    - "just some random text about zerodha"
+
+tg.link:
+  positive:
+    - "join t.me/bullrun_vip now"
+    - "t.me/+AbCdEfGhIjKlMnOp is the invite link"
+    - "t.me/joinchat/abcDEF123 to join now"
+  negative:
+    - "no telegram link here"
+    - "we use whatsapp only, not telegram"
+
+social.handle:
+  positive:
+    - "follow https://x.com/zerodhaonline now"
+    - "instagram.com/kedia.capital for tips"
+    - "facebook.com/randomhandle123 page"
+  negative:
+    - "no social handle here"
+    - "just follow the news"
+
+app.package:
+  positive:
+    - "play.google.com/store/apps/details?id=com.example.trade"
+    - "install from play.google.com/store/apps/details?id=com.fake.broker.pro"
+    - "get it at play.google.com/store/apps/details?id=in.tradeking.app"
+  negative:
+    - "no play store link here"
+    - "download our app from the office"
+
+apk.link:
+  positive:
+    - "download http://fakebroker.xyz/app.apk now"
+    - "get it from https://bit.ly/trade.apk today"
+    - "install tradeking.apk from this link"
+    - "रोज़ाना 3% मुनाफ़ा पक्का। ऐप डाउनलोड करें: http://profittrade.xyz/app.apk। सीमित सीटें"
+  negative:
+    - "no apk link here"
+    - "download the pdf instead"
+
+crypto.btc:
+  positive:
+    - "send btc to 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa now"
+    - "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4 is our wallet"
+    - "deposit to 3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy please"
+  negative:
+    - "no crypto address here"
+    - "random text 123 nothing else"
+
+crypto.evm:
+  positive:
+    - "send to 0x742d35Cc6634C0532925a3b844Bc454e4438f44e eth"
+    - "usdt bep20 0x5aAeb6053f3E94C9b9A09f33669435E7Ef1BeAed address"
+    - "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045 is the wallet"
+  negative:
+    - "no evm address here"
+    - "just some hex 0x1234 nothing more"
+
+crypto.tron:
+  positive:
+    - "usdt trc20 TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t address"
+    - "send usdt to TJRabPrwbZy45sbavfcjinPJC18kjpRTv8 now"
+    - "tron wallet TLsV52sRDL79HXGGm9yzwKibb6BeruhUzy please"
+  negative:
+    - "no tron address here"
+    - "random text nothing else"
+
+money.inr:
+  positive:
+    - "pay ₹1,00,000 now to confirm"
+    - "Rs 5 lakh guaranteed in 3 months"
+    - "रु 50000 जमा करें आज ही"
+  negative:
+    - "call 9876543210 for support"
+    - "track record of 5 years in the market"
+
+money.return_rate:
+  positive:
+    - "earn 5% daily guaranteed returns"
+    - "10% per month assured profit"
+    - "रोज़ 3% रिटर्न मिलेगा"
+    - "रोजाना 3% मुनाफा पक्का"  # nukta-less spelling of the line above must fold onto the same match
+    - "रोज़ाना 3% मुनाफ़ा पक्का। ऐप डाउनलोड करें: http://profittrade.xyz/app.apk। सीमित सीटें"
+    - "target 150% in 3 days, join now"
+    - "90% returns are guaranteed within a week"
+    - "money double in 7 days, trust us"
+    - "paisa double 30 din mein, guaranteed"
+    - "7 दिन में पैसा डबल, 100% गारंटी"
+  negative:
+    - "5% discount on brokerage fees"
+    - "no rate mentioned here at all"

@@ -1,0 +1,27 @@
+# Text-family rules (LLD §9.8). Loaded by satark/config.py into ctx.config.claim_rules.
+#
+# return_math: text.return_math's annualisation (HLD Appendix C.5). n_per_year is trading
+# days/weeks/months/years per year; impossible_annual_return is the threshold (a fraction: 0.5 = 50%).
+return_math:
+  n_per_year: {day: 250, week: 52, month: 12, year: 1}
+  impossible_annual_return: 0.5
+
+# map: claims.rules' entity type -> signal code. A plain string is an unconditional mapping; a
+# list of {when: {attr: [values]}, code: ...} rules is checked in order, first match wins.
+# claim.registered_as, doc.official_notice and the U-class presence types (aadhaar, card.number,
+# otp) have their own cross-entity logic in satark/checkers/text.py and are not listed here.
+map:
+  claim.guaranteed_return: GUARANTEED_RETURN
+  request.fee_to_withdraw: FEE_TO_WITHDRAW
+  request.remote_access: REMOTE_ACCESS_REQUEST
+  request.credentials: OTP_REQUEST
+  threat.legal_action: DIGITAL_ARREST
+  claim.institutional_access: INSTITUTIONAL_ACCESS
+  request.account_handling: ACCOUNT_HANDLING
+  pressure.urgency: URGENCY
+  request.join_group: VIP_GROUP
+  tip.security_call: PUMP_LANGUAGE
+  claim.endorsement: CELEBRITY_ENDORSEMENT
+  offer.unregulated:
+    - {when: {kind: [dabba]}, code: DABBA}
+    - {when: {kind: [crypto, forex]}, code: CRYPTO_PAYMENT_REQUEST}

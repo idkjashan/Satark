@@ -1,0 +1,80 @@
+{
+  "id": "kyc-otp-remote-access",
+  "icon": "📱",
+  "minutes": 2,
+  "title": {
+    "en": "The \"KYC update\" call that wants remote access",
+    "hi": "\"KYC अपडेट\" कॉल जो रिमोट एक्सेस माँगती है"
+  },
+  "tactic": {
+    "en": "Tactic: remote access — sharing an OTP or installing a remote-control app hands your account straight to a scammer.",
+    "hi": "तरीका: रिमोट एक्सेस — OTP शेयर करना या रिमोट-कंट्रोल ऐप इंस्टॉल करना आपका अकाउंट सीधे स्कैमर के हाथ में दे देता है।"
+  },
+  "tacticKey": "remote_access_app",
+  "steps": [
+    {
+      "text": {
+        "en": "A call or SMS says your KYC, SIM or bank account will be blocked today unless you \"verify\" immediately.",
+        "hi": "एक कॉल या SMS कहता है कि आज \"वेरिफ़ाई\" न करने पर आपका KYC, सिम या बैंक अकाउंट बंद हो जाएगा।"
+      }
+    },
+    {
+      "text": {
+        "en": "They ask you to install an app like AnyDesk or TeamViewer \"to help you\" — this gives them full remote control of your phone.",
+        "hi": "वे आपसे AnyDesk या TeamViewer जैसा ऐप इंस्टॉल करने को कहते हैं \"मदद के लिए\" — इससे वे आपके फ़ोन का पूरा रिमोट कंट्रोल ले लेते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Or they ask for the OTP that just arrived \"to confirm your identity\" — that OTP is the only thing standing between them and your money.",
+        "hi": "या वे अभी आए OTP को \"पहचान कन्फ़र्म\" करने के लिए माँगते हैं — वह OTP ही आख़िरी चीज़ है जो उन्हें आपके पैसे से रोकती है।"
+      }
+    },
+    {
+      "text": {
+        "en": "With remote access or your OTP, they open your banking app themselves and move the money out — in seconds, while you watch.",
+        "hi": "रिमोट एक्सेस या आपके OTP से, वे ख़ुद आपका बैंकिंग ऐप खोलते हैं और पैसे निकाल लेते हैं — सेकंडों में, आपके देखते-देखते।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like handing a stranger the keys to your house \"just to check the locks\" — once they're inside, nothing stops them.",
+    "hi": "यह वैसा है जैसे किसी अजनबी को \"ताले चेक करने\" के लिए घर की चाबी दे दें — एक बार अंदर आने पर उसे कोई रोक नहीं सकता।"
+  },
+  "source": "https://sancharsaathi.gov.in/sfc/",
+  "sim": "S6",
+  "quiz": [
+    {
+      "question": {
+        "en": "A caller says: \"Your KYC will expire tonight, install AnyDesk now so our officer can fix it for you.\" What should you do?",
+        "hi": "कॉल करने वाला कहता है: \"आपका KYC आज रात ख़त्म हो जाएगा, अभी AnyDesk इंस्टॉल करें ताकि हमारा अधिकारी इसे ठीक कर सके।\" आपको क्या करना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Hang up — no bank or telecom officer ever asks you to install a remote-access app", "hi": "कॉल काटें — कोई बैंक या टेलीकॉम अधिकारी कभी रिमोट-एक्सेस ऐप इंस्टॉल करने को नहीं कहता"}, "correct": true},
+        {"id": "b", "text": {"en": "Install it, since it saves a trip to the branch", "hi": "इंस्टॉल कर दें, इससे शाखा जाने की ज़रूरत नहीं पड़ेगी"}, "correct": false},
+        {"id": "c", "text": {"en": "Install it, but only share your screen, not control", "hi": "इंस्टॉल करें, पर सिर्फ़ स्क्रीन दिखाएं, कंट्रोल नहीं"}, "correct": false}
+      ],
+      "explain": {
+        "en": "No real KYC update needs remote control of your phone. Banks and telecom staff fix KYC in person, in-app, or at official branches — never through a remote-access app.",
+        "hi": "असली KYC अपडेट के लिए फ़ोन का रिमोट कंट्रोल कभी नहीं चाहिए। बैंक और टेलीकॉम स्टाफ़ KYC ख़ुद मिलकर, ऐप में या आधिकारिक शाखा में ठीक करता है — किसी रिमोट-एक्सेस ऐप से कभी नहीं।"
+      },
+      "tactic": "remote_access_app"
+    },
+    {
+      "question": {
+        "en": "Someone claiming to be from your bank asks you to read out the OTP you just received, \"to cancel a wrong transaction\". What should you do?",
+        "hi": "आपके बैंक से होने का दावा करने वाला कोई व्यक्ति अभी आए OTP को \"ग़लत ट्रांज़ैक्शन रद्द करने\" के लिए बताने को कहता है। आपको क्या करना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Never share it — hang up and call your bank's official number yourself", "hi": "कभी न बताएं — कॉल काटें और ख़ुद अपने बैंक के आधिकारिक नंबर पर कॉल करें"}, "correct": true},
+        {"id": "b", "text": {"en": "Share it, since they already know your account number", "hi": "बता दें, क्योंकि उन्हें आपका अकाउंट नंबर पहले से ही पता है"}, "correct": false},
+        {"id": "c", "text": {"en": "Share only the last two digits of the OTP", "hi": "सिर्फ़ OTP के आख़िरी दो अंक बताएं"}, "correct": false}
+      ],
+      "explain": {
+        "en": "An OTP is never shared with anyone, for any reason — even a caller who already seems to know real details about you.",
+        "hi": "OTP किसी को भी, किसी भी वजह से कभी नहीं बताया जाता — भले ही कॉल करने वाला आपके बारे में सच्ची जानकारी जानता लगे।"
+      },
+      "tactic": "remote_access_app"
+    }
+  ]
+}

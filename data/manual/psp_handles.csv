@@ -1,0 +1,23 @@
+handle,bank,app
+ybl,Yes Bank,PhonePe
+ibl,ICICI Bank,PhonePe
+axl,Axis Bank,PhonePe
+okaxis,Axis Bank,Google Pay
+okhdfcbank,HDFC Bank,Google Pay
+okicici,ICICI Bank,Google Pay
+oksbi,State Bank of India,Google Pay
+paytm,Paytm Payments Bank,Paytm
+ptyes,Yes Bank,Paytm
+ptaxis,Axis Bank,Paytm
+pthdfc,HDFC Bank,Paytm
+ptsbi,State Bank of India,Paytm
+apl,Amazon Pay,Amazon Pay
+yapl,Amazon Pay,Amazon Pay
+rapl,Amazon Pay,Amazon Pay
+waicici,ICICI Bank,WhatsApp Pay
+waaxis,Axis Bank,WhatsApp Pay
+wahdfcbank,HDFC Bank,WhatsApp Pay
+wasbi,State Bank of India,WhatsApp Pay
+upi,NPCI (BHIM; bank varies per user),BHIM
+validhdfc,HDFC Bank,
+validicici,ICICI Bank,

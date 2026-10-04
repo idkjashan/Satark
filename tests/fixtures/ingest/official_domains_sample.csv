@@ -1,0 +1,4 @@
+domain,entity_name,category,source
+examplemf.com,Example Mutual Fund,amc,unit test fixture
+examplebroker.in,Example Broker,broker,unit test fixture
+not a domain,Bad Row,amc,unit test fixture

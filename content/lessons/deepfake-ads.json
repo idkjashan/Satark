@@ -1,0 +1,80 @@
+{
+  "id": "deepfake-ads",
+  "icon": "🎭",
+  "minutes": 2,
+  "title": {
+    "en": "The deepfake celebrity investment ad",
+    "hi": "डीपफ़ेक सेलिब्रिटी इन्वेस्टमेंट विज्ञापन"
+  },
+  "tactic": {
+    "en": "Tactic: deepfake endorsement — an AI-faked video puts a real celebrity's face and voice on a fake investment pitch.",
+    "hi": "तरीका: डीपफ़ेक एंडोर्समेंट — AI से बनाई नकली वीडियो में असली सेलिब्रिटी का चेहरा और आवाज़ एक फ़र्ज़ी इन्वेस्टमेंट पिच पर लगा दी जाती है।"
+  },
+  "tacticKey": "deepfake_endorsement",
+  "steps": [
+    {
+      "text": {
+        "en": "A video on Instagram or YouTube shows a famous actor, cricketer or business leader recommending a trading app or platform.",
+        "hi": "Instagram या YouTube पर एक वीडियो में कोई मशहूर अभिनेता, क्रिकेटर या बिज़नेस लीडर किसी ट्रेडिंग ऐप या प्लेटफ़ॉर्म की सिफ़ारिश करता दिखता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "The face and voice look and sound real — AI tools can now clone both convincingly from just a few minutes of public footage.",
+        "hi": "चेहरा और आवाज़ असली जैसे लगते हैं — AI टूल अब कुछ मिनटों के पब्लिक वीडियो से दोनों की भरोसेमंद नकल बना सकते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "No well-known public figure endorses one specific trading app or guarantees a return — that claim alone marks the video as fake.",
+        "hi": "कोई भी जाना-माना सार्वजनिक चेहरा किसी एक ख़ास ट्रेडिंग ऐप की सिफ़ारिश नहीं करता या रिटर्न की गारंटी नहीं देता — यही दावा वीडियो को नकली साबित कर देता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "The ad links to a lookalike app or a WhatsApp group that follows the same old pattern: deposit, fake profit, blocked withdrawal.",
+        "hi": "विज्ञापन किसी नकली जैसे ऐप या WhatsApp ग्रुप पर ले जाता है, जो वही पुराना तरीक़ा अपनाता है: जमा, नकली मुनाफ़ा, रुकी हुई निकासी।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a famous doctor's photo pasted onto a stranger's medicine advertisement — the face is real, but the endorsement never happened.",
+    "hi": "यह वैसा है जैसे किसी मशहूर डॉक्टर की तस्वीर किसी अजनबी की दवा के विज्ञापन पर चिपका दी जाए — चेहरा असली है, पर सिफ़ारिश कभी हुई ही नहीं।"
+  },
+  "source": "https://siportal.sebi.gov.in/intermediary/sebi-check",
+  "sim": "S2",
+  "quiz": [
+    {
+      "question": {
+        "en": "A video shows a famous actor saying: \"I personally made ₹10 lakh with this app, you can too, guaranteed.\" What is this?",
+        "hi": "एक वीडियो में मशहूर अभिनेता कहते हैं: \"मैंने ख़ुद इस ऐप से ₹10 लाख कमाए, आप भी कमा सकते हैं, पक्का।\" यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Deepfake endorsement — celebrities don't endorse specific trading apps or guarantee returns", "hi": "डीपफ़ेक एंडोर्समेंट — सेलिब्रिटी किसी ख़ास ट्रेडिंग ऐप की सिफ़ारिश या रिटर्न की गारंटी नहीं देते"}, "correct": true},
+        {"id": "b", "text": {"en": "Real, since the voice sounds exactly like them", "hi": "असली है, क्योंकि आवाज़ बिलकुल उन्हीं जैसी लगती है"}, "correct": false},
+        {"id": "c", "text": {"en": "Worth trying, since a celebrity wouldn't lie", "hi": "कोशिश करने लायक़ है, क्योंकि कोई सेलिब्रिटी झूठ नहीं बोलेगा"}, "correct": false}
+      ],
+      "explain": {
+        "en": "No genuine celebrity personally guarantees a trading app's returns. AI can now clone a familiar face and voice convincingly — the claim itself is the real tell, not the likeness.",
+        "hi": "कोई असली सेलिब्रिटी किसी ट्रेडिंग ऐप के रिटर्न की ख़ुद गारंटी नहीं देता। AI अब जाने-पहचाने चेहरे और आवाज़ की भरोसेमंद नकल बना सकता है — पहचान नहीं, बल्कि यह दावा ही असली पहचान है।"
+      },
+      "tactic": "deepfake_endorsement"
+    },
+    {
+      "question": {
+        "en": "What is the fastest way to check whether an ad like this is linked to a real, registered entity?",
+        "hi": "यह जाँचने का सबसे तेज़ तरीक़ा क्या है कि ऐसा विज्ञापन किसी असली, रजिस्टर्ड संस्था से जुड़ा है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Look up the app or adviser's name on the SEBI intermediary register yourself", "hi": "ख़ुद ऐप या एडवाइज़र का नाम SEBI के इंटरमीडियरी रजिस्टर में देखें"}, "correct": true},
+        {"id": "b", "text": {"en": "Check how many likes or views the video has", "hi": "वीडियो पर कितने लाइक या व्यूज़ हैं, वह देखें"}, "correct": false},
+        {"id": "c", "text": {"en": "Trust it if it was shared from the celebrity's official account", "hi": "भरोसा करें अगर यह सेलिब्रिटी के आधिकारिक अकाउंट से शेयर हुआ हो"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Popularity and even a shared post prove nothing about registration. Only SEBI's own register confirms whether an entity is real and allowed to advise or manage money.",
+        "hi": "लोकप्रियता या शेयर किया गया पोस्ट भी रजिस्ट्रेशन का सबूत नहीं है। सिर्फ़ SEBI का अपना रजिस्टर बताता है कि कोई संस्था असली है और पैसे की सलाह देने या संभालने के लिए अधिकृत है।"
+      },
+      "tactic": "guaranteed_returns"
+    }
+  ]
+}

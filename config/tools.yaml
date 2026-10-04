@@ -1,0 +1,49 @@
+# Toolsets the agent loop can call (satark/harness/tools.py). Plug-and-play: add any MCP server that speaks
+# stdio as a toolset below, restart, and its tools appear in the loop's menu of lookups. Every call goes through
+# the same policy: allowed modes, a per-run cap, a timeout and, for `privacy: external`, only public identifiers
+# (the types in `public_types`) may leave the server; anything else is removed and the PII tripwire must pass.
+max_calls_per_run: 6     # tool calls per check or chat turn, across all steps
+menu_size: 6             # suggested lookups shown to the model per step
+
+toolsets:
+  satark:                # Satark's own checks, in-process
+    kind: builtin
+    privacy: local
+    tools:
+      check_identifiers:    {modes: [check, chat], max_calls: 2}
+      add_and_check:        {modes: [check, chat], max_calls: 3}
+      search_sebi_register: {modes: [check, chat], max_calls: 2}
+      read_safety_note:     {modes: [chat], max_calls: 2}
+
+  web:                   # an MCP server (satark/mcp_servers/websearch.py, DuckDuckGo); off when SATARK_OFFLINE=1
+    kind: mcp_stdio
+    command: ["{python}", "-m", "satark.mcp_servers.websearch"]
+    env: {SATARK_WEBSEARCH_BACKEND: ddgs}
+    privacy: external
+    needs_network: true
+    timeout_s: 20     # the server tries up to 4 engines in turn (websearch.py), ~4 s each
+    public_types: [url, domain, app.package, social.handle, tg.link, party.name]
+    # Chat only (a check may still need any web result to spot a scam site): a chat reply only
+    # ever points the user at one of these official sources, never an arbitrary search hit.
+    chat_domains:
+      - sebi.gov.in
+      - rbi.org.in
+      - cybercrime.gov.in
+      - pib.gov.in
+      - nism.ac.in
+      - amfiindia.com
+      - npci.org.in
+      - incometax.gov.in
+      - sancharsaathi.gov.in
+    tools:
+      search: {modes: [check, chat], max_calls: 2, suggest: {query: [domain, app.package, social.handle, tg.link, party.name]}}
+
+  # Example of another MCP server (not enabled): the reference "fetch" server reads a public web page.
+  # fetch:
+  #   kind: mcp_stdio
+  #   command: ["uvx", "mcp-server-fetch"]
+  #   privacy: external
+  #   needs_network: true
+  #   public_types: [url]
+  #   tools:
+  #     fetch: {modes: [check], max_calls: 1, suggest: {url: [url]}}

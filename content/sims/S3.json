@@ -1,0 +1,62 @@
+{
+  "id": "S3",
+  "kind": "leverage",
+  "version": 1,
+  "title": {
+    "en": "The leverage wipe-out",
+    "hi": "लीवरेज में सब कुछ ख़त्म"
+  },
+  "texts": {
+    "prompt": {
+      "en": "Put up ₹{margin} as margin at {leverage} times leverage, and watch the market move.",
+      "hi": "₹{margin} मार्जिन के साथ {leverage} गुना लीवरेज लें, और बाज़ार की चाल देखें।"
+    },
+    "result": {
+      "en": "Your equity is now ₹{equity}.",
+      "hi": "आपकी इक्विटी अब ₹{equity} है।"
+    },
+    "wiped_out": {
+      "en": "A market fall of about 12% wiped out your entire margin.",
+      "hi": "बाज़ार में लगभग 12% की गिरावट ने आपका पूरा मार्जिन ख़त्म कर दिया।"
+    },
+    "fact": {
+      "en": "SEBI found that 87.7% of individual F&O traders lost money in FY26 — ₹91,685 crore in total.",
+      "hi": "SEBI ने पाया कि FY26 में 87.7% खुदरा F&O ट्रेडर्स को नुक़सान हुआ — कुल ₹91,685 करोड़।"
+    }
+  },
+  "defaults": {"margin": 10000, "leverage": 8, "seed": 2871, "steps": 30},
+  "quiz": [
+    {
+      "question": {
+        "en": "A \"dabba trading\" group offers 10x leverage with no official exchange involved. What is the main risk this simulator just showed?",
+        "hi": "एक \"डब्बा ट्रेडिंग\" ग्रुप किसी आधिकारिक एक्सचेंज के बिना 10 गुना लीवरेज देने का ऑफ़र देता है। इस सिम्युलेटर ने जो मुख्य जोखिम दिखाया, वह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "A small market move can wipe out your entire margin", "hi": "बाज़ार की एक छोटी-सी चाल भी आपका पूरा मार्जिन ख़त्म कर सकती है"}, "correct": true},
+        {"id": "b", "text": {"en": "Higher leverage only increases your possible profit", "hi": "ज़्यादा लीवरेज सिर्फ़ मुनाफ़े की संभावना बढ़ाता है"}, "correct": false},
+        {"id": "c", "text": {"en": "Leverage has no effect without an official exchange", "hi": "आधिकारिक एक्सचेंज के बिना लीवरेज का कोई असर नहीं होता"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Leverage multiplies losses exactly as fast as gains. At high leverage, a routine market move is enough to erase your entire margin.",
+        "hi": "लीवरेज नुक़सान को भी ठीक उसी तेज़ी से बढ़ाता है, जितना मुनाफ़े को। ज़्यादा लीवरेज पर, बाज़ार की एक सामान्य चाल भी पूरा मार्जिन मिटा सकती है।"
+      },
+      "tactic": "leverage_trap"
+    },
+    {
+      "question": {
+        "en": "SEBI found that 87.7% of individual F&O traders lost money in FY26. What does this tell a new trader?",
+        "hi": "SEBI ने पाया कि FY26 में 87.7% खुदरा F&O ट्रेडर्स को नुक़सान हुआ। यह किसी नए ट्रेडर को क्या बताता है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "The odds in high-leverage trading are stacked heavily against most individuals", "hi": "ज़्यादा लीवरेज वाली ट्रेडिंग में ज़्यादातर लोगों के ख़िलाफ़ संभावनाएँ भारी हैं"}, "correct": true},
+        {"id": "b", "text": {"en": "87.7% is a typo and does not apply to careful traders", "hi": "87.7% एक टाइपिंग ग़लती है और सावधान ट्रेडर्स पर लागू नहीं होती"}, "correct": false},
+        {"id": "c", "text": {"en": "It only applies to traders outside big cities", "hi": "यह सिर्फ़ बड़े शहरों से बाहर के ट्रेडर्स पर लागू होती है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "This is SEBI's own measured finding across individual F&O traders nationwide, cities included. It is a statistic about the activity, not about any one trader's skill.",
+        "hi": "यह पूरे देश के खुदरा F&O ट्रेडर्स पर SEBI की अपनी मापी गई खोज है, बड़े शहर भी शामिल। यह आँकड़ा इस गतिविधि के बारे में है, किसी एक ट्रेडर की समझ के बारे में नहीं।"
+      },
+      "tactic": "leverage_trap"
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "_doc": "Official portals and verdict/chat actions (LLD §9.10). Shared by the server (verdict actions, report drafts) and the PWA (buttons). Labels are i18n keys portal.<id> and action.<id> in content/i18n. Source ids refer to docs/reference/Satark-Sources.md. Route actions also let the chat agent hand users to Track C content (lessons, simulators).",
+  "portals": {
+    "ncrp_1930": {
+      "url": "https://cybercrime.gov.in",
+      "phone": "1930",
+      "source": "I4C-1"
+    },
+    "i4c_suspect": {
+      "url": "https://cybercrime.gov.in/Webform/suspect_search_repository.aspx",
+      "source": "I4C-2"
+    },
+    "mrm": {
+      "url": "https://mrm-ncrp.mha.gov.in",
+      "source": "I4C-3"
+    },
+    "sebi_check": {
+      "url": "https://siportal.sebi.gov.in/intermediary/sebi-check",
+      "source": "SEBI-3"
+    },
+    "sebi_register": {
+      "url": "https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognised=yes",
+      "source": "SEBI-1"
+    },
+    "sebi_dnvs": {
+      "url": "https://www.sebi.gov.in/sebiweb/dnvs-authentication-v2.html",
+      "source": "SEBI-4"
+    },
+    "sebi_scores": {
+      "url": "https://scores.sebi.gov.in",
+      "source": "SEBI-6"
+    },
+    "smart_odr": {
+      "url": "https://smartodr.in",
+      "source": "SEBI-6"
+    },
+    "sebi_mi": {
+      "url": "https://mi.sebi.gov.in/",
+      "source": "SEBI-7"
+    },
+    "chakshu": {
+      "url": "https://sancharsaathi.gov.in/sfc/",
+      "source": "DOT-1"
+    },
+    "tafcop": {
+      "url": "https://tafcop.sancharsaathi.gov.in",
+      "source": "DOT-1"
+    },
+    "rbi_sachet": {
+      "url": "https://sachet.rbi.org.in",
+      "source": "RBI-7"
+    },
+    "rbi_cms": {
+      "url": "https://cms.rbi.org.in/",
+      "phone": "14448",
+      "source": "RBI-8"
+    },
+    "nse_trade_verify": {
+      "url": "https://www.nseindia.com/static/invest/first-time-investor-trade-verification",
+      "source": "NSE-6"
+    },
+    "cas_nsdl": {
+      "url": "https://nsdl.com/investor/know-your-cas",
+      "source": "DEP-1"
+    },
+    "cas_cdsl": {
+      "url": "https://www.cdslindia.com/CAS/LoginCAS.aspx",
+      "source": "DEP-1"
+    },
+    "amfi_arn": {
+      "url": "https://www.amfiindia.com/locate-distributor",
+      "source": "AMFI-1"
+    },
+    "iepf": {
+      "url": "https://www.iepf.gov.in/",
+      "source": "MCA-3"
+    },
+    "pib_factcheck": {
+      "url": "https://factcheck.pib.gov.in/",
+      "source": "PIB-1"
+    }
+  },
+  "actions": {
+    "dont_pay": {
+      "kind": "info"
+    },
+    "dont_install": {
+      "kind": "info"
+    },
+    "report_1930": {
+      "kind": "call",
+      "phone": "1930",
+      "portal": "ncrp_1930"
+    },
+    "warn_family": {
+      "kind": "share"
+    },
+    "verify_sebi_check": {
+      "kind": "portal",
+      "portal": "sebi_check"
+    },
+    "verify_sebi_register": {
+      "kind": "portal",
+      "portal": "sebi_register"
+    },
+    "verify_dnvs": {
+      "kind": "portal",
+      "portal": "sebi_dnvs"
+    },
+    "report_chakshu": {
+      "kind": "portal",
+      "portal": "chakshu"
+    },
+    "report_sebi_mi": {
+      "kind": "portal",
+      "portal": "sebi_mi"
+    },
+    "check_pib": {
+      "kind": "portal",
+      "portal": "pib_factcheck"
+    },
+    "check_sachet": {
+      "kind": "portal",
+      "portal": "rbi_sachet"
+    },
+    "verify_yourself": {
+      "kind": "route",
+      "route": "/learn/sebi-registration"
+    },
+    "learn": {
+      "kind": "route",
+      "route": "/learn"
+    },
+    "draft_complaint": {
+      "kind": "route",
+      "route": "/help-paid"
+    },
+    "type_details": {
+      "kind": "route",
+      "route": "/check"
+    },
+    "ask": {
+      "kind": "route",
+      "route": "/chat"
+    },
+    "sim_s1": {
+      "kind": "route",
+      "route": "/sim/S1"
+    },
+    "sim_s2": {
+      "kind": "route",
+      "route": "/sim/S2"
+    },
+    "sim_s3": {
+      "kind": "route",
+      "route": "/sim/S3"
+    },
+    "lesson_compounding": {
+      "kind": "route",
+      "route": "/learn/compounding"
+    },
+    "lesson_leverage": {
+      "kind": "route",
+      "route": "/learn/leverage"
+    },
+    "lesson_sebi_registration": {
+      "kind": "route",
+      "route": "/learn/sebi-registration"
+    },
+    "lesson_fake_apps": {
+      "kind": "route",
+      "route": "/learn/fake-apps"
+    },
+    "lesson_tips_and_pumps": {
+      "kind": "route",
+      "route": "/learn/tips-and-pumps"
+    }
+  }
+}

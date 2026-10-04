@@ -1,0 +1,67 @@
+{
+  "id": "fake-apps",
+  "icon": "📲",
+  "minutes": 2,
+  "title": {
+    "en": "How the fake trading-app trap works",
+    "hi": "नकली ट्रेडिंग-ऐप का जाल कैसे काम करता है"
+  },
+  "tactic": {
+    "en": "Tactic: pay to withdraw — if you must pay a fee to get your own money out, it is always a scam.",
+    "hi": "तरीका: निकालने के लिए भुगतान — अपना ही पैसा निकालने के लिए फ़ीस माँगना हमेशा स्कैम होता है।"
+  },
+  "tacticKey": "pay_to_withdraw",
+  "sim": "S1",
+  "steps": [
+    {
+      "text": {
+        "en": "A fake trading app first lets you withdraw a small amount, to build trust.",
+        "hi": "नकली ट्रेडिंग ऐप पहले आपको थोड़ा पैसा निकालने देता है, ताकि भरोसा बने।"
+      }
+    },
+    {
+      "text": {
+        "en": "Then your \"balance\" grows fast on screen — but it is just a number, not real money.",
+        "hi": "फिर स्क्रीन पर आपका \"बैलेंस\" तेज़ी से बढ़ता है — पर यह सिर्फ़ एक नंबर है, असली पैसा नहीं।"
+      }
+    },
+    {
+      "text": {
+        "en": "When you try to withdraw a large amount, it suddenly gets blocked.",
+        "hi": "जब आप बड़ी रकम निकालने की कोशिश करते हैं, तो वह अचानक रुक जाती है।"
+      }
+    },
+    {
+      "text": {
+        "en": "They ask for a \"tax\" or \"unlock fee\" first — paying it never actually releases your money.",
+        "hi": "वे पहले \"टैक्स\" या \"अनलॉक फ़ीस\" माँगते हैं — इसे भरने से पैसा कभी नहीं मिलता।"
+      }
+    },
+    {
+      "text": {
+        "en": "A real broker's app shows a green \"Verified\" label on the Google Play Store.",
+        "hi": "असली ब्रोकर के ऐप पर Google Play Store में हरा \"Verified\" लेबल दिखता है।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a fairground game that lets you win small prizes, just to get you to bet bigger.",
+    "hi": "यह मेले के खेल जैसा है, जो पहले छोटा इनाम देता है, ताकि आप बड़ा दाँव लगाएं।"
+  },
+  "quiz": {
+    "question": {
+      "en": "An app blocks your withdrawal and asks for a fee to \"unlock\" your money. What does this mean?",
+      "hi": "एक ऐप आपकी निकासी रोकता है और पैसा \"अनलॉक\" करने के लिए फ़ीस माँगता है। इसका क्या मतलब है?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "It is a scam — a fee to withdraw always means fraud", "hi": "यह स्कैम है — निकासी के लिए फ़ीस का मतलब हमेशा धोखाधड़ी है"}, "correct": true},
+      {"id": "b", "text": {"en": "It is normal verification, so pay it", "hi": "यह सामान्य वेरिफ़िकेशन है, इसे भर दें"}, "correct": false},
+      {"id": "c", "text": {"en": "The app needs time, so wait a few days", "hi": "ऐप को समय चाहिए, कुछ दिन रुक जाएं"}, "correct": false}
+    ],
+    "explain": {
+      "en": "A real broker never charges a fee to release your own money. Trust your depository's CAS statement, not the app's dashboard.",
+      "hi": "असली ब्रोकर आपका अपना पैसा देने के लिए कभी फ़ीस नहीं लेता। ऐप के डैशबोर्ड पर नहीं, अपनी डिपॉज़िटरी की CAS स्टेटमेंट पर भरोसा करें।"
+    },
+    "tactic": "pay_to_withdraw"
+  }
+}

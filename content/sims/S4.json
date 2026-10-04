@@ -1,0 +1,109 @@
+{
+  "id": "S4",
+  "kind": "fsm",
+  "version": 1,
+  "start": "call",
+  "title": {
+    "en": "The fake \"digital arrest\" call",
+    "hi": "नकली \"डिजिटल अरेस्ट\" कॉल"
+  },
+  "vars": {"lost": 0},
+  "states": {
+    "call": {
+      "say": {
+        "en": "A video call appears: someone in a police/CBI uniform says a parcel with contraband was sent in your name.",
+        "hi": "एक वीडियो कॉल आती है: पुलिस/CBI की यूनिफ़ॉर्म में कोई कहता है कि आपके नाम से भेजे गए एक पार्सल में प्रतिबंधित सामान मिला है।"
+      },
+      "choices": [
+        {"id": "check", "label": {"en": "Hang up and check with Satark first", "hi": "कॉल काटें और पहले Satark से जाँच लें"}, "to": "checked"},
+        {"id": "believe", "label": {"en": "Stay on the call to find out more", "hi": "ज़्यादा जानने के लिए कॉल पर बने रहें"}, "to": "threat"}
+      ]
+    },
+    "threat": {
+      "say": {
+        "en": "They say you're under \"digital arrest\": stay on camera and transfer ₹50,000 as \"refundable security\" to avoid arrest.",
+        "hi": "वे कहते हैं आप \"डिजिटल अरेस्ट\" में हैं: कैमरे पर बने रहें और गिरफ़्तारी से बचने के लिए ₹50,000 \"रिफ़ंडेबल सिक्योरिटी\" के तौर पर भेजें।"
+      },
+      "choices": [
+        {"id": "refuse", "label": {"en": "Refuse and end the call", "hi": "मना करें और कॉल काट दें"}, "to": "resisted"},
+        {"id": "pay", "label": {"en": "Pay the ₹50,000", "hi": "₹50,000 भेज दें"}, "to": "more_demand", "set": {"lost": "+50000"}}
+      ]
+    },
+    "more_demand": {
+      "say": {
+        "en": "After paying, they demand another ₹1,00,000 as an \"RBI verification fee\", or you'll be arrested tonight.",
+        "hi": "पैसे भेजने के बाद, वे एक और ₹1,00,000 \"RBI वेरिफ़िकेशन फ़ीस\" के तौर पर माँगते हैं, वरना आज रात गिरफ़्तारी होगी।"
+      },
+      "choices": [
+        {"id": "refuse_more", "label": {"en": "Refuse to pay any more", "hi": "और पैसे देने से मना करें"}, "to": "lost_partial"},
+        {"id": "pay_more", "label": {"en": "Pay the ₹1,00,000", "hi": "₹1,00,000 और भेज दें"}, "to": "lost_all", "set": {"lost": "+100000"}}
+      ]
+    },
+    "checked": {
+      "end": "safe",
+      "reveal": {
+        "en": "You hung up and verified independently. No police or CBI ever calls to arrest you on video. You lost ₹{lost}.",
+        "hi": "आपने कॉल काटकर ख़ुद अलग से जाँच की। कोई पुलिस या CBI वीडियो पर कभी गिरफ़्तार नहीं करती। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "resisted": {
+      "end": "safe",
+      "reveal": {
+        "en": "You refused to pay. Real police never collect money over a call to avoid an arrest. You lost ₹{lost}.",
+        "hi": "आपने पैसे देने से मना किया। असली पुलिस गिरफ़्तारी से बचाने के लिए कभी कॉल पर पैसे नहीं लेती। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_partial": {
+      "end": "lost",
+      "reveal": {
+        "en": "You stopped paying, but the first transfer is already gone. A real agency never demands money this way. You lost ₹{lost}.",
+        "hi": "आपने आगे भेजना रोक दिया, पर पहला ट्रांसफ़र पहले ही जा चुका है। असली एजेंसी कभी इस तरह पैसे नहीं माँगती। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_all": {
+      "end": "lost",
+      "reveal": {
+        "en": "Real police never arrest over video or collect fees to \"verify\" you. The call then ended, and so did your money. You lost ₹{lost}.",
+        "hi": "असली पुलिस कभी वीडियो पर गिरफ़्तार नहीं करती या \"वेरिफ़ाई\" करने के लिए फ़ीस नहीं लेती। फिर कॉल कट गई, और साथ ही आपका पैसा भी। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    }
+  },
+  "quiz": [
+    {
+      "question": {
+        "en": "What is the one sure sign that a \"police\" or \"CBI\" video call is fake?",
+        "hi": "यह पक्का कैसे पता चलता है कि कोई \"पुलिस\" या \"CBI\" वीडियो कॉल नकली है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "It asks you to transfer money or stay silent to avoid arrest", "hi": "वह गिरफ़्तारी से बचने के लिए पैसे भेजने या चुप रहने को कहती है"}, "correct": true},
+        {"id": "b", "text": {"en": "The caller is wearing a uniform on camera", "hi": "कॉल करने वाला कैमरे पर यूनिफ़ॉर्म पहने है"}, "correct": false},
+        {"id": "c", "text": {"en": "The call comes from an unknown number", "hi": "कॉल किसी अनजान नंबर से आती है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A uniform on screen proves nothing. Any call demanding money or silence to avoid arrest is authority impersonation, full stop.",
+        "hi": "स्क्रीन पर यूनिफ़ॉर्म कुछ साबित नहीं करती। गिरफ़्तारी से बचने के लिए पैसे या चुप्पी माँगने वाली कोई भी कॉल अधिकारी बनकर धमकाना ही है, बस।"
+      },
+      "tactic": "authority_impersonation"
+    },
+    {
+      "question": {
+        "en": "Why do scammers insist you stay on the call and decide within minutes?",
+        "hi": "स्कैमर यह ज़िद क्यों करते हैं कि आप कॉल पर बने रहें और कुछ मिनटों में फ़ैसला लें?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Fake urgency stops you from pausing to verify independently", "hi": "फ़र्ज़ी हड़बड़ी आपको रुककर अलग से जाँच करने से रोकती है"}, "correct": true},
+        {"id": "b", "text": {"en": "Legal cases are genuinely always this fast", "hi": "क़ानूनी मामले असल में हमेशा इतनी जल्दी होते हैं"}, "correct": false},
+        {"id": "c", "text": {"en": "It is a courtesy so you aren't kept waiting", "hi": "यह आपको इंतज़ार न करवाने की एक शिष्टता है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Urgency is the whole trick: a calm, independent check is the one thing the scammer cannot survive.",
+        "hi": "हड़बड़ी ही पूरी चाल है: एक शांत, अलग से की गई जाँच ही वह चीज़ है जिसे स्कैमर झेल नहीं सकता।"
+      },
+      "tactic": "fake_urgency"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "job-scam",
+  "icon": "💼",
+  "minutes": 2,
+  "title": {
+    "en": "The part-time job that asks you to pay",
+    "hi": "वह पार्ट-टाइम जॉब जो आपसे पैसे माँगती है"
+  },
+  "tactic": {
+    "en": "Tactic: advance fee — a tiny real payout earns your trust, then a bigger \"deposit\" is demanded before you can withdraw.",
+    "hi": "तरीका: एडवांस फ़ीस — पहले थोड़ा असली पैसा देकर भरोसा जीता जाता है, फिर निकासी से पहले बड़ी \"जमा राशि\" माँगी जाती है।"
+  },
+  "tacticKey": "task_advance_fee",
+  "steps": [
+    {
+      "text": {
+        "en": "A WhatsApp or Telegram message offers ₹300–₹2,000 a day for simple tasks: liking videos, rating apps, or joining a group.",
+        "hi": "एक WhatsApp या Telegram मैसेज वीडियो लाइक करने, ऐप को रेटिंग देने या ग्रुप जॉइन करने के लिए रोज़ाना ₹300–₹2,000 का ऑफ़र देता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "The first few tasks really do pay a small amount, straight to your UPI — this is only to earn your trust.",
+        "hi": "पहले कुछ टास्क सच में आपके UPI पर थोड़ा पैसा भेजते हैं — यह सिर्फ़ भरोसा जीतने के लिए होता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "You're then moved to a \"VIP\" task set with bigger rewards — but first you must deposit money into the app's wallet.",
+        "hi": "फिर आपको एक \"VIP\" टास्क सेट में भेजा जाता है जिसमें बड़ा इनाम है — पर पहले आपको ऐप के वॉलेट में पैसे जमा करने होते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Once you deposit, your \"earnings\" grow on screen, but withdrawal is always one more deposit away. That deposited money is gone.",
+        "hi": "जमा करने के बाद, स्क्रीन पर आपकी \"कमाई\" बढ़ती दिखती है, पर निकासी हमेशा एक और जमा राशि दूर रहती है। जमा किया गया पैसा असल में जा चुका होता है।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a shop that gives you a free sample to earn your trust, then asks you to prepay for the main order — and never delivers it.",
+    "hi": "यह वैसा है जैसे कोई दुकान भरोसा जीतने के लिए फ़्री सैंपल दे, फिर मुख्य ऑर्डर के लिए पहले पैसे माँगे — और कभी सामान न दे।"
+  },
+  "source": "https://cybercrime.gov.in",
+  "sim": "S5",
+  "quiz": [
+    {
+      "question": {
+        "en": "A task-group admin says: \"Deposit ₹5,000 to unlock VIP tasks that pay 5x more.\" What is this?",
+        "hi": "एक टास्क-ग्रुप एडमिन कहता है: \"5 गुना ज़्यादा कमाने वाले VIP टास्क खोलने के लिए ₹5,000 जमा करें।\" यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "An advance-fee scam — a real job never asks you to pay to work", "hi": "एडवांस-फ़ीस स्कैम — असली नौकरी कभी काम करने के लिए पैसे नहीं माँगती"}, "correct": true},
+        {"id": "b", "text": {"en": "A normal onboarding fee — pay it", "hi": "एक सामान्य ऑनबोर्डिंग फ़ीस — इसे भर दें"}, "correct": false},
+        {"id": "c", "text": {"en": "Ask a friend to pay it for you instead", "hi": "अपने किसी दोस्त से यह फ़ीस भरने को कहें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A genuine job pays you — it never asks you to deposit money first. Stop as soon as any \"task\" asks you to pay.",
+        "hi": "असली नौकरी आपको पैसे देती है — वह कभी पहले पैसे जमा करने को नहीं कहती। जैसे ही कोई \"टास्क\" पैसे माँगे, वहीं रुक जाएँ।"
+      },
+      "tactic": "task_advance_fee"
+    },
+    {
+      "question": {
+        "en": "After depositing, your task-app balance shows ₹40,000, but withdrawal fails every time. What should you do?",
+        "hi": "जमा करने के बाद, टास्क-ऐप का बैलेंस ₹40,000 दिखाता है, पर निकासी हर बार फ़ेल हो जाती है। आपको क्या करना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Stop, don't deposit more, and report it — a balance you can't withdraw is not real money", "hi": "रुक जाएँ, और पैसे जमा न करें, और रिपोर्ट करें — जो निकल ही न सके वह बैलेंस असली पैसा नहीं है"}, "correct": true},
+        {"id": "b", "text": {"en": "Deposit more to \"activate\" withdrawal", "hi": "निकासी \"शुरू\" करने के लिए और पैसे जमा करें"}, "correct": false},
+        {"id": "c", "text": {"en": "Wait a week — it will fix itself", "hi": "एक हफ़्ता रुकें — यह ख़ुद ठीक हो जाएगा"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A screen number you cannot withdraw is not money. Paying more to \"unlock\" it only loses more.",
+        "hi": "जो नंबर स्क्रीन पर है पर निकल नहीं सकता, वह पैसा नहीं है। उसे \"खोलने\" के लिए और पैसे देना सिर्फ़ और नुक़सान कराता है।"
+      },
+      "tactic": "task_advance_fee"
+    }
+  ]
+}

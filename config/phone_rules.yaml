@@ -1,0 +1,19 @@
+# Phone-family rules (LLD §9.6). Loaded by satark/config.py into ctx.config.phone_rules.
+#
+# TRAI's 1600-series migration deadlines per sector (principal entity header rules): after this
+# ISO date, a regulated firm's customer-facing number must be a 1600 number, not an ordinary mobile.
+sector_deadlines:
+  bank: "2026-01-01"
+  amc: "2026-02-15"
+  broker: "2026-03-15"
+
+# Official helplines. Keys are the E.164 (or short-code) form satark.infra.norm.phone_norm
+# produces, so they match ctx.raw(entity) directly.
+helplines:
+  "1930": {name: "Cyber fraud helpline (1930)", org: "I4C"}
+  "14448": {name: "RBI helpline (14448)", org: "RBI"}
+  "155255": {name: "IRDAI helpline (155255)", org: "IRDAI"}
+  "1909": {name: "DND / spam reporting (1909)", org: "TRAI"}
+  "+9118002667575": {name: "SEBI toll-free (1800 266 7575)", org: "SEBI"}
+  "+911800227575": {name: "SEBI toll-free (1800 22 7575)", org: "SEBI"}
+  "+911600313384": {name: "SEBI investor-awareness calls (1600 313 384)", org: "SEBI"}

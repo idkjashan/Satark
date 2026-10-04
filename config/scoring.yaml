@@ -1,0 +1,41 @@
+# Scoring rules (LLD §6.1). First matching level wins. Only risk signals from evidence with
+# status "hit" count; a code counts once per case however many entities trigger it.
+version: "2026-10-03.1"
+levels:
+  HIGH_RISK:  {any: [{weight: critical, min: 1}, {weight: high, min: 2}]}
+  SUSPICIOUS: {any: [{weight: high, min: 1}, {weight: medium, min: 2}]}
+  NO_SIGNS:   {all: [{completed_checks: 1}]}   # headline: "No strong risk signs found"
+  UNKNOWN:    {default: true}
+basis_strength: [registry, official_list, threat_feed, rule, llm_claim]
+# When every deciding risk was found only by the AI review (no phrase rule or fact check agrees), the level
+# is at most this: the model alone can say "be careful", "high risk - do not pay" needs corroboration.
+ai_only_max_level: SUSPICIOUS
+weight_order: [critical, high, medium, low]
+# Actions shown on the verdict card: the first two defaults, then the actions of the top
+# signals, then the remaining defaults; unique; at most 3.
+default_actions:
+  HIGH_RISK:  [dont_pay, report_1930, warn_family]
+  SUSPICIOUS: [dont_pay, verify_sebi_register, warn_family]
+  NO_SIGNS:   [verify_yourself, learn]
+  UNKNOWN:    [type_details]
+max_actions: 3
+max_reasons: 3
+# Lesson shown under the verdict, by scam type (content/lessons/<id>.json)
+lesson_by_scam_type:
+  T1: fake-apps
+  T2: sebi-registration
+  T3: sebi-registration
+  T4: sebi-registration
+  T5: tips-and-pumps
+  T6: tips-and-pumps
+  T7: deepfake-ads
+  T8: fake-apps
+  T9: leverage
+  T10: leverage
+  T11: compounding
+  T12: digital-arrest
+  T13: job-scam
+  T14: withdrawal-fee-app
+  T15: pig-butchering
+  T16: kyc-otp-remote-access
+  T17: ipo-allotment

@@ -1,0 +1,607 @@
+# tests/golden/online_v1.yaml
+# Online-sourced generalisation set v1 — real scam and genuine investment/payment
+# messages collected from public sources (SEBI/RBI/NSE/BSE/NPCI pages, PIB Fact
+# Check, I4C/state-police cyber-cell advisories, news reports that quote the text
+# victims received, and official bank/broker/AMC/income-tax-department pages), for
+# testing how well Satark generalises to real-world messages nobody on the team
+# wrote. Collected: 4 Oct 2026.
+#
+# Every `text` is quoted verbatim or closely paraphrased from the URL in its
+# `source` field (see each item's `note` for which, and where in the source); text
+# is reproduced here strictly for scam-detection evaluation/testing, not as an
+# endorsement of, or claim that the linked page itself is a scam. Where a source
+# presented an identifier that could belong to a private victim/reporter, it was
+# replaced with a format-preserving fake and noted "identifier altered"; scammer-
+# side identifiers (aliases, fake group names) that the source itself published
+# are kept as-is.
+#
+# 60 cases: 40 scam / 20 legit. 17 items are Hindi (Devanagari or Hinglish,
+# lang: hi), split across both verdicts.
+
+# ───────────────────────── SCAM — ENGLISH (on-001..on-027) ─────────────────────────
+
+- id: on-001
+  lang: en
+  text: "Your bank account will be blocked in 2 hours. Update your KYC now."
+  expect:
+    verdict: scam
+  type: kyc_phishing
+  source: "https://www.indianpaycalculator.in/govt-news/rbi-fake-kyc-account-closure-2-hours-scam-2026"
+  note: "Paraphrase in source of a fake KYC-update SMS circulating widely; article cites an RBI press release and cybercrime.gov.in. In the real message this line is followed by a phishing link, omitted here."
+
+- id: on-002
+  form: narrative
+  lang: en
+  text: "Fraudsters pose as bank employees and call customers saying there is a problem with their bank balance or account, then ask them to download the AnyDesk app from the Play Store and install it. AnyDesk then generates a nine-digit number — when the customer shares this number with the caller, the fraudster gets control of the phone and can carry out transactions without the victim's knowledge."
+  expect:
+    verdict: scam
+  type: remote_access_anydesk
+  source: "https://www.bankinfosecurity.asia/rbi-warns-fraud-that-leverages-anydesk-app-a-12035"
+  note: "Paraphrase in source, built from RBI's own Feb 2019 description of the vishing-plus-AnyDesk fraud modus operandi."
+
+- id: on-003
+  lang: en
+  text: "This is a call from an LIC service branch; you can transfer the existing policies to new policies for better returns."
+  expect:
+    verdict: scam
+  type: insurance_mis_selling
+  source: "https://cyber.delhipolice.gov.in/insurancefrauds.html"
+  note: "Example fraudulent call script published on Delhi Police Cyber Cell's official insurance-frauds advisory page."
+
+- id: on-004
+  lang: en
+  text: "We are calling from Insurance Verification Department. Give your PAN Card number, Bank Details and Aadhaar number to complete the verification process."
+  expect:
+    verdict: scam
+  type: kyc_phishing
+  source: "https://cyber.delhipolice.gov.in/insurancefrauds.html"
+  note: "Example fraudulent call script published on Delhi Police Cyber Cell's official insurance-frauds advisory page."
+
+- id: on-005
+  lang: en
+  text: "I am calling from IRDAI. You are entitled to the bonus on your life insurance policy. But to realise the cheque, you have to make an investment first."
+  expect:
+    verdict: scam
+  type: insurance_bonus
+  source: "https://cyber.delhipolice.gov.in/insurancefrauds.html"
+  note: "Example fraudulent call script published on Delhi Police Cyber Cell's official insurance-frauds advisory page; impersonates IRDAI and demands an upfront 'investment' before releasing a bonus."
+
+- id: on-006
+  lang: en
+  text: "Like this page… Rate on Google… Earn ₹100–₹150 per task."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://the420.in/whatsapp-telegram-task-scam-digital-arrest-cyber-fraud-india/"
+  note: "Opening task-offer message quoted in article (29 Dec 2025) on WhatsApp/Telegram task-scam recruitment."
+
+- id: on-007
+  lang: en
+  text: "Invest a little — you'll earn thousands every day."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://the420.in/whatsapp-telegram-task-scam-digital-arrest-cyber-fraud-india/"
+  note: "Follow-up pitch quoted in the same article, used once small real payouts have built the victim's trust."
+
+- id: on-008
+  lang: en
+  text: "If you stop midway, you lose both capital and profits."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://the420.in/whatsapp-telegram-task-scam-digital-arrest-cyber-fraud-india/"
+  note: "Pressure-tactic line quoted in the same article, used to push victims into depositing more once they try to stop."
+
+- id: on-009
+  lang: en
+  text: "This message is to inform you that your number has won a lottery of Rs 25 lakh from Kaun Banega Crorepati. Contact on the given mobile number to get your cheque."
+  expect:
+    verdict: scam
+  type: lottery_prize
+  source: "https://www.ibtimes.co.in/fact-check-got-call-kbc-its-fake-phishing-attempt-ignore-flag-it-827478"
+  note: "Verbatim fake KBC-lottery WhatsApp/SMS message quoted in article; cites a Mumbai Police warning about this exact message."
+
+- id: on-010
+  form: narrative
+  lang: en
+  text: "A Mumbai project manager was added to a WhatsApp group called 'W1001-ACME Wealth Private Limited Group', then moved into a second group, 'ACME Wealth-VIPW72', where someone using the name 'Priyanka Chikhlkar' gave live guidance on 'pairs trading' and other lucrative-sounding stock-market opportunities. He was eventually cheated of ₹1.23 crore."
+  expect:
+    verdict: scam
+  type: copy_trade_influencer
+  source: "https://the420.in/mumbai-whatsapp-trading-scam-1-23-crore-fake-app-sebi-forgery/"
+  note: "Paraphrase in source (18 Mar 2026); WhatsApp group names and the adviser alias are exactly as reported."
+
+- id: on-011
+  form: narrative
+  lang: en
+  text: "An Indian man was added to a WhatsApp group named 'VIP3 Global Securities Official Stock Community', where the scammers posed as representatives of SMC Global Securities. He was eventually duped of Rs 1.3 million."
+  expect:
+    verdict: scam
+  type: fake_sebi_registered_adviser
+  source: "https://www.fastbull.com/brokersview/news/indian-man-duped-of-rs-13-million-in-whatsapp-trading-scam-257352"
+  note: "Paraphrase in source; WhatsApp group name and impersonated broker exactly as reported."
+
+- id: on-012
+  form: narrative
+  lang: en
+  text: "A man using the name 'Cute Arvin Anghita' persuaded a retired Army Colonel to invest in forex trading with promises of substantial returns. The Colonel ended up transferring ₹18,80,818 to him in multiple installments."
+  expect:
+    verdict: scam
+  type: forex_whatsapp
+  note: "Paraphrase in source; scammer's own alias and the exact amount as reported."
+  source: "https://www.tribuneindia.com/news/delhi/forex-scam-kerala-fisherman-held-for-duping-retired-army-colonel-of-18-8l"
+
+- id: on-013
+  form: narrative
+  lang: en
+  text: "A woman was added to a WhatsApp group called 'BlackRock Stock Club', where someone shared stock-market tips and got her to download a trading app. She received small returns at first, before being asked to invest as much as Rs 1 crore — part of a wider racket in which two Noida residents were defrauded of about Rs 1.40 crore."
+  expect:
+    verdict: scam
+  type: pig_butchering
+  source: "https://www.business-standard.com/finance/personal-finance/fake-profits-to-human-trafficking-the-whatsapp-stock-market-scam-decoded-124090900416_1.html"
+  note: "Paraphrase in source (9 Sep 2024); fake brokerage group name as reported."
+
+- id: on-014
+  lang: en
+  text: "Refund is on hold u/s 139AA(2)"
+  expect:
+    verdict: scam
+  type: fake_itr_notice
+  source: "https://hindi.goodreturns.in/personal-finance/itr-refund-scam-alert-2026-how-to-identify-fake-messages-011-148121.html"
+  note: "One of several fake notice-style SMS lines quoted in the article (23 Jul 2026), which uses legal-sounding section numbers to look official."
+
+- id: on-015
+  lang: en
+  text: "Notice for AY 2026 u/s 143A"
+  expect:
+    verdict: scam
+  type: fake_itr_notice
+  source: "https://hindi.goodreturns.in/personal-finance/itr-refund-scam-alert-2026-how-to-identify-fake-messages-011-148121.html"
+  note: "Another fake notice-style SMS line quoted in the same article."
+
+- id: on-016
+  lang: en
+  text: "Tax Authority Checklist for July 2026 – COMM-2026-089"
+  expect:
+    verdict: scam
+  type: fake_itr_notice
+  source: "https://hindi.goodreturns.in/personal-finance/itr-refund-scam-alert-2026-how-to-identify-fake-messages-011-148121.html"
+  note: "Third fake notice-style SMS line quoted in the same article; it warns these use legal jargon and urgency during ITR-filing season."
+
+- id: on-017
+  form: narrative
+  lang: en
+  text: "A link circulating on WhatsApp directs users to a video falsely portraying Union Finance Minister Nirmala Sitharaman endorsing an investment platform. The video claims that an investment of ₹21,000 can generate returns of up to ₹30 lakh."
+  expect:
+    verdict: scam
+  type: deepfake_promo
+  source: "https://x.com/PIBFactCheck/status/2052302327856373843"
+  note: "Paraphrase in source, trimmed from a PIB Fact Check post describing the fake-endorsement video's claim, before its own fact-check verdict text. #PIBFactCheck flagged the video itself as fake and digitally altered."
+
+- id: on-018
+  form: narrative
+  lang: en
+  text: "NSE flagged a fake WhatsApp investment group impersonating 'Lazard Asset Management India', being used to run a stock-tip scam targeting investors."
+  expect:
+    verdict: scam
+  type: fake_sebi_registered_adviser
+  source: "https://www.business-standard.com/amp/finance/personal-finance/nse-warns-about-another-whatsapp-group-scam-lazard-asset-management-india-124091300237_1.html"
+  note: "Paraphrase in source; exact impersonated entity name as named in NSE's warning."
+
+- id: on-019
+  form: narrative
+  lang: en
+  text: "A man in Mysuru lost ₹1.77 crore after being lured into a fake trading app that promised guaranteed profits on stock-market trades."
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.deccanherald.com/amp/story/india%2Fkarnataka%2Fmysuru%2Fmysuru-man-loses-rs-177-crore-in-fake-trading-app-scam-3855312"
+  note: "paraphrase in source"
+
+- id: on-020
+  form: narrative
+  lang: en
+  text: "A man from Rajasthan's Churu district lost ₹43.90 lakh after fraudsters added him to a WhatsApp group, promised him high returns, and showed him fabricated profits on a fake trading profile."
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://the420.in/churu-fake-stock-trading-scam-43-lakh-gujarat-arrest"
+  note: "paraphrase in source; one person was later arrested in Gujarat in connection with this case"
+
+- id: on-021
+  form: narrative
+  lang: en
+  text: "A man in Mandi was duped of ₹20 lakh after being drawn into an online stock-trading scheme promising high returns."
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.tribuneindia.com/news/himachal/mandi-man-duped-of-rs-20-lakh-in-online-trading-scandal"
+  note: "paraphrase in source"
+
+- id: on-022
+  form: narrative
+  lang: en
+  text: "A woman in Mangaluru was offered a part-time job over WhatsApp — rating listings for quick payouts — and ended up losing Rs 28.18 lakh once the 'tasks' required larger and larger upfront deposits."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://www.deccanherald.com/amp/story/india%2Fkarnataka%2Fmangaluru-woman-duped-of-rs-2818-lakh-in-part-time-job-scam-3201592"
+  note: "paraphrase in source"
+
+- id: on-023
+  form: narrative
+  lang: en
+  text: "A woman in Karnataka was duped of Rs 85 lakh in a part-time job scam that began with an unsolicited message offering easy online work."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://www.deccanherald.com/amp/story/india%2Fkarnataka%2Fkarnataka-woman-duped-of-rs-85-lakh-in-part-time-job-scam-3596541"
+  note: "paraphrase in source"
+
+- id: on-024
+  form: narrative
+  lang: en
+  text: "A man in Bengaluru was cheated of Rs 45 lakh in a part-time work-from-home scam that started with a message promising easy daily earnings."
+  expect:
+    verdict: scam
+  type: task_scam
+  source: "https://www.deccanherald.com/amp/story/india%2Fkarnataka%2Fbengaluru%2Fpart-time-work-scam-bengaluru-man-cheated-of-rs-45-lakh-1212390.html"
+  note: "paraphrase in source"
+
+- id: on-025
+  form: narrative
+  lang: en
+  text: "Uttar Pradesh police busted a racket running fake trading apps through a maze of over 200 shell companies, used to collect and launder roughly ₹800 crore from investors lured by promises of high stock-market returns."
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.business-standard.com/finance/personal-finance/fake-trading-apps-shell-firms-800-cr-investment-scam-busted-by-up-cops-126041000111_1.html"
+  note: "paraphrase in source"
+
+- id: on-026
+  form: narrative
+  lang: en
+  text: "A senior citizen in Navi Mumbai was kept on a video call by fraudsters posing as investigators, accused of 'laundering money for terrorists', and ended up wiring ₹21 lakh into what she believed was a government-controlled account."
+  expect:
+    verdict: scam
+  type: digital_arrest
+  source: "https://www.tookitaki.com/blog/locked-on-video-inside-indias-chilling-digital-arrest-scam"
+  note: "paraphrase in source (28 Aug 2025)"
+
+- id: on-027
+  form: narrative
+  lang: en
+  text: "A woman kept under a 'digital arrest' video call by fraudsters posing as investigators ended up selling her gold and a ₹2-crore home and transferring the proceeds to the scammers, before realising there is no such thing as a digital arrest under Indian law."
+  expect:
+    verdict: scam
+  type: digital_arrest
+  source: "https://www.outlookmoney.com/news/digital-arrest-scam-goes-beyond-the-screen-woman-loses-gold-and-rs-2-crore-home"
+  note: "paraphrase in source"
+
+# ───────────────────────── SCAM — HINDI / HINGLISH (on-028..on-040) ─────────────────────────
+
+- id: on-028
+  form: narrative
+  lang: hi
+  text: "ठाणे में 59 वर्षीय महिला को शेयर बाजार में भारी मुनाफे का झांसा देकर फर्जी ट्रेडिंग ऐप के जरिए करीब 1.1 करोड़ रुपए ठगा गया। ठगों ने वेंचुरा सिक्योरिटीज और 'गो मार्केट ग्लोबल' जैसी नामी ब्रोकरेज कंपनियों के नाम पर व्हाट्सऐप ग्रुप बनाकर खुद को अधिकृत ब्रोकर बताया।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://navbharatlive.com/maharashtra/thane/thane-woman-loses-1-1-crore-in-fake-trading-app-scam-asl01"
+  note: "paraphrase in source"
+
+- id: on-029
+  lang: hi
+  text: "आपका लोन अप्रूव हो गया है, बस यह लिंक क्लिक करें"
+  expect:
+    verdict: scam
+  type: loan_app_combo
+  source: "https://loancalculate.in/hindi/fake-loan-app-kaise-pehchane-rbi/"
+  note: "Example fraudulent loan-approval message quoted in article; typically sent via WhatsApp/Telegram/SMS with a malicious link attached."
+
+- id: on-030
+  form: narrative
+  lang: hi
+  text: "बंद बीमा पॉलिसी को चालू करने के नाम पर किसानों को ठगा जा रहा है। कॉल करने वाला खुद को बीमा कंपनी का प्रतिनिधि बताता है और पॉलिसी का बोनस निकलवाने के लिए 25 प्रतिशत टैक्स के रूप में रकम जमा कराता है।"
+  expect:
+    verdict: scam
+  type: insurance_bonus
+  source: "https://www.etvbharat.com/hi/state/major-online-fraud-in-cg-farmer-cheated-in-durg-under-guise-of-insurance-policy-cts26052504125"
+  note: "paraphrase in source"
+
+- id: on-031
+  form: narrative
+  lang: hi
+  text: "साइबर ठग फेसबुक, इंस्टाग्राम सहित अन्य सोशल मीडिया प्लेटफॉर्म पर फ्री स्टॉक एनालिसिस, स्पेशल इन्वेस्टमेंट ऑफर या गारंटीड रिटर्न जैसे आकर्षक विज्ञापन चलाकर लोगों को निशाना बनाते हैं, फिर पीड़ित को फर्जी व्हाट्सएप ग्रुप में जोड़कर कंपनी का अधिकारी बनकर निवेश की सलाह देते हैं।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.etvbharat.com/hi/state/fraud-involving-promises-of-free-stock-analysis-and-guaranteed-returns-rajasthan-police-issues-advisory-rjs26071005960"
+  note: "paraphrase in source (Rajasthan Police cyber advisory, as reported)"
+
+- id: on-032
+  lang: hi
+  text: "Dear customer aap ke liye good news soojna hai ke aap ke is WhatsApp number par 25,00000 ki lotery lagi hai bohat bohat wadhai ho lottery cash ke liye company officer Rajesh Bala G se sampat karen or company officer ki tumam jankari par amal karen"
+  expect:
+    verdict: scam
+  type: lottery_prize
+  source: "https://www.india.com/viral/fake-whatsapp-alert-kaun-banega-crorepati-lottery-message-promising-rs-25-lakh-is-bogus-take-a-look-3508492/"
+  note: "Verbatim Hinglish WhatsApp lottery message quoted in article (3 Jan 2019), spelling/grammar as published; the scammer's own 'company officer' name is kept as published."
+
+- id: on-033
+  form: narrative
+  lang: hi
+  text: "हैलो, मैं दिव्या — यही पहला मैसेज था जो एक 70 वर्षीय चार्टर्ड अकाउंटेंट को व्हाट्सऐप पर आया था; अगले 7 महीनों में बातचीत बढ़ाकर उन्हें क्रिप्टो ट्रेडिंग में निवेश के लिए राज़ी किया गया और कुल ₹21 करोड़ की ठगी हुई।"
+  expect:
+    verdict: scam
+  type: pig_butchering
+  source: "https://www.thelallantop.com/india/post/mp-ca-21-crore-crypto-investment-fraud-whatsapp-scam"
+  note: "Opening line 'हैलो, मैं दिव्या' is quoted verbatim in the article (15 Jul 2026); the rest of this entry paraphrases the case facts reported there — the full chat is not reproduced in the source."
+
+- id: on-034
+  form: narrative
+  lang: hi
+  text: "नोएडा में आईपीओ में निवेश के नाम पर एक व्यक्ति से व्हाट्सऐप के जरिए ₹53 लाख की ठगी की गई; आरोपियों ने शेयर अलॉटमेंट का झांसा देकर रकम जमा कराई।"
+  expect:
+    verdict: scam
+  type: pre_ipo
+  source: "https://subkuz.com/news/hindi/details/noida-ipo-investment-whatsapp-scam-rs53-lakh-fraud/199084"
+  note: "paraphrase in source"
+
+- id: on-035
+  form: narrative
+  lang: hi
+  text: "नोएडा और ग्रेटर नोएडा में शेयर व आईपीओ में निवेश का झांसा देकर तीन लोगों से व्हाट्सऐप और टेलीग्राम के ज़रिए कुल ₹76 लाख की ठगी की गई।"
+  expect:
+    verdict: scam
+  type: pre_ipo
+  source: "https://jaihindjanab.com/noida-greater-noida-share-ipo-investment-scam-76-lakh-whatsapp-telegram-cyber-crime/"
+  note: "paraphrase in source"
+
+- id: on-036
+  form: narrative
+  lang: hi
+  text: "नोएडा में तीन लोगों को व्हाट्सएप-टेलीग्राम के ज़रिए एक निवेश स्कीम में जोड़कर ₹25 लाख की साइबर ठगी की गई।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://subkuz.com/news/hindi/details/noida-cyber-fraud-three-people-25-lakh-whatsapp-telegram-investment-scam/210544"
+  note: "paraphrase in source"
+
+- id: on-037
+  form: narrative
+  lang: hi
+  text: "रायपुर में फेसबुक पर दोस्ती करने के बाद एक युवती ने एक डॉक्टर को क्रिप्टो में निवेश के नाम पर जाल में फंसाया और 25 लाख रुपये से अधिक की ठगी कर ली।"
+  expect:
+    verdict: scam
+  type: pig_butchering
+  source: "https://ibc24.in/chhattisgarh/raipur-crypto-fraud-news-3780085.html"
+  note: "paraphrase in source"
+
+- id: on-038
+  form: narrative
+  lang: hi
+  text: "दिल्ली में एक फर्जी ऑनलाइन ट्रेडिंग सिंडिकेट का भंडाफोड़ हुआ, जिसका कंबोडिया कनेक्शन था और जिसने निवेशकों से करीब ₹300 करोड़ की ठगी की; पुलिस ने इस मामले में चार लोगों को गिरफ्तार किया।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.aajtak.in/crime/cyber-crime/story/fake-online-trading-syndicate-busted-four-held-delhi-police-opnm2-dskc-2447921-2026-01-24"
+  note: "paraphrase in source (24 Jan 2026)"
+
+- id: on-039
+  form: narrative
+  lang: hi
+  text: "छत्रपति संभाजीनगर में एक गृहिणी को फर्जी सीए बनकर अमेरिकी शेयर बाजार में निवेश का झांसा दिया गया; फर्जी लाइसेंस दिखाकर भरोसा जीतकर ₹22 लाख की साइबर ठगी की गई।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://navbharatlive.com/maharashtra/aurangabad/fake-ca-chhatrapati-sambhajinagar-us-stock-market-investment-cyber-fraud-22-lakh-1872634.html"
+  note: "paraphrase in source"
+
+- id: on-040
+  form: narrative
+  lang: hi
+  text: "कर्नाटक में एक 71 वर्षीय बुजुर्ग को फर्जी निवेश सलाहकार बनकर व्हाट्सऐप के जरिए जाल में फंसाया गया और ₹75.4 लाख की ठगी की गई।"
+  expect:
+    verdict: scam
+  type: fake_trading_app
+  source: "https://www.palpalindia.com/2026/05/19/Karnataka-Elderly-man-duped-of-Rs-75-lakh-in-WhatsApp-investment-scam-cyber-criminals.html"
+  note: "paraphrase in source"
+
+# ───────────────────────── LEGIT — ENGLISH (on-041..on-056) ─────────────────────────
+
+- id: on-041
+  form: awareness
+  lang: en
+  text: "These entities create fake profiles that portray them as experts in the securities market. Many times these entities impersonate Sebi registered intermediaries, well-known public figures, celebrities, CEOs/MDs, etc. of established organisations. They exploit investors by showcasing fake testimonials of achieving huge profits from other group members who play a supporting role in these scams."
+  expect:
+    verdict: legit
+  type: hard_sebi_whatsapp_telegram_awareness
+  source: "https://www.outlookmoney.com/news/impersonation-and-false-promises-sebi-cautions-against-rising-social-media-stock-market-scams-heres-how-to-protect-yourself"
+  note: "Verbatim SEBI quote (press release, 21 May 2025) describing how scammers impersonate it — genuine regulator awareness text describing a scam pattern, must not be flagged as the scam itself."
+
+- id: on-042
+  form: awareness
+  lang: en
+  text: "Zerodha will never ask you to transfer money to random bank accounts or pressure you into quick decisions. Zerodha never asks for your login credentials, OTPs, or money transfers to personal accounts through WhatsApp or unofficial channels."
+  expect:
+    verdict: legit
+  type: hard_broker_scam_awareness
+  source: "https://support.zerodha.com/category/trading-and-markets/general-kite/others-kite/articles/investment-scams"
+  note: "Verbatim text from Zerodha's official support page on spotting scams that use its name."
+
+- id: on-043
+  form: awareness
+  lang: en
+  text: "Don't trust investment advice from unknown groups. Download trading apps only from Google Play Store or Apple App Store. Avoid guaranteed returns, VIP stock tips, and apps from private links. Report fraud to 1930 helpline or cybercrime.gov.in."
+  expect:
+    verdict: legit
+  type: hard_i4c_trading_advisory
+  source: "https://www.theindiadaily.com/technology/whatsapp-investment-scam-i4c-warns-against-fake-stock-tips-and-guaranteed-returns-news-127425"
+  note: "I4C's official advisory, quoted verbatim in article (14 Jul 2026)."
+
+- id: on-044
+  lang: en
+  text: "Refund of Rs. X for AY 2027-28 has been issued. Refund Sequence No. XXXXXXXXXX. Check status at incometax.gov.in."
+  expect:
+    verdict: legit
+  type: hard_itr_refund_genuine
+  source: "https://legalsuvidha.com/blog/income-tax-sms-alert"
+  note: "Genuine Income Tax Department refund-issued SMS format, sent from the official sender header ITDCPC."
+
+- id: on-045
+  lang: en
+  text: "Refund of Rs. X for PAN XXXXX1234X credited to account XX1234 on DD/MM/YYYY."
+  expect:
+    verdict: legit
+  type: hard_itr_refund_genuine
+  source: "https://legalsuvidha.com/blog/income-tax-sms-alert"
+  note: "Genuine Income Tax Department refund-credited SMS format, sent from the official sender header ITDREF (Refund Banker/SBI)."
+
+- id: on-046
+  lang: en
+  text: "Dear Taxpayer, TDS credit of Rs. X has been updated in your Form 26AS for PAN XXXXX1234X for Q[n] of FY 2025-26 by deductor TAN XXXXX1234X. Login to TRACES/e-filing portal for details."
+  expect:
+    verdict: legit
+  type: hard_itr_tds_alert
+  source: "https://legalsuvidha.com/blog/income-tax-sms-alert"
+  note: "Genuine Income Tax Department TDS-credit SMS format."
+
+- id: on-047
+  lang: en
+  text: "Intimation u/s 143(1) for AY 2027-28 has been sent to your registered email. Outstanding demand of Rs. XXXX. Login to e-filing portal for details."
+  expect:
+    verdict: legit
+  type: hard_itr_intimation
+  source: "https://legalsuvidha.com/blog/income-tax-sms-alert"
+  note: "Genuine Income Tax Department processing-intimation SMS format — mentions an 'outstanding demand' but is a routine official notice, not a scam; tests whether the checker over-triggers on demand language alone."
+
+- id: on-048
+  lang: en
+  text: "It was noticed that a claim of refund has been made in the Income-Tax Return for PAN XXXXXXXXN, for AY 2025-26 filed by you. Processing of the said return has been put on hold as it was identified under risk management framework on account of certain discrepancies in the claim of refund. An email with details has also been sent to your registered email address."
+  expect:
+    verdict: legit
+  type: hard_itr_processing_hold
+  source: "https://arthgyaan.com/blog/processing-of-the-said-return-was-held-as-it-was-identified-under-risk-management-process-sms.html"
+  note: "Genuine Income Tax Department SMS, confirmed genuine by the Department's own 23 Dec 2025 press release cited in the article — scary-sounding 'hold'/'discrepancies' wording but not a scam; false-positive test."
+
+- id: on-049
+  form: awareness
+  lang: en
+  text: "Reserve Bank of India cautions the members of public not to fall prey to fictitious offers / lottery winnings / remittance of cheap funds in foreign currency from abroad/Cyber Frauds / Cybercrimes through investment / Part time Job / Ponzi Scheme Scams etc."
+  expect:
+    verdict: legit
+  type: hard_rbi_fictitious_offers_advisory
+  source: "https://www.federal.bank.in/rbi-advisory-messages"
+  note: "Verbatim RBI public-awareness advisory, reproduced on a bank's official RBI-advisory page."
+
+- id: on-050
+  form: awareness
+  lang: en
+  text: "Never share OTP / PIN / personal details, etc., in any form with anyone, including your own friends and family members."
+  expect:
+    verdict: legit
+  type: hard_rbi_never_share_otp
+  source: "https://www.bajajfinserv.in/do-not-share-otp-guide"
+  note: "paraphrase in source; RBI's general consumer-protection guidance on OTP/PIN sharing, as reproduced on this page."
+
+- id: on-051
+  form: awareness
+  lang: en
+  text: "RBI PHISHING SCAM ‼️ Did you also receive a #WhatsApp message in the name of RBI, along with an APK file, alleging that your bank account is linked to suspicious transactions and asking for financial details to avoid account blockage❓ #PIBFactCheck: ❌ This message is #Fa…"
+  expect:
+    verdict: legit
+  type: hard_pib_factcheck_rbi_apk
+  source: "https://x.com/PIBFactCheck/status/2065040879694577870"
+  note: "PIB Fact Check's own post (verbatim, truncated with … as shown in the page title) debunking a fake RBI WhatsApp/APK message — genuine government fact-check notice, not the scam message itself."
+
+- id: on-052
+  form: awareness
+  lang: en
+  text: "Did you also receive a message asking you to download & install an APK file to redeem SBI rewards❓ Beware ‼️ #PIBFactCheck ❌@TheOfficialSBI NEVER sends links or APK files over SMS/WhatsApp ✔️Never download unknown files or click on such links"
+  expect:
+    verdict: legit
+  type: hard_pib_factcheck_sbi_apk
+  source: "https://x.com/PIBFactCheck/status/2025175969682915658"
+  note: "PIB Fact Check's own debunking post (verbatim, trailing media link omitted) about a fake SBI-rewards APK message — genuine fact-check notice."
+
+- id: on-053
+  form: awareness
+  lang: en
+  text: "Any message informing that you have won a lottery or a prize, is, in all likelihood, a fraud."
+  expect:
+    verdict: legit
+  type: hard_delhipolice_lottery_awareness
+  source: "https://eastmojo.com/fact-check/2022/11/01/fact-check-kbc-lottery-with-rs-25-lakh-reward-on-whatsapp-is-fake/"
+  note: "Verbatim Delhi Police Cyber Cell warning line, as quoted in article."
+
+- id: on-054
+  lang: en
+  text: "The nominal value of the Sovereign Gold Bond, 2023-24 Series II shall be ₹5,923/- per gram of gold. The Government of India, in consultation with the Reserve Bank, has decided to give a discount of ₹50/- per gram less than the nominal value to investors applying online with payment through digital mode, so the issue price for such investors shall be ₹5,873/- per gram of gold."
+  expect:
+    verdict: legit
+  type: hard_rbi_sgb_announcement
+  source: "https://rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=56348"
+  note: "Verbatim official RBI press release on a real Sovereign Gold Bond tranche — genuinely carries a government-backed guarantee, unlike scam 'guaranteed doubling' pitches that borrow the same language."
+
+- id: on-055
+  lang: en
+  text: "The contract note shows the details of the trades executed for the day: Order No. (the exchange order number), Trade time (when the order was executed at the exchange), Brokerage per Unit, and the Net total before levies such as GST, STT, stamp duty, SEBI turnover fee, and exchange transaction tax."
+  expect:
+    verdict: legit
+  type: hard_broker_contract_note_format
+  source: "https://www.icicidirect.com/faqs/my-account/how-to-read-the-contract-note"
+  note: "Close paraphrase of ICICI Direct's own field-by-field description of a genuine contract note, the routine post-trade confirmation every broker must issue."
+
+- id: on-056
+  form: awareness
+  lang: en
+  text: "Investors are cautioned against dealing based on unsolicited stock tips or recommendations circulated by unauthorised/unregistered entities through WhatsApp, Telegram, SMS, calls, or other social media platforms."
+  expect:
+    verdict: legit
+  type: hard_nse_unsolicited_tips_warning
+  source: "https://www.nseindia.com/static/invest/first-time-investor-fraud-dos-and-donts"
+  note: "paraphrase in source; NSE's standard investor-protection warning, the same language exchanges reuse on their 'Attention Investors' pages."
+
+# ───────────────────────── LEGIT — HINDI / HINGLISH (on-057..on-060) ─────────────────────────
+
+- id: on-057
+  form: awareness
+  lang: hi
+  text: "Main Moorkh Nahi Hoon"
+  expect:
+    verdict: legit
+  type: hard_npci_awareness_campaign
+  source: "https://mediabrief.com/npci-main-moorkh-nahi-hoon-campaign/"
+  note: "Official tagline of NPCI's UPI safety awareness campaign (6 Nov 2024), fronted by actor Pankaj Tripathi, warning citizens about SMS phishing and easy-money schemes."
+
+- id: on-058
+  form: awareness
+  lang: hi
+  text: "'Address update' bola tha… par poora account साफ़ कर दिया!"
+  expect:
+    verdict: legit
+  type: hard_i4c_cyberdost_awareness
+  source: "https://www.aajtak.in/technology/tech-news/story/fake-delivery-message-scam-a-phishing-trick-follow-these-safety-tips-ttecr-dskc-2264561-2025-06-16"
+  note: "Verbatim CyberDost (I4C) warning post, quoted in article (16 Jun 2025), cautioning about fake delivery/address-update links — genuine government awareness messaging, Hinglish."
+
+- id: on-059
+  form: awareness
+  lang: hi
+  text: "Guaranteed Returns का दावा सबसे बड़ा खतरे का संकेत है"
+  expect:
+    verdict: legit
+  type: hard_i4c_guaranteed_returns_awareness
+  source: "https://www.aajtak.in/technology/tech-news/story/whatsapp-telegram-investment-scam-i4c-guaranteed-returns-fake-trading-app-cyber-fraud-ttecm-dskc-2601001-2026-07-14"
+  note: "Verbatim I4C advisory line, quoted in article (14 Jul 2026) — genuine warning, not a scam pitch."
+
+- id: on-060
+  form: awareness
+  lang: hi
+  text: "फोन कॉल, ई-मेल और मैसेज पर धोखेबाजों द्वारा यह #फ़र्ज़ी दावा किया जा रहा है कि प्राप्तकर्ता ने ₹25,00,000 की लॉटरी जीती है।"
+  expect:
+    verdict: legit
+  type: hard_pib_factcheck_lottery
+  source: "https://eastmojo.com/fact-check/2022/11/01/fact-check-kbc-lottery-with-rs-25-lakh-reward-on-whatsapp-is-fake/"
+  note: "Verbatim PIB Fact Check Hindi tweet (28 Apr 2022), quoted in article, debunking the KBC lottery claim — genuine government fact-check notice."

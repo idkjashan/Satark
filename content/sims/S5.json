@@ -1,0 +1,109 @@
+{
+  "id": "S5",
+  "kind": "fsm",
+  "version": 1,
+  "start": "offer",
+  "title": {
+    "en": "The part-time job that asks you to pay",
+    "hi": "वह पार्ट-टाइम जॉब जो आपसे पैसे माँगती है"
+  },
+  "vars": {"lost": 0},
+  "states": {
+    "offer": {
+      "say": {
+        "en": "A WhatsApp message offers ₹500 a day for simple tasks like rating apps and liking videos.",
+        "hi": "एक WhatsApp मैसेज ऐप को रेटिंग देने और वीडियो लाइक करने जैसे आसान टास्क के लिए रोज़ाना ₹500 का ऑफ़र देता है।"
+      },
+      "choices": [
+        {"id": "check", "label": {"en": "Check it with Satark first", "hi": "पहले Satark से जाँच लें"}, "to": "checked"},
+        {"id": "join", "label": {"en": "Join and try the first few tasks", "hi": "जॉइन करें और पहले कुछ टास्क आज़माएँ"}, "to": "small_task"}
+      ]
+    },
+    "small_task": {
+      "say": {
+        "en": "₹500 really lands in your UPI for 3 tasks. The admin now invites you to \"VIP\" tasks that pay 10x more — for a ₹5,000 refundable deposit first.",
+        "hi": "3 टास्क के लिए सच में ₹500 आपके UPI पर आ जाते हैं। एडमिन अब आपको \"VIP\" टास्क के लिए बुलाता है जो 10 गुना ज़्यादा देते हैं — पहले ₹5,000 की \"रिफ़ंडेबल\" जमा राशि के बदले।"
+      },
+      "choices": [
+        {"id": "refuse", "label": {"en": "Refuse — a job should pay you, not the other way round", "hi": "मना करें — नौकरी आपको पैसे देनी चाहिए, उल्टा नहीं"}, "to": "safe_refuse"},
+        {"id": "deposit", "label": {"en": "Deposit the ₹5,000", "hi": "₹5,000 जमा कर दें"}, "to": "vip_balance", "set": {"lost": "+5000"}}
+      ]
+    },
+    "vip_balance": {
+      "say": {
+        "en": "Your VIP balance shows ₹60,000 \"earned\". Withdrawal needs a ₹10,000 \"processing fee\" first.",
+        "hi": "आपका VIP बैलेंस ₹60,000 \"कमाई\" दिखाता है। निकासी से पहले ₹10,000 की \"प्रोसेसिंग फ़ीस\" चाहिए।"
+      },
+      "choices": [
+        {"id": "refuse_fee", "label": {"en": "Refuse to pay the fee", "hi": "फ़ीस भरने से मना करें"}, "to": "lost_deposit"},
+        {"id": "pay_fee", "label": {"en": "Pay the ₹10,000 fee", "hi": "₹10,000 फ़ीस भर दें"}, "to": "lost_all", "set": {"lost": "+10000"}}
+      ]
+    },
+    "checked": {
+      "end": "safe",
+      "reveal": {
+        "en": "You checked first with Satark and lost ₹{lost}. A real job never asks you to pay before it pays you.",
+        "hi": "आपने पहले Satark से जाँच ली और ₹{lost} खोए। असली नौकरी आपको भुगतान करने से पहले कभी आपसे पैसे नहीं माँगती।"
+      },
+      "show": ["lost"]
+    },
+    "safe_refuse": {
+      "end": "safe",
+      "reveal": {
+        "en": "You refused the deposit. A genuine task never needs your money first. You lost ₹{lost}.",
+        "hi": "आपने जमा राशि देने से मना कर दिया। असली टास्क के लिए पहले आपके पैसे की ज़रूरत कभी नहीं होती। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_deposit": {
+      "end": "lost",
+      "reveal": {
+        "en": "A balance you cannot withdraw is not real money. Your deposit is gone. You lost ₹{lost}.",
+        "hi": "जो बैलेंस निकल ही न सके, वह असली पैसा नहीं है। आपकी जमा राशि जा चुकी है। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_all": {
+      "end": "lost",
+      "reveal": {
+        "en": "Paying the \"processing fee\" never unlocks real money — it only loses more. You lost ₹{lost}.",
+        "hi": "\"प्रोसेसिंग फ़ीस\" भरने से असली पैसा कभी नहीं मिलता — इससे सिर्फ़ और नुक़सान होता है। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    }
+  },
+  "quiz": [
+    {
+      "question": {
+        "en": "A task-group admin asks you to deposit money to \"unlock\" higher-paying tasks. What is this?",
+        "hi": "एक टास्क-ग्रुप एडमिन आपसे ज़्यादा कमाई वाले टास्क \"खोलने\" के लिए पैसे जमा करने को कहता है। यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "An advance-fee scam — a real job pays you, it never asks you to pay first", "hi": "एडवांस-फ़ीस स्कैम — असली नौकरी आपको पैसे देती है, वह कभी पहले आपसे पैसे नहीं माँगती"}, "correct": true},
+        {"id": "b", "text": {"en": "A normal membership upgrade", "hi": "एक सामान्य मेंबरशिप अपग्रेड"}, "correct": false},
+        {"id": "c", "text": {"en": "Fine, since the first ₹500 really arrived", "hi": "ठीक है, क्योंकि पहले वाले ₹500 सच में आ गए थे"}, "correct": false}
+      ],
+      "explain": {
+        "en": "The small real payout exists only to earn your trust before the deposit ask. That ask is the actual scam.",
+        "hi": "वह छोटा-सा असली पेआउट सिर्फ़ जमा राशि माँगने से पहले भरोसा जीतने के लिए होता है। असली स्कैम तो वही माँग है।"
+      },
+      "tactic": "task_advance_fee"
+    },
+    {
+      "question": {
+        "en": "Your task-app balance keeps growing, but every withdrawal attempt asks for one more fee first. What should you conclude?",
+        "hi": "आपका टास्क-ऐप बैलेंस बढ़ता जाता है, पर हर निकासी की कोशिश पर पहले एक और फ़ीस माँगी जाती है। आपको क्या समझना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "The balance was never real — stop paying and report it", "hi": "वह बैलेंस कभी असली था ही नहीं — पैसे देना बंद करें और रिपोर्ट करें"}, "correct": true},
+        {"id": "b", "text": {"en": "One more fee will finally release it", "hi": "एक और फ़ीस भरने से आख़िरकार पैसा मिल जाएगा"}, "correct": false},
+        {"id": "c", "text": {"en": "This is standard for all task apps", "hi": "यह सभी टास्क ऐप्स में सामान्य बात है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A withdrawal that always needs one more fee will never complete. Every new fee only confirms there was no real money to begin with.",
+        "hi": "जिस निकासी के लिए हमेशा एक और फ़ीस चाहिए, वह कभी पूरी नहीं होती। हर नई फ़ीस यही साबित करती है कि शुरुआत से कोई असली पैसा था ही नहीं।"
+      },
+      "tactic": "task_advance_fee"
+    }
+  ]
+}

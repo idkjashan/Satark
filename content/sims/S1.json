@@ -1,0 +1,125 @@
+{
+  "id": "S1",
+  "kind": "fsm",
+  "version": 1,
+  "start": "invite",
+  "title": {
+    "en": "The fake trading-app trap",
+    "hi": "नकली ट्रेडिंग-ऐप का जाल"
+  },
+  "vars": {"balance": 0, "lost": 0},
+  "states": {
+    "invite": {
+      "say": {
+        "en": "A WhatsApp group invites you to a free \"VIP\" trading tips channel.",
+        "hi": "एक WhatsApp ग्रुप आपको एक फ़्री \"VIP\" ट्रेडिंग टिप्स चैनल में बुलाता है।"
+      },
+      "choices": [
+        {"id": "check", "label": {"en": "Check it with Satark first", "hi": "पहले Satark से जाँच लें"}, "to": "checked"},
+        {"id": "join", "label": {"en": "Join and see what happens", "hi": "जॉइन करें और देखें क्या होता है"}, "to": "deposit"}
+      ]
+    },
+    "deposit": {
+      "say": {
+        "en": "The group's \"professor\" says: deposit ₹10,000 to start trading on their app.",
+        "hi": "ग्रुप का \"प्रोफ़ेसर\" कहता है: उनके ऐप पर ट्रेडिंग शुरू करने के लिए ₹10,000 जमा करें।"
+      },
+      "choices": [
+        {
+          "id": "pay",
+          "label": {"en": "Pay the ₹10,000", "hi": "₹10,000 भर दें"},
+          "to": "profits",
+          "set": {"lost": "+10000", "balance": "=70000"}
+        },
+        {"id": "stop", "label": {"en": "Stop and check first", "hi": "रुकें और पहले जाँच लें"}, "to": "checked"}
+      ]
+    },
+    "profits": {
+      "say": {
+        "en": "Within a week, the app shows your balance has grown to ₹{balance}.",
+        "hi": "एक हफ़्ते में, ऐप पर आपका बैलेंस बढ़कर ₹{balance} दिखता है।"
+      },
+      "choices": [
+        {"id": "withdraw", "label": {"en": "Try to withdraw ₹{balance}", "hi": "₹{balance} निकालने की कोशिश करें"}, "to": "blocked"}
+      ]
+    },
+    "blocked": {
+      "say": {
+        "en": "Withdrawal is blocked. A message says you must first pay 18% tax: ₹12,600.",
+        "hi": "निकासी रुक जाती है। एक मैसेज कहता है: पहले 18% टैक्स भरें: ₹12,600।"
+      },
+      "choices": [
+        {"id": "refuse_tax", "label": {"en": "Refuse to pay the \"tax\"", "hi": "\"टैक्स\" भरने से मना करें"}, "to": "lost_deposit"},
+        {
+          "id": "pay_tax",
+          "label": {"en": "Pay the ₹12,600 tax", "hi": "₹12,600 टैक्स भर दें"},
+          "to": "unlock",
+          "set": {"lost": "+12600"}
+        }
+      ]
+    },
+    "unlock": {
+      "say": {
+        "en": "The tax is paid, but now they ask for a ₹12,000 \"unlock fee\".",
+        "hi": "टैक्स भर दिया, पर अब वे ₹12,000 की \"अनलॉक फ़ीस\" माँगते हैं।"
+      },
+      "choices": [
+        {"id": "refuse_fee", "label": {"en": "Refuse to pay the fee", "hi": "फ़ीस भरने से मना करें"}, "to": "lost_more"},
+        {
+          "id": "pay_fee",
+          "label": {"en": "Pay the ₹12,000 fee", "hi": "₹12,000 फ़ीस भर दें"},
+          "to": "lost_all",
+          "set": {"lost": "+12000"}
+        }
+      ]
+    },
+    "checked": {
+      "end": "safe",
+      "reveal": {
+        "en": "You checked first with Satark and lost ₹{lost}. That was exactly the right move.",
+        "hi": "आपने पहले Satark से जाँच ली और ₹{lost} खोए। यही सही कदम था।"
+      },
+      "show": ["lost"]
+    },
+    "lost_deposit": {
+      "end": "lost",
+      "reveal": {
+        "en": "A fee to withdraw your own money always means it is a scam. You lost ₹{lost}.",
+        "hi": "अपना ही पैसा निकालने के लिए फ़ीस माँगना हमेशा स्कैम होता है। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_more": {
+      "end": "lost",
+      "reveal": {
+        "en": "A fee to withdraw your own money always means it is a scam. You lost ₹{lost}.",
+        "hi": "अपना ही पैसा निकालने के लिए फ़ीस माँगना हमेशा स्कैम होता है। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "lost_all": {
+      "end": "lost",
+      "reveal": {
+        "en": "A fee to withdraw your own money always means it is a scam. The app then disappeared. You lost ₹{lost}.",
+        "hi": "अपना ही पैसा निकालने के लिए फ़ीस माँगना हमेशा स्कैम होता है। फिर ऐप ग़ायब हो गया। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    }
+  },
+  "quiz": {
+    "question": {
+      "en": "What is the one sure sign that an investment app is a scam?",
+      "hi": "यह पक्का कैसे पता चलता है कि कोई इन्वेस्टमेंट ऐप स्कैम है?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "It asks for a fee before letting you withdraw your own money", "hi": "अपना पैसा निकालने से पहले वह फ़ीस माँगता है"}, "correct": true},
+      {"id": "b", "text": {"en": "It has a colourful, modern-looking design", "hi": "उसका डिज़ाइन रंगीन और आधुनिक दिखता है"}, "correct": false},
+      {"id": "c", "text": {"en": "A friend added you to its group", "hi": "किसी दोस्त ने आपको उसके ग्रुप में जोड़ा"}, "correct": false}
+    ],
+    "explain": {
+      "en": "No real broker ever charges a fee to release money that is already yours. That single rule catches this entire trap.",
+      "hi": "कोई असली ब्रोकर आपका अपना पैसा देने के लिए कभी फ़ीस नहीं लेता। यह एक नियम ही इस पूरे जाल को पकड़ लेता है।"
+    },
+    "tactic": "pay_to_withdraw"
+  }
+}

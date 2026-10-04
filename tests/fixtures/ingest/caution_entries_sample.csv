@@ -1,0 +1,7 @@
+list_id,entry_type,value,display,published_at,source_url
+sample_list,name,Quick Profit Advisory,Quick Profit Advisory,2026-09-01,https://example.org/notice1.pdf
+sample_list,phone,+91 99999 00000,+91 99999 00000,2026-09-15,https://example.org/notice2.pdf
+sample_list,domain,https://Fake-SEBI-Refund.in/pay,fake-sebi-refund.in,2026-10-01,https://example.org/notice3.pdf
+sample_list,upi,Scammer@YBL,scammer@ybl,,https://example.org/notice4.pdf
+sample_list,bogus_type,something,something,2026-09-01,https://example.org/notice5.pdf
+sample_list,name,,blank value dropped,2026-09-01,https://example.org/notice6.pdf

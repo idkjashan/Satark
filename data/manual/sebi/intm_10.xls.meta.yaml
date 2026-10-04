@@ -1,0 +1,7 @@
+url: https://www.sebi.gov.in/sebiweb/other/IntmExportAction.do?intmId=10
+fetched_on: '2026-10-03'
+as_on: '2026-10-03'
+licence: 'SEBI website policy: reproduction allowed after permission by e-mail (paymenthandles@sebi.gov.in
+  / website contact), source acknowledged; deep links need no permission.'
+note: Category RTA (Registrars to an issue and share Transfer Agents); as_on is parsed
+  at ingest from the file's own title row and should match this value.

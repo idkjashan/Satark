@@ -1,0 +1,78 @@
+# Link-family static rules (C: checkers). Not loaded by satark/config.py; satark/checkers/link.py
+# caches its own yaml.safe_load of this file (docs/CONTRACTS.md: link_rules.yaml is C's own).
+#
+# shorteners: hosts link.unshorten will follow (seed; extend freely).
+shorteners:
+  - bit.ly
+  - tinyurl.com
+  - t.co
+  - goo.gl
+  - cutt.ly
+  - rb.gy
+  - is.gd
+  - shorturl.at
+  - tiny.cc
+  - ow.ly
+  - buff.ly
+  - rebrand.ly
+  - s.id
+  - v.gd
+  - bit.do
+  - t.ly
+  - lnkd.in
+  - wa.link
+  - shorte.st
+  - adf.ly
+  - tr.im
+  - soo.gd
+  - clck.ru
+  - qr.ae
+  - x.co
+  - url.ie
+  - cli.gs
+  - db.tt
+  - gg.gg
+  - kutt.it
+  - linktr.ee
+  - mcaf.ee
+  - ouo.io
+  - po.st
+  - shorl.com
+  - snip.ly
+  - vzturl.com
+  - zpr.io
+  - shrtco.de
+  - dub.sh
+  - bl.ink
+  - switchy.io
+  - short.io
+  - tiny.one
+  - qps.ru
+
+# free_hosting: a landing page on infrastructure anyone can spin up for free, not a company's own
+# site. A bare host matches any path; "*.suffix" matches that suffix and any subdomain of it;
+# "host/prefix" matches only that path prefix on that host (see link.google_hosted).
+free_hosting:
+  - forms.gle
+  - docs.google.com/forms
+  - sites.google.com
+  - drive.google.com
+  - "*.web.app"
+  - "*.firebaseapp.com"
+  - "*.netlify.app"
+  - "*.vercel.app"
+  - "*.github.io"
+  - "*.blogspot.com"
+  - "*.wixsite.com"
+  - "*.weebly.com"
+  - "*.000webhostapp.com"
+
+# known_spoofs: domains seen imitating a government claims process (IEPF unclaimed-shares refunds,
+# Sahara-refund schemes) that are not the real agency's own domain. Seed; extend from caution notices.
+known_spoofs:
+  - iepf.org.in
+  - iepfclaim.com
+  - iepf-india.com
+  - sahara-refund.in
+  - sahararefund.com
+  - saharirefund.com

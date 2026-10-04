@@ -1,0 +1,10 @@
+# Languages (LLD §24). `enabled` languages must have every signal title in content/i18n.
+# `speech` is the BCP-47 tag for Web Speech (voice in and out) on the phone.
+languages:
+  en: {name: "English", native: "English", speech: en-IN, script: Latin, enabled: true}
+  hi: {name: "Hindi", native: "हिन्दी", speech: hi-IN, script: Devanagari, enabled: true}
+  mr: {name: "Marathi", native: "मराठी", speech: mr-IN, script: Devanagari, enabled: false}
+  bn: {name: "Bengali", native: "বাংলা", speech: bn-IN, script: Bengali, enabled: false}
+  ta: {name: "Tamil", native: "தமிழ்", speech: ta-IN, script: Tamil, enabled: false}
+  te: {name: "Telugu", native: "తెలుగు", speech: te-IN, script: Telugu, enabled: false}
+default: en

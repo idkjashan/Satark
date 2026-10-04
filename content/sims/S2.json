@@ -1,0 +1,62 @@
+{
+  "id": "S2",
+  "kind": "returns",
+  "version": 1,
+  "title": {
+    "en": "The \"guaranteed return\" calculator",
+    "hi": "\"गारंटीड रिटर्न\" कैलकुलेटर"
+  },
+  "texts": {
+    "prompt": {
+      "en": "Enter the rate someone promised you, and see what it really means.",
+      "hi": "वह रेट डालें जिसका वादा किया गया, और देखें इसका असल मतलब क्या है।"
+    },
+    "result": {
+      "en": "₹{amount} at {rate}% per {period} becomes about ₹{result} in one year.",
+      "hi": "₹{amount} पर {period} का {rate}% रेट एक साल में लगभग ₹{result} बन जाता है।"
+    },
+    "impossible": {
+      "en": "No investment can promise this. A number this large is not real.",
+      "hi": "कोई भी इन्वेस्टमेंट यह वादा नहीं कर सकता। इतना बड़ा नंबर असली नहीं है।"
+    },
+    "benchmark": {
+      "en": "For comparison, a government-backed option like PPF pays about 7.1% a year (Oct–Dec 2026) — a year, not a day.",
+      "hi": "तुलना के लिए, PPF जैसा सरकार-समर्थित विकल्प साल में लगभग 7.1% देता है (अक्टूबर–दिसंबर 2026) — साल में, दिन में नहीं।"
+    }
+  },
+  "defaults": {"rate": 5, "period": "day", "amount": 10000},
+  "quiz": [
+    {
+      "question": {
+        "en": "A message promises \"2% profit every week, guaranteed\". What does this calculator show about that claim?",
+        "hi": "एक मैसेज \"हर हफ़्ते 2% मुनाफ़ा, पक्का\" का वादा करता है। यह कैलकुलेटर इस दावे के बारे में क्या दिखाता है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "It compounds to an impossible multiple within a year — no real investment pays this", "hi": "यह एक साल में एक नामुमकिन गुना बन जाता है — कोई असली इन्वेस्टमेंट ऐसा नहीं देता"}, "correct": true},
+        {"id": "b", "text": {"en": "It is reasonable, since 2% sounds small", "hi": "यह सही लगता है, क्योंकि 2% छोटा लगता है"}, "correct": false},
+        {"id": "c", "text": {"en": "It only matters if you invest a large amount", "hi": "यह सिर्फ़ तब मायने रखता है जब बड़ी रकम लगाई जाए"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A small-looking weekly rate compounds into an enormous, impossible multiple within a year. The percentage, not the amount, is the warning sign.",
+        "hi": "छोटा दिखने वाला हफ़्ते का रेट भी एक साल में एक बहुत बड़ा, नामुमकिन गुना बन जाता है। रकम नहीं, वह प्रतिशत ही चेतावनी है।"
+      },
+      "tactic": "guaranteed_returns"
+    },
+    {
+      "question": {
+        "en": "What should you compare a promised rate against before believing it?",
+        "hi": "किसी वादा किए गए रेट पर भरोसा करने से पहले उसे किससे मिलाकर देखना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "A government-backed benchmark like PPF's published yearly rate (about 7.1%)", "hi": "PPF जैसे सरकार-समर्थित विकल्प की प्रकाशित सालाना दर (लगभग 7.1%) से"}, "correct": true},
+        {"id": "b", "text": {"en": "How confident the person sounds", "hi": "व्यक्ति कितने भरोसे से बोल रहा है, उससे"}, "correct": false},
+        {"id": "c", "text": {"en": "How many people are already in the group", "hi": "ग्रुप में कितने लोग पहले से जुड़े हैं, उससे"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A published, regulated yearly rate is the only honest yardstick. Anything many times larger, especially per day or week, cannot be real.",
+        "hi": "एक प्रकाशित, नियमित सालाना दर ही सबसे ईमानदार पैमाना है। उससे कई गुना ज़्यादा, ख़ासकर रोज़ाना या हफ़्ते का रेट, असली नहीं हो सकता।"
+      },
+      "tactic": "guaranteed_returns"
+    }
+  ]
+}

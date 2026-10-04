@@ -1,0 +1,62 @@
+{
+  "id": "compounding",
+  "icon": "📈",
+  "minutes": 2,
+  "title": {
+    "en": "Why \"1% a day\" is impossible",
+    "hi": "\"रोज़ 1%\" मुमकिन क्यों नहीं है"
+  },
+  "tactic": {
+    "en": "Tactic: guaranteed returns — no real investment can promise a fixed daily or weekly profit, ever.",
+    "hi": "तरीका: गारंटीड रिटर्न — कोई भी असली इन्वेस्टमेंट रोज़ाना या हफ़्ते का तय मुनाफ़ा देने का वादा कभी नहीं कर सकता।"
+  },
+  "tacticKey": "guaranteed_returns",
+  "sim": "S2",
+  "steps": [
+    {
+      "text": {
+        "en": "Compounding means your returns start earning their own returns.",
+        "hi": "कंपाउंडिंग का मतलब है: आपका मुनाफ़ा भी आगे मुनाफ़ा कमाने लगता है।"
+      },
+      "visual": "compounding-chart"
+    },
+    {
+      "text": {
+        "en": "That is why growth speeds up over time, instead of staying flat.",
+        "hi": "इसी वजह से समय के साथ बढ़त तेज़ होती है, एक जैसी नहीं रहती।"
+      }
+    },
+    {
+      "text": {
+        "en": "A scheme promising \"1% profit every day\" sounds small and safe.",
+        "hi": "\"रोज़ 1% मुनाफ़ा\" का वादा सुनने में छोटा और सुरक्षित लगता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "But 1% a day compounds to about 12 times in one year — and no one can guarantee that.",
+        "hi": "पर रोज़ 1% एक साल में क़रीब 12 गुना बन जाता है — और यह कोई गारंटी नहीं दे सकता।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a snowball rolling downhill: the longer it rolls, the more snow it picks up, and the faster it grows.",
+    "hi": "यह पहाड़ से लुढ़कते बर्फ़ के गोले जैसा है: जितनी देर लुढ़के, उतनी ज़्यादा बर्फ़ जुड़े और उतनी तेज़ी से बढ़े।"
+  },
+  "quiz": {
+    "question": {
+      "en": "If someone promises 1% profit every single day, how much bigger does ₹10,000 become in one year?",
+      "hi": "अगर कोई रोज़ 1% मुनाफ़े का वादा करे, तो एक साल में ₹10,000 कितना बड़ा हो जाएगा?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "About 12 times", "hi": "लगभग 12 गुना"}, "correct": true},
+      {"id": "b", "text": {"en": "About 1.5 times", "hi": "लगभग 1.5 गुना"}, "correct": false},
+      {"id": "c", "text": {"en": "About 365 times", "hi": "लगभग 365 गुना"}, "correct": false}
+    ],
+    "explain": {
+      "en": "1.01 multiplied by itself 250 trading days is about 12. No one can guarantee a daily return like this, ever.",
+      "hi": "1.01 को 250 ट्रेडिंग दिनों तक बार-बार गुणा करें तो यह लगभग 12 बनता है। ऐसा रोज़ाना रिटर्न कोई गारंटी नहीं दे सकता।"
+    },
+    "tactic": "guaranteed_returns"
+  }
+}

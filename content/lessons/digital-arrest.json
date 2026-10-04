@@ -1,0 +1,96 @@
+{
+  "id": "digital-arrest",
+  "icon": "🚔",
+  "minutes": 2,
+  "title": {
+    "en": "The fake \"digital arrest\" call",
+    "hi": "नकली \"डिजिटल अरेस्ट\" कॉल"
+  },
+  "tactic": {
+    "en": "Tactic: authority impersonation — a fake police or CBI video call threatens arrest to panic you into paying.",
+    "hi": "तरीका: अधिकारी बनकर धमकाना — नकली पुलिस या CBI वीडियो कॉल गिरफ़्तारी की धमकी देकर पैसे माँगती है।"
+  },
+  "tacticKey": "authority_impersonation",
+  "steps": [
+    {
+      "text": {
+        "en": "A video call shows someone in a police or CBI uniform. They say your Aadhaar, phone number or a parcel is linked to a crime.",
+        "hi": "एक वीडियो कॉल में पुलिस या CBI की यूनिफ़ॉर्म पहने कोई व्यक्ति दिखता है। वे कहते हैं कि आपका आधार, फ़ोन नंबर या कोई पार्सल किसी अपराध से जुड़ा है।"
+      }
+    },
+    {
+      "text": {
+        "en": "They say you are under \"digital arrest\" — stay on camera, don't tell your family, or you'll be arrested right now.",
+        "hi": "वे कहते हैं कि आप \"डिजिटल अरेस्ट\" में हैं — कैमरे के सामने रहें, परिवार को न बताएँ, वरना अभी गिरफ़्तारी हो जाएगी।"
+      }
+    },
+    {
+      "text": {
+        "en": "\"Digital arrest\" does not exist in Indian law. No one can be arrested, investigated or held on a video call.",
+        "hi": "\"डिजिटल अरेस्ट\" जैसा कुछ भारतीय कानून में नहीं है। वीडियो कॉल पर किसी को गिरफ़्तार, जाँच या रोका नहीं जा सकता।"
+      }
+    },
+    {
+      "text": {
+        "en": "The real police or CBI never call to collect money, never ask you to stay silent, and never work over WhatsApp or Skype video.",
+        "hi": "असली पुलिस या CBI कभी पैसे लेने के लिए कॉल नहीं करती, कभी चुप रहने को नहीं कहती, और कभी WhatsApp या Skype वीडियो पर काम नहीं करती।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a stranger in a costume shouting arrest threats through your door — the costume alone proves nothing.",
+    "hi": "यह वैसा है जैसे कोई अजनबी वेश बदलकर आपके दरवाज़े से गिरफ़्तारी की धमकी चिल्लाए — सिर्फ़ वेश किसी असली अधिकार का सबूत नहीं है।"
+  },
+  "source": "https://cybercrime.gov.in",
+  "sim": "S4",
+  "quiz": [
+    {
+      "question": {
+        "en": "A man in a police uniform video-calls you, says you're under \"digital arrest\", and demands ₹50,000 to \"clear your name\". What is this?",
+        "hi": "पुलिस की यूनिफ़ॉर्म में एक व्यक्ति आपको वीडियो कॉल करता है, कहता है आप \"डिजिटल अरेस्ट\" में हैं, और नाम \"साफ़\" करने के लिए ₹50,000 माँगता है। यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Authority impersonation — hang up and verify independently", "hi": "अधिकारी बनकर धमकाना — कॉल काटें और ख़ुद अलग से जाँच करें"}, "correct": true},
+        {"id": "b", "text": {"en": "A real police procedure — pay to clear your name", "hi": "असली पुलिस की प्रक्रिया — नाम साफ़ करने के लिए पैसे दें"}, "correct": false},
+        {"id": "c", "text": {"en": "Ask them to call back tomorrow", "hi": "उनसे कहें कल फिर कॉल करें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Real police never arrest, investigate or collect money over a video call. Hang up and verify through the real police station or 1930.",
+        "hi": "असली पुलिस कभी वीडियो कॉल पर गिरफ़्तार नहीं करती, जाँच नहीं करती या पैसे नहीं लेती। कॉल काटें और असली पुलिस स्टेशन या 1930 से जाँच लें।"
+      },
+      "tactic": "authority_impersonation"
+    },
+    {
+      "question": {
+        "en": "The caller says: \"Do not disconnect or you'll be arrested in the next 10 minutes.\" What tactic is this?",
+        "hi": "कॉल करने वाला कहता है: \"कॉल मत काटो, वरना अगले 10 मिनट में गिरफ़्तारी होगी।\" यह कौन-सा तरीका है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Fake urgency — a real legal process is never this instant", "hi": "फ़र्ज़ी हड़बड़ी — असली क़ानूनी प्रक्रिया कभी इतनी तुरंत नहीं होती"}, "correct": true},
+        {"id": "b", "text": {"en": "True — always obey a strict deadline on a call", "hi": "सच बात है — कॉल पर दी गई सख़्त डेडलाइन हमेशा माननी चाहिए"}, "correct": false},
+        {"id": "c", "text": {"en": "Stay on the call and ask a family member to join it too", "hi": "कॉल पर बने रहें और परिवार के किसी सदस्य को भी जोड़ लें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "No lawful process is rushed through one phone or video call. The deadline exists only to stop you from thinking clearly.",
+        "hi": "कोई क़ानूनी प्रक्रिया एक ही फ़ोन या वीडियो कॉल पर इतनी जल्दी नहीं होती। डेडलाइन सिर्फ़ इसलिए है कि आप सोच न पाएं।"
+      },
+      "tactic": "fake_urgency"
+    },
+    {
+      "question": {
+        "en": "What is the right first move if this happens to you or your parents?",
+        "hi": "अगर यह आपके या आपके माता-पिता के साथ हो, तो सही पहला क़दम क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "End the call, then verify independently via 1930 or the nearest police station", "hi": "कॉल काटें, फिर 1930 या पास के पुलिस स्टेशन से अलग से जाँच करें"}, "correct": true},
+        {"id": "b", "text": {"en": "Keep the video call open and ask them to prove their identity", "hi": "वीडियो कॉल चालू रखें और उनसे पहचान का सबूत माँगें"}, "correct": false},
+        {"id": "c", "text": {"en": "Pay a small amount first to show good faith", "hi": "भरोसा दिखाने के लिए पहले थोड़े पैसे भेज दें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "End the call first — never negotiate while the scammer controls it. Verify only after you disconnect.",
+        "hi": "पहले कॉल काटें — जब तक स्कैमर कॉल पर हावी है, कोई बातचीत न करें। कॉल काटने के बाद ही जाँच करें।"
+      },
+      "tactic": "authority_impersonation"
+    }
+  ]
+}

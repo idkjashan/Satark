@@ -1,0 +1,403 @@
+# Red-flag phrase lexicon for text.redflags (LLD §9.8; HLD Appendix C.2 seed phrases + SEBI PR
+# phrases). Loaded by satark/config.py into ctx.config.lexicons["redflags"].
+#
+# Shape: {CODE: {en: [regex...], hi: [regex...], hinglish: [regex...]}}. Matching is
+# case-insensitive (satark/checkers/text.py). Patterns are precise on purpose (word-ish
+# boundaries, short proximity windows) so a genuine broker/bank message does not fire them;
+# satark/checkers/text.py also discards a match whose short preceding window contains a
+# negator ("never", "don't", Hindi न/मत/नहीं as a whole token), so "never share your OTP"
+# does not read as a request for one.
+#
+# CELEBRITY_ENDORSEMENT is not here: it is a proximity rule (a brands.yaml kind=celebrity
+# alias near an investment word), computed in satark/checkers/text.py from brands.yaml.
+# CRYPTO_PAYMENT_REQUEST, REG_CLAIM_NO_NUMBER and SENSITIVE_DATA_SHARED are claims.rules
+# codes (claim-type driven, not phrase-driven) and are not here either.
+
+
+
+
+
+FEE_TO_WITHDRAW:
+  en:
+    - '\bwithdraw\w*\b.{0,60}\b(tax|tds|fee|charge|unlock)\w*\b'
+    - '\b(tax|tds|fee|charge|unlock)\w*\b.{0,60}\bwithdraw\w*\b'
+    - '\bunlock(ing)?\s*fee\b'
+    - '\b(pay|deposit)\b.{0,40}\b(tax|tds|fee|charges?)\b.{0,40}\b(release|unlock|withdraw)\w*'
+    - '\bwithdrawal\b.{0,30}\b(blocked|on\s*hold|pending|stuck)\b.{0,80}\b(pay|deposit)\b'
+  hi:
+    - 'निकास\w*.{0,60}(टैक्स|शुल्क|जुर्माना)'
+    - '(टैक्स|शुल्क|जुर्माना).{0,60}निकास\w*'
+    - 'निकाल\w*.{0,60}(टैक्स|शुल्क|फीस|चार्ज)'
+    - '(टैक्स|शुल्क|फीस|चार्ज).{0,60}निकाल\w*'
+    - 'पैसे\s*निकालने\s*के\s*लिए'
+  hinglish:
+    - 'nikal\w*.{0,60}(tax|fee|charge)'
+    - 'withdraw\w*.{0,30}(ke liye|se pehle).{0,30}(tax|fee|charge)'
+    - 'nikasi\w*.{0,30}ke liye.{0,20}(tax|fee|charge)'
+    - 'withdrawal\s*(ke\s*liye|se\s*pehle).{0,40}(tax|fee|charge|bharna|jama)'
+    - 'paise\s*nikalne\s*ke\s*liye'
+
+REMOTE_ACCESS_REQUEST:
+  en:
+    - '\b(anydesk|teamviewer|quick\s?support|rustdesk|airdroid)\b'
+    - '\bscreen\s*shar\w*\b.{0,40}\b(app|install)\b'
+    - '\b(any\s*desk|team\s*viewer|rust\s*desk|air\s*droid)\b'
+  hi:
+    - 'एनीडेस्क|टीमव्यूअर|रिमोट\s*एक्सेस'
+    - 'स्क्रीन\s*शेयर'
+  hinglish:
+    - '\b(anydesk|teamviewer|quick\s?support|rustdesk|airdroid)\b'
+    - 'screen\s*share\s*kar\w*'
+
+OTP_REQUEST:
+  en:
+    - '\bshare\b.{0,20}\b(otp|password|pin)\b'
+    - '\b(otp|password|pin)\b.{0,20}\bshare\b'
+    - '\bsend\s*(me|us)?\s*(the\s*)?otp\b'
+    - '\b(tell|give|provide|send|share)\b.{0,20}\b(otp|one[- ]time\s*password|upi\s*pin|atm\s*pin|cvv)\b'
+    - '\breply\s*(with|back\s*with)?\s*(the\s*)?(otp|code|pin)\b'
+    - '\b(otp|verification\s*code)\b.{0,30}\b(reply|send\s*back|forward)\b'
+    - '\b(share|send|tell|give|read\s*out)\b.{0,15}\b(the\s*)?(\d{1,2}[- ]digit\s*)?(code|pin)\b'
+  hi:
+    - 'ओटीपी.{0,20}(बताएं|भेजें|शेयर)'
+    - 'पिन.{0,20}(बताएं|भेजें)'
+    - 'otp.{0,20}(शेयर|बताएं|बताइए|बताओ|भेजें|भेजो|दें|दीजिए)'
+    - 'पिन.{0,20}(शेयर|बताएं|भेजें|डालें)'
+  hinglish:
+    - 'otp.{0,20}(bata|bhejo|share)'
+    - 'apna\s*otp.{0,20}(batao|bhejo)'
+
+DIGITAL_ARREST:
+  en:
+    - '\bdigital\s*arrest\b'
+    - '\b(arrest|fir|warrant)\b.{0,40}\b(avoid|pay|settle)\b'
+    - '\baccount\s*(will\s*be\s*)?freeze'
+    - '\bstay\s*on\s*(the\s*)?video\s*call\b'
+    - '\bmoney\s*laundering\s*case\b'
+    - '\b(cbi|ed|police|customs|narcotics|cyber\s*cell)\b.{0,60}\b(case|arrest|warrant)\b'
+    - '\b(parcel|courier|package|consignment)\b.{0,120}\b(customs|police|narcotics|drugs|illegal|seized|cbi|ncb)\b'
+    - '\b(non-?bailable|arrest)\s*warrant\b'
+    - '\bpress\s*1\b.{0,60}\b(officer|police|customs|cbi)\b'
+  hi:
+    - 'डिजिटल\s*अरेस्ट'
+    - 'गिरफ्तार\w*.{0,40}(भुगतान|जुर्माना|जमा)'
+    - 'खाता.{0,20}फ्रीज'
+    - 'वीडियो\s*कॉल\s*पर\s*(बने|रहें|रहिए|रहना)'
+    - 'मनी\s*लॉन्ड्रिंग'
+    - '(cbi|सीबीआई|ईडी|पुलिस|साइबर\s*सेल).{0,80}(केस|गिरफ्तार|वारंट)'
+    - 'गिरफ्तारी\s*से\s*बच'
+    - '(पार्सल|कूरियर).{0,120}(कस्टम|पुलिस|ड्रग्स|गैरकानूनी|जब्त|सीबीआई)'
+    - '(गैर[\s-]*जमानती|अरेस्ट)\s*वारंट'
+  hinglish:
+    - 'digital\s*arrest'
+    - 'account\s*freeze\s*ho\s*jayega'
+    - 'fir\s*file\s*ho\s*jayegi'
+    - 'video\s*call\s*par\s*(bane|rahe|rahiye|raho)'
+    - 'arrest\s*(ho\s*)?jaoge'
+    - '(parcel|courier).{0,120}(customs|police|drugs|illegal|cbi)'
+
+GUARANTEED_RETURN:
+  en:
+    - '\bguarantee\w*\b'
+    - '\bassured\s*returns?\b'
+    - '\bsure[- ]?shot\b'
+    - '\bno[- ]loss\b'
+    - '\brisk[- ]free\b'
+    - '\b100%\s*(safe|sure|profit)\b'
+    - '\bassured\s*(profits?|income)\b'
+    - '\bfixed\s*(daily|weekly|monthly)?\s*(returns?|profits?|income)\b'
+    - '\b(double|triple)\s*(your\s*)?money\b'
+    - '\b(zero|no)\s*risk\b'
+    - '\bg(?:u|a|ua|au)r(?:a|e)?n?t(?:e|ee)d?\b'
+    - '\b\d{2,3}%\s*(accuracy|accurate|success\s*rate|strike\s*rate)\b'
+    - '\b(all|every)\s*(last\s*)?\d*\s*calls?\s*(hit|were\s*right|successful)\b'
+    - '\bdoubling\b'
+    - '\b(send|transfer|deposit)\b.{0,80}\b(receive|get)\b.{0,20}\b(double|2x|twice|triple)\b'
+    - '\b\d{2,3}%\s*win(ning)?\s*rate\b'
+    - '\bearn\b.{0,20}(₹|rs\.?|\$|inr|usd)?\s?\d[\d,]*\s*(k|lakh|thousand)?\s*(daily|per\s*day|a\s*day|every\s*day|weekly|per\s*week|monthly|per\s*month)\b'
+    - '\b(like|watch)\s*(videos?|posts?|reels)\b.{0,40}\b(earn|paid|money)\b'
+    - '\bwork\s*from\s*home\b.{0,60}\bearn\b'
+    - '\bdouble\s*(your|the)?\s*(money|investment|amount)\b'
+  hi:
+    - 'गारंटी'
+    - 'पक्का\s*मुनाफ़?ा'
+    - 'निश्चित\s*मुनाफ़?ा'
+    - '100%\s*सुरक्षित'
+    - 'मुनाफा\s*पक्का'
+    - 'पैसा\s*डबल'
+    - 'डबल\s*पक्का'
+    - 'कोई\s*(रिस्क|जोखिम|नुकसान)\s*नहीं'
+    - 'बिना\s*(रिस्क|जोखिम|नुकसान)'
+    - 'फिक्स्ड\s*रिटर्न'
+    - 'गारंटीड'
+    - 'डबलिंग'
+    - '(भेजें|भेजो|ट्रांसफर).{0,80}(डबल|दोगुना).{0,20}(पाएं|मिलेगा|वापस)'
+    - '\d+\s*में\s*से\s*\d+\s*(कॉल|सही)'
+    - 'दोगुना'
+    - 'घर\s*बैठे.{0,60}(कमाएं|कमाई|कमाओ|कमाइए)'
+    - 'रोजाना\s*₹?\s?[\d,]+.{0,30}कमाएं'
+    - 'वीडियो\s*लाइक'
+  hinglish:
+    - 'pakka\s*profit'
+    - 'guaranteed\s*returns?'
+    - 'loss\s*nahi\s*hoga'
+    - 'paisa\s*double'
+    - 'fixed\s*returns?'
+    - 'bina\s*(kisi\s*)?(loss|risk|nuksan)'
+    - 'koi\s*risk\s*nahi'
+    - 'pakka\s*(munafa|return|profit)'
+    - 'munafa\s*pakka'
+    - 'double\s*paisa'
+    - 'guarn?teed'
+    - '(bhejo|bhejiye|send\s+karo).{0,80}(double|dugna|doguna).{0,20}(wapas|milega|paao)'
+    - 'double\s+wapas'
+    - '(roz|daily|har\s*din)\s*(ka|ke)?\s*\d[\d,]*\s*(k|hazaar|hazar)?\s*(kamao|kamai|milta|milega)'
+    - '(roz|daily|rozana)\s*.{0,25}\b(kamao|kamaiye)\b'
+    - 'video\s*like\s*kar'
+    - 'double\s*kar(ne|o)'
+    - 'part\s*time\s*job.{0,80}(kamao|earn)'
+
+INSTITUTIONAL_ACCESS:
+  en:
+    - '\b(institutional|fpi|qib|otc|block[- ]trade|pre[- ]ipo)\b.{0,40}\b(account|access|allotment)\b'
+    - '\bguaranteed\s*(ipo\s*)?allotment\b'
+    - '\bwithout\s*(a\s*)?demat\b'
+    - '\b(institutional|anchor|qib|hni)\s*(quota|category|account|investor\s*quota)\b'
+    - '\bipo\b.{0,60}\b(allotment|quota)\b.{0,150}\b(fee|pay|deposit)\b'
+  hi:
+    - 'संस्थागत.{0,20}(खाता|एक्सेस)'
+    - 'बिना\s*डीमैट'
+    - '(इंस्टिट्यूशनल|संस्थागत|एंकर)\s*(कोटा|कैटेगरी)'
+  hinglish:
+    - 'institutional.{0,20}(account|access)'
+    - 'ipo\s*allotment\s*pakka'
+    - 'demat\s*(ki\s*)?zaroorat\s*nahi'
+    - 'institutional\s*quota'
+    - 'ipo.{0,40}(quota|allotment).{0,120}(bhejo|pay|fees?)'
+
+DABBA:
+  en:
+    - '\bdabba\b.{0,20}trad\w*'
+    - '\bparallel\s*trading\b'
+    - '\bno\s*demat\s*(account\s*)?(needed|required)\b'
+    - '\bbinary\s*(option|options|trading)\b'
+  hi:
+    - 'डब्बा\s*ट्रेडिंग'
+    - 'बिना\s*डीमैट'
+    - 'बाइनरी\s*(ऑप्शन|ट्रेडिंग)'
+  hinglish:
+    - 'dabba\s*trading'
+    - 'demat\s*(account\s*)?nahi\s*chahiye'
+    - 'binary\s*(option|trading)'
+
+ACCOUNT_HANDLING:
+  en:
+    - '\baccount\s*handl\w*\b'
+    - '\b50[- ]?50\s*profit\b'
+    - '\btrade\s*on\s*your\s*behalf\b'
+    - '\bprofit\s*shar\w*\b'
+  hi:
+    - 'खाता\s*संभाल\w*'
+    - 'मुनाफ़?ा\s*बंटवारा'
+  hinglish:
+    - 'account\s*handle\s*kar\w*'
+    - '50[- ]?50\s*profit'
+
+URGENCY:
+  en:
+    - '\bonly\s*today\b'
+    - '\blimited\s*(slots|seats)\b'
+    - '\bact\s*now\b'
+    - '\bdon''?t\s*tell\s*anyone\b'
+    - '\b(today|offer)\s*only\b'
+    - '\blimited\s*(time|period|offer|spots)\b'
+    - '\bhurry\b'
+    - '\blast\s*(chance|day|few\s*seats)\b'
+    - '\bjoin\s*now\b'
+    - '\b(frozen|freeze|blocked|suspended|locked|deactivated)\b.{0,30}\b(within|in)\s*\d{1,2}\s*(hours?|hrs?|minutes?|mins?)\b'
+    - '\bwithin\s*\d{1,2}\s*(hours?|hrs?|minutes?|mins?)\b'
+    - '\bends?\s*(at\s*)?(midnight|tonight|today)\b'
+    - '\blose\s*this\s*(opportunity|chance|offer)\b'
+    - '\bfirst\s*\d+\s*(members|people|users|customers)\b'
+    - '\blimited\s*free\s*trial\b'
+    - '\bwon''?t\s*(come|get|see)\s*(this\s*)?(chance|opportunity|offer)\s*again\b'
+    - '\bdon''?t\s*(tell|share\s*this\s*with)\s*anyone\b'
+  hi:
+    - 'सीमित\s*सीटें'
+    - 'सिर्फ़?\s*आज'
+    - 'जल्दी\s*करें'
+    - 'आज\s*ही'
+    - 'अभी\s*(जुड़ें|जॉइन|करें|भेजें|खरीद)'
+    - 'सीटें\s*सीमित'
+    - 'सीमित\s*(समय|ऑफर)'
+    - 'जल्दी'
+    - '\d{1,2}\s*घंटे\s*(में|के\s*अंदर)'
+    - 'ऑफर\s*खत्म'
+    - 'आज\s*रात'
+    - 'दोबारा\s*नहीं\s*(मिलेगा|आएगा)'
+    - 'किसी\s*को\s*(मत|न)\s*बता'
+    - 'सीमित\s*लोगों'
+    - 'अभी\s*एंट्री'
+  hinglish:
+    - 'sirf\s*aaj'
+    - 'jaldi\s*(join\s*)?karo'
+    - 'limited\s*seats'
+    - 'aaj\s*hi\b'
+    - 'abhi\s*join'
+    - 'offer\s*sirf\s*aaj'
+    - '\bjaldi\b'
+    - '\d{1,2}\s*ghante\s*(mein|me)'
+    - '(chance|offer)\s*(chala|khatam)'
+    - 'aaj\s*raat'
+    - 'dobara\s*nahi\s*(aayega|milega)'
+    - 'kisi\s*ko\s*mat\s*batana'
+
+VIP_GROUP:
+  en:
+    - '\bvip\s*group\b'
+    - '\bfree\s*(trading\s*)?course\b'
+    - '\bjoin\s*(our|the)\s*(telegram|whatsapp)\s*group\b'
+    - '\bvip\s*(members?|channel|club|batch|community)\b'
+    - '\b(premium|paid|exclusive)\s*(tips?|signals?|calls?)\s*(group|channel)\b'
+    - '\bjoin\s*(my|our)\s*(premium|vip|private)\b'
+    - '\b(premium|paid)\s*(group|subscription|membership|calls?|tips|plan|channel)\b'
+    - '\bsubscribe\s*(to\s*)?(our\s*)?premium\b'
+  hi:
+    - 'वीआईपी\s*ग्रुप'
+    - 'फ्री\s*कोर्स'
+    - 'vip.{0,30}ग्रुप'
+    - 'वीआईपी\s*मेंबर'
+    - 'ग्रुप\s*में\s*जोड़ा\s*गया'
+    - 'प्रीमियम\s*(ग्रुप|मेंबरशिप|प्लान)'
+  hinglish:
+    - 'vip\s*group'
+    - 'free\s*trading\s*course'
+    - 'telegram\s*group\s*join'
+    - 'vip\s*members?'
+    - 'group\s*(mein|me)\s*join'
+    - 'vip\s*(trading\s*)?group'
+    - 'premium\s*group'
+
+PUMP_LANGUAGE:
+  en:
+    - '\boperator\s*(wala\s*)?stock\b'
+    - '\bupper\s*circuit\b'
+    - '\bjackpot\s*call\b'
+    - '\boperators?\b.{0,40}\b(loaded|buying|accumulat\w*|call)\b'
+    - '\btarget\s*(of\s*)?(rs\.?|₹)?\s*\d'
+    - '\bmultibagger\b'
+    - '\bbuy\s*before\b'
+    - '\bstock\s*tip\b'
+    - '\bcmp\b.{0,40}\btarget\b'
+    - '\bsl\s*[:=]?\s*\d'
+    - '\btip\s*of\s*the\s*day\b'
+    - '\boperator\s*call\b'
+    - '\b(penny|small[- ]?cap)\s*stock\b.{0,60}\b(news|jump|rocket|upper|target)\b'
+  hi:
+    - 'ऑपरेटर\s*वाला\s*स्टॉक'
+    - 'अपर\s*सर्किट'
+    - 'ऊपर\s*जाएगा'
+    - 'टारगेट\s*\d'
+    - 'खरीद\s*(लो|लें|लीजिए)'
+    - 'स्टॉक\s*टिप'
+    - 'आज\s*का\s*स्टॉक\s*टिप'
+    - 'cmp.{0,40}टारगेट'
+    - 'ऑपरेटर'
+    - 'कन्फर्म.{0,10}टिप'
+    - 'एंट्री\s*ले\s*लो'
+  hinglish:
+    - 'operator\s*wala\s*stock'
+    - 'upper\s*circuit'
+    - 'jackpot\s*call'
+    - 'target\s*\d'
+    - 'khar[ie]e?d\s*lo'
+    - 'upar\s*jayega'
+    - 'stock\s*tip'
+    - 'aaj\s*ka\s*(stock\s*)?tip'
+    - 'operator\s*call'
+    - 'load\s*kar\s*lo'
+    - 'penny\s*stock'
+
+LIVE_CALLS:
+  en:
+    - '\blive\s*(trading\s*)?calls?\b'
+    - '\breal[- ]?time\s*strateg\w*\b'
+    - '\blive\s*(intraday|market)\s*calls?\b'
+    - '\breal[- ]?time\s*(entry|exit|calls?)\b'
+    - '\bintraday\s*calls?\b'
+  hi:
+    - 'लाइव\s*कॉल'
+    - 'लाइव\s*ट्रेडिंग'
+    - 'लाइव\s*इंट्राडे\s*कॉल'
+    - 'इंट्राडे\s*कॉल'
+  hinglish:
+    - 'live\s*calls?'
+    - 'live\s*trading'
+    - 'live\s*intraday\s*calls?'
+    - 'intraday\s*calls?'
+
+FAKE_REGULATOR_NOTICE:
+  en:
+    - '\b(sebi|rbi)\b.{0,60}\b(notice|order|circular)\b.{0,60}\b(pay|penalty|fine|stt|dues)\b'
+    - '\bsecurities\s*transaction\s*tax\b.{0,40}\bdue\b'
+    - '\b(sebi|rbi|nse|bse|income\s*tax)\b.{0,30}\b(notice|warning|alert)\b.{0,250}\b(penalty|fine|frozen|freeze|blocked|suspended|locked|deactivated)\b'
+  hi:
+    - '(सेबी|आरबीआई).{0,60}(नोटिस|आदेश).{0,60}(भुगतान|जुर्माना|बकाया)'
+    - '(सेबी|आरबीआई|rbi|sebi).{0,30}(नोटिस|सूचना|चेतावनी).{0,250}(जुर्माना|फ्रीज|निलंबित|बंद|ब्लॉक)'
+  hinglish:
+    - 'sebi.{0,40}notice.{0,60}(penalty|stt|dues)'
+    - '(sebi|rbi).{0,30}(notice|suchna|warning).{0,250}(penalty|jurmana|freeze|band|block)'
+
+INJECTION_TEXT:
+  en:
+    - '\bignore\s*(all\s*)?(previous|above)\s*instructions\b'
+    - '\byou\s*are\s*an?\s*ai\b'
+    - '\bas\s*an\s*ai\s*(language\s*)?model\b'
+    - '\bsystem\s*prompt\b'
+    - '\bignore\s*(all\s*)?(your|the)\s*(rules|instructions)\b'
+    - '\bsay\s*(this|it)\s*is\s*(safe|genuine)\b'
+  hi:
+    - 'पिछले\s*निर्देश.{0,15}(भूल|नज़रअंदाज़|इग्नोर)'
+  hinglish:
+    - 'ignore\s*(previous|above)\s*instructions'
+    - 'tum\s*ek\s*ai\s*ho'
+
+KYC_PHISHING:
+  en:
+    - '\b(verify|update|link|submit|re-?kyc|complete)\b.{0,40}\b(pan|aadhaa?r|kyc|account\s*details|bank\s*details)\b.{0,80}(https?://|www\.|bit\.ly|tinyurl|\.com|\.in\b|click|link)'
+    - '(click|tap|visit|open)\b.{0,40}\b(verify|update)\b.{0,40}\b(pan|aadhaa?r|kyc)\b'
+  hi:
+    - '(pan|पैन|आधार|kyc|केवाईसी|जानकारी).{0,40}(वेरीफाई|वेरिफाई|अपडेट|सत्यापित|लिंक).{0,80}(https?://|bit\.ly|tinyurl|लिंक)'
+    - '(लिंक|link).{0,40}(जानकारी|पैन|आधार|kyc|केवाईसी).{0,20}(अपडेट|वेरीफाई|वेरिफाई)'
+  hinglish:
+    - '(pan|aadhaa?r|kyc).{0,40}(verify|update)\s*(karo|kare|karein|kijiye).{0,80}(https?://|bit\.ly|tinyurl|link|yaha|yahan)'
+
+ADVANCE_FEE:
+  en:
+    - '\b(congrat\w*|shortlisted|selected|you\s+have\s+won|lucky\s+winner|winner)\b.{0,250}\b(processing|registration|allotment|activation|unlock|booking|release|delivery)\s*(fee|charges?)\b'
+    - '\b(congrat\w*|shortlisted|selected|you\s+have\s+won)\b.{0,250}\b(pay|paying|transfer|deposit)\b.{0,20}(₹|rs\.?|inr)\s?\d'
+    - '\brecover\w*\b.{0,60}\b(lost|stuck|scammed)\b.{0,160}\b(fee|charges?|advance|pay)\b'
+    - '\brecovery\s*(agent|team|expert|service|firm)\b'
+    - '\b(paid|prepaid|merchant)\s*tasks?\b'
+    - '\bwallet\s*recharge\b'
+  hi:
+    - '(बधाई|चुना\s*गया|चयन|चयनित|जीत).{0,250}(प्रोसेसिंग|रजिस्ट्रेशन|अलॉटमेंट|एक्टिवेशन)\s*(फीस|शुल्क|चार्ज)'
+    - '(बधाई|चुना\s*गया|चयनित|आपका\s*नाम).{0,250}(भेजें|भेजो|जमा\s*करें|पे\s*करें).{0,10}'
+    - '(रिकवरी|वापस\s*दिला).{0,160}(फीस|शुल्क|चार्ज)'
+    - 'एडवांस\s*(फीस|शुल्क)'
+    - 'वॉलेट\s*रिचार्ज'
+    - 'टास्क.{0,60}(जमा|राशि)'
+  hinglish:
+    - '(congrat\w*|select\s+hua|selected|shortlist\w*).{0,250}(bhejo|bhejiye|jama\s+karo|pay\s+karo|fees?)'
+    - 'paisa\s*wapas\s*dila.{0,100}(fees?|charge)'
+    - 'paid\s*task'
+    - 'wallet\s*(mein|me)\s*paisa'
+
+SIDELOAD_APK:
+  en:
+    - '\bapk\b.{0,20}\b(link|file|download|install)\b'
+    - '\b(download|install)\b.{0,20}\bapk\b'
+  hi:
+    - '(apk|एपीके).{0,20}(लिंक|डाउनलोड|इंस्टॉल)'
+  hinglish:
+    - 'apk\s*(link|file)\s*(bhej|de)'

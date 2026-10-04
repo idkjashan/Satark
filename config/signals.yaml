@@ -1,0 +1,103 @@
+# Signals (LLD §9.9). Codes are a contract: checkers declare them in `produces`, the scorer reads
+# polarity/weight, the PWA and the template explainer show `signal.<CODE>` from content/i18n/*.json.
+#
+# polarity: risk (raises the level) | assurance ("what we checked"; never lowers a level) |
+#           info (shown, never scored) | flag (asks the harness to reason more; never scored, never shown)
+# weight:   critical | high | medium | low   (risk only; seeds to tune on the golden set)
+# skill:    skills/<name>/SKILL.md loaded by the explainer when this code is a top reason
+# simulator: S1 fake trading app · S2 guaranteed-return maths · S3 leverage wipe-out
+# actions:  ids from content/portals.json -> actions
+# scam_types: T1..T11 (docs/reference/hld.txt, Appendix C)
+# suppressed_by: drop this risk code when any listed code is present in the case
+
+# ---------------- registry ----------------
+REG_FORMAT_INVALID: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3]}
+REG_NOT_FOUND: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3, T6]}
+REG_EXPIRED: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3]}
+REG_NAME_MISMATCH: {polarity: risk, weight: critical, skill: scams/fake-adviser, actions: [verify_sebi_register], scam_types: [T3]}
+REG_CATEGORY_MISMATCH: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3]}
+REG_CLAIM_NOT_FOUND: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3, T6]}
+REG_CLAIM_NO_NUMBER: {polarity: risk, weight: high, skill: regulators/sebi-registration, actions: [verify_sebi_register], scam_types: [T3, T6]}
+DEBARRED_ENTITY: {polarity: risk, weight: critical, skill: scams/pump-and-dump, actions: [verify_sebi_register], scam_types: [T5]}
+ON_CAUTION_LIST: {polarity: risk, weight: critical, skill: scams/fake-adviser, actions: [report_1930], scam_types: [T3, T10]}
+REG_FOUND: {polarity: assurance}
+
+# ---------------- payment ----------------
+UPI_PERSONAL_WHILE_CLAIMING_SEBI: {polarity: risk, weight: high, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T1, T3]}
+UPI_VALID_CATEGORY_MISMATCH: {polarity: risk, weight: high, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T3]}
+UPI_HANDLE_UNKNOWN: {polarity: risk, weight: low, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T1]}
+UPI_COLLECT_TO_RECEIVE: {polarity: risk, weight: critical, skill: recovery/after-loss, actions: [dont_pay], scam_types: [T1]}
+QR_P2P_FOR_BUSINESS: {polarity: risk, weight: high, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T1, T3]}
+QR_PAYEE_NAME_MISMATCH: {polarity: risk, weight: high, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T3]}
+QR_MCC_NOT_SECURITIES: {polarity: risk, weight: medium, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T3]}
+QR_UNSIGNED: {polarity: risk, weight: low, skill: regulators/upi-valid, actions: [verify_sebi_check], scam_types: [T1]}
+CRYPTO_PAYMENT_REQUEST: {polarity: risk, weight: high, skill: scams/forex-crypto, actions: [dont_pay], scam_types: [T9]}
+UPI_VALID_HANDLE: {polarity: assurance}
+
+# ---------------- link ----------------
+URL_SHORTENED: {polarity: risk, weight: low, skill: scams/fake-trading-app, scam_types: [T1]}
+URL_KNOWN_PHISHING: {polarity: risk, weight: critical, skill: scams/fake-trading-app, actions: [report_1930], scam_types: [T1]}
+DOMAIN_YOUNG: {polarity: risk, weight: medium, skill: scams/fake-trading-app, scam_types: [T1], suppressed_by: [DOMAIN_OFFICIAL]}
+DOMAIN_LOOKALIKE: {polarity: risk, weight: high, skill: scams/fake-trading-app, actions: [report_1930], scam_types: [T1, T3], suppressed_by: [DOMAIN_OFFICIAL]}
+BANK_NOT_BANK_IN: {polarity: risk, weight: high, skill: scams/fake-trading-app, scam_types: [T3], suppressed_by: [DOMAIN_OFFICIAL]}
+GOVT_NOT_GOV_IN: {polarity: risk, weight: high, skill: scams/fake-sebi-notice, actions: [verify_dnvs], scam_types: [T4], suppressed_by: [DOMAIN_OFFICIAL]}
+OFFICIAL_DOMAIN_SPOOF: {polarity: risk, weight: high, skill: scams/fake-sebi-notice, scam_types: [T4], suppressed_by: [DOMAIN_OFFICIAL]}
+SIDELOAD_APK: {polarity: risk, weight: high, skill: scams/fake-trading-app, simulator: S1, actions: [dont_install], scam_types: [T1, T8]}
+FREE_HOSTED_LANDING: {polarity: risk, weight: medium, skill: scams/fake-trading-app, scam_types: [T1]}
+DOMAIN_UNPOPULAR_FOR_BRAND: {polarity: risk, weight: medium, skill: scams/fake-trading-app, scam_types: [T3], suppressed_by: [DOMAIN_OFFICIAL]}
+DOMAIN_OFFICIAL: {polarity: assurance}
+DOMAIN_OLD: {polarity: assurance}
+
+# ---------------- app ----------------
+APP_NOT_ON_PLAY: {polarity: risk, weight: high, skill: scams/fake-trading-app, simulator: S1, actions: [dont_install], scam_types: [T1]}
+APP_DEVELOPER_MISMATCH: {polarity: risk, weight: high, skill: scams/fake-trading-app, simulator: S1, actions: [dont_install], scam_types: [T1, T3]}
+APP_CLAIMS_BROKER_NOT_LISTED: {polarity: risk, weight: high, skill: scams/fake-trading-app, simulator: S1, actions: [dont_install], scam_types: [T1]}
+REMOTE_ACCESS_REQUEST: {polarity: risk, weight: critical, skill: scams/remote-access, actions: [dont_install, report_1930], scam_types: [T8]}
+APP_SEBI_VERIFIED: {polarity: assurance}
+APP_IN_BROKER_REGISTRY: {polarity: assurance}
+
+# ---------------- phone ----------------
+FOREIGN_NUMBER_OFFICIAL_CLAIM: {polarity: risk, weight: high, skill: scams/fake-adviser, actions: [report_chakshu], scam_types: [T3, T9]}
+REGULATED_CALL_NOT_1600: {polarity: risk, weight: medium, skill: scams/fake-adviser, actions: [report_chakshu], scam_types: [T3]}
+PROMO_140_FOR_SERVICE: {polarity: risk, weight: medium, skill: scams/fake-adviser, actions: [report_chakshu], scam_types: [T3]}
+FAKE_HELPLINE: {polarity: risk, weight: high, skill: recovery/after-loss, actions: [report_chakshu], scam_types: [T4]}
+HEADER_CATEGORY_MISMATCH: {polarity: risk, weight: medium, skill: scams/fake-adviser, actions: [report_chakshu], scam_types: [T3]}
+MOBILE_SENDER_FOR_BANK: {polarity: risk, weight: medium, skill: scams/fake-adviser, actions: [report_chakshu], scam_types: [T3]}
+SERIES_1600: {polarity: assurance}
+OFFICIAL_HELPLINE: {polarity: assurance}
+
+# ---------------- social ----------------
+HANDLE_LOOKALIKE_OFFICIAL: {polarity: risk, weight: high, skill: scams/fake-adviser, scam_types: [T3]}
+HANDLE_OFFICIAL: {polarity: assurance}
+
+# ---------------- text ----------------
+FEE_TO_WITHDRAW: {polarity: risk, weight: critical, skill: scams/fake-trading-app, simulator: S1, actions: [dont_pay, report_1930], scam_types: [T1]}
+OTP_REQUEST: {polarity: risk, weight: critical, skill: scams/remote-access, actions: [dont_pay], scam_types: [T8]}
+DIGITAL_ARREST: {polarity: risk, weight: critical, skill: scams/fake-sebi-notice, actions: [report_1930], scam_types: [T4]}
+GUARANTEED_RETURN: {polarity: risk, weight: high, skill: scams/ponzi, simulator: S2, scam_types: [T11, T1]}
+IMPOSSIBLE_RETURN: {polarity: risk, weight: high, skill: scams/ponzi, simulator: S2, scam_types: [T11, T1]}
+INSTITUTIONAL_ACCESS: {polarity: risk, weight: high, skill: scams/institutional-account, scam_types: [T2]}
+DABBA: {polarity: risk, weight: high, skill: scams/dabba, simulator: S3, scam_types: [T10]}
+ACCOUNT_HANDLING: {polarity: risk, weight: high, skill: scams/remote-access, scam_types: [T8]}
+FAKE_REGULATOR_NOTICE: {polarity: risk, weight: high, skill: scams/fake-sebi-notice, actions: [verify_dnvs], scam_types: [T4]}
+KYC_PHISHING: {polarity: risk, weight: high, skill: scams/fake-sebi-notice, actions: [dont_pay, report_1930], scam_types: [T4, T8]}
+ADVANCE_FEE: {polarity: risk, weight: high, skill: scams/institutional-account, actions: [dont_pay, report_1930], scam_types: [T2]}
+URGENCY: {polarity: risk, weight: medium, skill: scams/fake-trading-app, scam_types: [T1, T2]}
+VIP_GROUP: {polarity: risk, weight: medium, skill: scams/fake-trading-app, simulator: S1, scam_types: [T1]}
+PUMP_LANGUAGE: {polarity: risk, weight: medium, skill: scams/pump-and-dump, actions: [report_sebi_mi], scam_types: [T5]}
+LIVE_CALLS: {polarity: risk, weight: medium, skill: scams/unregistered-education, simulator: S3, scam_types: [T6]}
+CELEBRITY_ENDORSEMENT: {polarity: risk, weight: medium, skill: scams/deepfake-endorsement, actions: [check_pib], scam_types: [T7]}
+SENSITIVE_DATA_SHARED: {polarity: risk, weight: medium, skill: recovery/after-loss, scam_types: [T8]}
+UNSOLICITED_CONTACT: {polarity: risk, weight: low, skill: scams/fake-trading-app, scam_types: [T1]}
+INJECTION_TEXT: {polarity: info}
+
+# ---------------- ai (the check agent's verified assessment) ----------------
+# A risk the AI found that no catalogue code names. Its reason text is the AI's own sentence, shown only
+# after the verifier grounded it in the message's words or in check evidence. Medium on purpose: alone it
+# never makes HIGH_RISK; it adds to the rule and registry evidence.
+AI_RISK_PATTERN: {polarity: risk, weight: high, skill: scams/fake-trading-app, scam_types: []}
+
+# ---------------- flags (never scored, never shown) ----------------
+AMBIGUOUS_MATCH: {polarity: flag}
+CONFLICT: {polarity: flag}
+LOW_OCR_CONFIDENCE: {polarity: flag}

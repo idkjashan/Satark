@@ -1,0 +1,365 @@
+# Entity types (LLD §8). Type ids are a contract shared by extractors, checkers, the LLM schema and the PWA:
+# never rename one; add new types freely.
+#
+# kind:        identifier (found by regex/LLM/QR) | claim (from LLM extraction or deterministic rules) | synthetic
+# class:       U user's own data (masked, value discarded, never checked) | C counterparty (masked for LLMs,
+#              raw value only to checkers) | P public (not masked) | R role-dependent (U when role=user, else C)
+# placeholder: prefix of the mask token: UPI -> [UPI_1]. Required for U, C and R identifiers.
+# patterns:    regexes over the normalised text. Group 1, when present, is the value. An item may be a plain
+#              string or {re: ..., context: ..., window: N}: then a `context` match must occur within N chars.
+# normalise / validate / derive: function names implemented in satark/harness/extract/fns.py
+# derive:      attribute functions (attrs) or derived entity types ("entity:domain")
+# max_per_case: keep only the first N by position (LLD §25)
+# role_hints:  regexes just before the value that set the role: user -> U; others -> counterparty
+# description: also the JSON-schema text the LLM extraction sees
+
+upi.vpa:
+  kind: identifier
+  description: "UPI payment address (VPA) such as name@okaxis or name.brk@validhdfc"
+  class: C
+  placeholder: UPI
+  patterns:
+    - '(?i)(?<![\w.@/-])([a-z0-9](?:[a-z0-9._-]{0,254}[a-z0-9])?@[a-z][a-z0-9]{1,63})(?![\w@-]|\.[a-z])'
+  normalise: lower
+  validate: upi_vpa
+  derive: [psp_handle, sebi_valid]
+  max_per_case: 5
+
+upi.uri:
+  kind: identifier
+  description: "UPI payment link or QR payload, upi://pay?pa=...&pn=..."
+  class: C
+  placeholder: UPIQR
+  patterns: ['(?i)(upi://pay\?[^\s<>"]+)']
+  normalise: strip
+  max_per_case: 3
+
+sebi.reg_no:
+  kind: identifier
+  description: "SEBI registration number, e.g. INA000012345 (investment adviser), INH000012345 (research analyst), INZ000012345 (stock broker), INP (portfolio manager), IN-DP-... (depository participant)"
+  class: C
+  placeholder: REG
+  patterns:
+    - '(?<![A-Za-z0-9])(IN[AHZPMRBFE]\d{9}|INBI\d{8}|IND\d{9}|IN-DP-(?:(?:CDSL|NSDL)-)?\d{1,4}-(?:\d{4}|\d{2})|MF/\d{3}/\d{2}/\d{1,2}|IN/(?:AIF[1-3]|REIT|SM-REIT|InvIT|VCF|FVCI)/\d{2}-\d{2}/\d{2,5})(?![A-Za-z0-9])'
+    # wrong digit count near a registration word: extracted so sebi.reg.format can flag it
+    - {re: '(?<![A-Za-z0-9])(IN[AHZP]\d{5,8}|IN[AHZP]\d{10,12})(?![A-Za-z0-9])', context: '(?i)sebi|reg|registration|registered|रजिस्ट|पंजीकृत', window: 60}
+  normalise: upper_nospace
+  derive: [reg_category]
+  max_per_case: 5
+
+pan:
+  kind: identifier
+  description: "PAN (Permanent Account Number), 10 characters like ABCPE1234F"
+  class: R
+  placeholder: PAN
+  patterns: ['(?<![A-Za-z0-9])([A-Z]{3}[PCHFATBLJG][A-Z]\d{4}[A-Z])(?![A-Za-z0-9])']
+  normalise: upper_nospace
+  derive: [pan_holder_type]
+  role_hints: {user: '(?i)(?<![\wऀ-ॿ])(my|mera|meri|apna|apni|मेरा|मेरी|अपना)(?![\wऀ-ॿ])[^\n]{0,20}$'}
+  max_per_case: 3
+
+aadhaar:
+  kind: identifier
+  description: "Aadhaar number (12 digits) of the user"
+  class: U
+  placeholder: AADHAAR
+  patterns: ['(?<!\d)([2-9]\d{3}[ -]?\d{4}[ -]?\d{4})(?!\d)']
+  normalise: digits
+  validate: verhoeff
+  max_per_case: 3
+
+card.number:
+  kind: identifier
+  description: "Debit or credit card number (13-19 digits)"
+  class: U
+  placeholder: CARD
+  patterns: ['(?<!\d)((?:\d[ -]?){12,18}\d)(?!\d)']
+  normalise: digits
+  validate: luhn
+  max_per_case: 3
+
+otp:
+  kind: identifier
+  description: "One-time password (OTP) or PIN"
+  class: U
+  placeholder: OTP
+  patterns:
+    - {re: '(?<!\d)(\d{4,8})(?!\d)', context: '(?i)\botp\b|one[ -]?time|passcode|verification code|\bpin\b|ओटीपी|पिन', window: 40}
+  normalise: digits
+  max_per_case: 3
+
+demat.bo_id:
+  kind: identifier
+  description: "Demat account (BO) ID of the user: 16 digits (CDSL) or IN + 14 digits (NSDL)"
+  class: U
+  placeholder: BOID
+  patterns:
+    - {re: '(?<![A-Za-z0-9])(\d{16}|IN\d{14})(?![A-Za-z0-9])', context: '(?i)demat|\bbo\b|\bdp\b|client id|beneficiary|डीमैट', window: 40}
+  normalise: upper_nospace
+  max_per_case: 3
+
+bank.account_no:
+  kind: identifier
+  description: "Bank account number (9-18 digits)"
+  class: R
+  placeholder: ACCT
+  patterns:
+    - {re: '(?<!\d)(\d{9,18})(?!\d)', context: '(?i)a/c|\bac\b|account|acct|khata|खाता|खाते', window: 30}
+  normalise: digits
+  role_hints: {user: '(?i)(?<![\wऀ-ॿ])(my|mera|meri|apna|apni|मेरा|मेरी|अपना)(?![\wऀ-ॿ])[^\n]{0,25}$'}
+  max_per_case: 3
+
+bank.ifsc:
+  kind: identifier
+  description: "Bank branch IFSC code such as SBIN0001234"
+  class: P
+  patterns: ['(?<![A-Za-z0-9])([A-Z]{4}0[A-Z0-9]{6})(?![A-Za-z0-9])']
+  normalise: upper_nospace
+  max_per_case: 3
+
+user.name:
+  kind: identifier
+  description: "The user's own name in a greeting (Dear Ramesh ji): removed before anything else sees the text"
+  class: U
+  placeholder: USERNAME
+  patterns:
+    - '(?:(?i:\b(?:hi|hello|dear|namaste|namaskar|respected))|नमस्ते|प्रिय)\s+([A-Z][a-z]{2,20}(?:\s[A-Z][a-z]{2,20})?)(?=\s*(?:ji\b|जी|,|!|\n|$))'
+  max_per_case: 2
+
+phone:
+  kind: identifier
+  description: "Phone number: Indian mobile, landline, 1600 or 140 series, toll-free, or foreign (+country code)"
+  class: R
+  placeholder: PHONE
+  patterns:
+    - '(?<![\d+])((?:\+91[ -]?|0091[ -]?|91[ -]|0)?[6-9]\d{4}[ -]?\d{5})(?!\d)'
+    - '(?<![\w+])(\+(?!91)[1-9]\d{0,3}[ -]?\d{2,5}[ -]?\d{3,5}[ -]?\d{0,5})(?!\d)'
+    - '(?<!\d)(1600[ -]?\d{3}[ -]?\d{3}|140[ -]?\d{3}[ -]?\d{4}|18[06]0[ -]?\d{3}[ -]?\d{4}|1800[ -]?\d{2}[ -]?\d{4})(?!\d)'
+    - {re: '(?<!\d)(1930|14448|155255|1909)(?!\d)', context: '(?i)call|dial|helpline|toll|number|हेल्पलाइन|कॉल', window: 30}
+  normalise: e164
+  derive: [phone_series]
+  role_hints: {user: '(?i)(?<![\wऀ-ॿ])(my|mera|meri|apna|मेरा|मेरी|अपना)(?![\wऀ-ॿ])[^\n]{0,20}$'}
+  max_per_case: 5
+
+sms.header:
+  kind: identifier
+  description: "SMS sender header such as VM-HDFCBK-S"
+  class: C
+  placeholder: HEADER
+  patterns: ['(?m)^\s*([A-Z]{2}-[A-Z0-9]{6,11}(?:-[PSTG])?)\b']
+  normalise: upper_nospace
+  max_per_case: 2
+
+email:
+  kind: identifier
+  description: "Email address"
+  class: R
+  placeholder: EMAIL
+  patterns: ['(?i)(?<![\w.+-])([a-z0-9][a-z0-9._%+-]{0,63}@(?:[a-z0-9-]+\.)+[a-z]{2,24})(?![\w-])']
+  normalise: lower
+  derive: ["entity:domain"]
+  role_hints: {user: '(?i)(?<![\wऀ-ॿ])(my|mera|meri|apna|मेरा|मेरी|अपना)(?![\wऀ-ॿ])[^\n]{0,20}$'}
+  max_per_case: 3
+
+url:
+  kind: identifier
+  description: "Web link (http/https or a bare domain with a path)"
+  class: C
+  placeholder: URL
+  patterns:
+    - '(?i)\b((?:https?://|www\.)[^\s<>"''`]+)'
+    - '(?i)(?<![@\w.-])((?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:com|in|net|org|co|io|app|xyz|info|biz|online|site|top|live|pro|club|vip|shop|store|tech|me|ly|gl|link|cc|ws|bank\.in|gov\.in|fin\.in|co\.in|org\.in)(?:/[^\s<>"''`]*)?)(?![\w@-])'
+  normalise: url
+  derive: ["entity:domain", host]
+  max_per_case: 5
+
+domain:
+  kind: identifier
+  description: "Registrable domain of a link or email, e.g. zerodha.com"
+  class: C
+  placeholder: DOMAIN
+  patterns: []          # derived from url and email only
+  normalise: domain
+  max_per_case: 6
+
+tg.link:
+  kind: identifier
+  description: "Telegram channel, group or invite link (t.me/...)"
+  class: C
+  placeholder: TG
+  patterns: ['(?i)\b((?:https?://)?(?:t\.me|telegram\.me|telegram\.dog)/(?:s/|joinchat/|\+)?[A-Za-z0-9_+-]{4,64})']
+  normalise: tg
+  derive: [tg_kind]
+  max_per_case: 3
+
+social.handle:
+  kind: identifier
+  description: "Social media profile: instagram, x/twitter, facebook or youtube handle"
+  class: C
+  placeholder: HANDLE
+  patterns: ['(?i)\b((?:https?://)?(?:www\.|m\.)?(?:instagram\.com|x\.com|twitter\.com|facebook\.com|fb\.com|youtube\.com)/@?[A-Za-z0-9_.-]{3,50})']
+  normalise: social      # value becomes "<platform>:<handle>"
+  derive: [platform]
+  max_per_case: 3
+
+app.package:
+  kind: identifier
+  description: "Android app package id, e.g. com.example.trade (from a Play Store link)"
+  class: C
+  placeholder: APP
+  patterns: ['(?i)play\.google\.com/store/apps/details\?(?:[^\s]*?&)?id=([A-Za-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)+)']
+  normalise: strip
+  max_per_case: 3
+
+apk.link:
+  kind: identifier
+  description: "Direct download link to an Android .apk file"
+  class: C
+  placeholder: APK
+  patterns: ['(?i)\b((?:https?://)?[^\s<>"'']+?\.apk)(?=$|[\s?#<>"''।.,!)])']
+  normalise: url
+  max_per_case: 3
+
+crypto.btc:
+  kind: identifier
+  description: "Bitcoin address"
+  class: C
+  placeholder: BTC
+  patterns: ['(?<![A-Za-z0-9])(bc1[ac-hj-np-z02-9]{25,62}|[13][a-km-zA-HJ-NP-Z1-9]{25,34})(?![A-Za-z0-9])']
+  normalise: strip
+  validate: btc
+  max_per_case: 3
+
+crypto.evm:
+  kind: identifier
+  description: "Ethereum / BNB chain (ERC-20, BEP-20) address 0x..."
+  class: C
+  placeholder: EVM
+  patterns: ['(?<![A-Za-z0-9])(0x[0-9a-fA-F]{40})(?![A-Za-z0-9])']
+  normalise: strip
+  max_per_case: 3
+
+crypto.tron:
+  kind: identifier
+  description: "TRON (TRC-20, often USDT) address T..."
+  class: C
+  placeholder: TRX
+  patterns: ['(?<![A-Za-z0-9])(T[1-9A-HJ-NP-Za-km-z]{33})(?![A-Za-z0-9])']
+  normalise: strip
+  validate: tron
+  max_per_case: 3
+
+money.inr:
+  kind: identifier
+  description: "Amount in rupees: ₹10,000, Rs 5 lakh, INR 2 crore"
+  class: P
+  patterns:
+    - '(?i)((?:₹|rs\.?|inr|रु\.?|रुपये)\s?\d{1,3}(?:,\d{2})*(?:,\d{3})(?:\.\d{1,2})?)'
+    - '(?i)((?:₹|rs\.?|inr|रु\.?)\s?\d+(?:\.\d+)?\s?(?:k|l|lakh|lac|lakhs|cr|crore|crores|लाख|करोड़)?)(?![\w])'
+  normalise: inr
+  max_per_case: 10
+
+money.return_rate:
+  kind: identifier
+  description: "A promised return rate with a period: 5% daily, 10% per month, 2% roz, रोज़ 3%"
+  class: P
+  patterns:
+    - '(?i)(\d{1,3}(?:\.\d{1,2})?\s?(?:%|percent|pct|प्रतिशत)\s?(?:per|a|every|/|har|हर|प्रति)?\s?(?:day|daily|din|roz|rozana|week|weekly|hafta|month|monthly|mahina|mahine|year|yearly|annum|saal|दिन|रोज़|रोज|रोजाना|प्रतिदिन|हफ्ते|सप्ताह|महीने|महीना|साल|वर्ष))'
+    - '(?i)((?:daily|roz|रोज़|रोज|रोजाना|प्रतिदिन|weekly|monthly|har din|har mahine|हर दिन|हर महीने)\s?\d{1,3}(?:\.\d{1,2})?\s?(?:%|percent|प्रतिशत))'
+    # "150% in 3 days", "90% returns ... within a week": a return % and a period, up to 60 chars apart
+    - '(?i)(\d{1,3}(?:\.\d{1,2})?\s?%[^%\n.!?।]{0,60}?(?<![a-z])(?:din|days|day|roz|rozana|दिन|दिनों|रोज़|रोज|रोजाना|weeks|week|hafta|हफ्ते|सप्ताह|months|month|mahina|mahine|महीने|महीना|years|year|साल|वर्ष)(?![a-z]))'
+    # "money double in 7 days", "paisa double 30 din mein": a multiplier word then N periods
+    - '(?i)((?:money|paisa|पैसा)?\s?(?:double|triple|डबल|ट्रिपल|दोगुना|दुगना|तिगुना)[^.\n]{0,40}?\d{1,3}\s?(?:din|days|day|दिन|दिनों|weeks|week|hafta|हफ्ते|सप्ताह|months|month|mahina|mahine|महीने|महीना|years|year|साल|वर्ष))'
+    # "7 दिन में पैसा डबल": N periods then a multiplier word (common Hindi word order)
+    - '(?i)(\d{1,3}\s?(?:din|days|day|दिन|दिनों|weeks|week|hafta|हफ्ते|सप्ताह|months|month|mahina|mahine|महीने|महीना|years|year|साल|वर्ष)[^.\n]{0,40}?(?:double|triple|डबल|ट्रिपल|दोगुना|दुगना|तिगुना))'
+  normalise: return_rate     # value "0.05/day"; attrs {rate: 0.05, period: day|week|month|year}
+  max_per_case: 3
+
+message.text:
+  kind: synthetic
+  description: "The whole message (normalised). Always present when there is text."
+  class: C
+  max_per_case: 1
+
+# ---------------- names and claims (LLM extraction, plus deterministic rules in fns.py) ----------------
+party.name:
+  kind: identifier
+  description: "A person or organisation named as the sender, adviser, firm or platform (attrs.kind: person | org)"
+  class: C
+  placeholder: NAME
+  patterns: []        # LLM, plus the deterministic name-near-registration-number rule
+  normalise: name
+  max_per_case: 5
+
+claim.registered_as:
+  kind: claim
+  description: "The message claims someone is registered with a regulator. attrs: regulator (SEBI, RBI, AMFI, IRDAI, PFRDA, IFSCA), category (IA, RA, BROKER, PMS, DP, MF, AIF, NBFC); refs: the party.name and sebi.reg_no entity ids"
+  class: P
+claim.impersonates:
+  kind: claim
+  description: "The message claims to come from, or be linked to, a known organisation or brand. attrs: org, kind (regulator, exchange, depository, broker, amc, bank, government, police, celebrity), brand_id"
+  class: P
+claim.guaranteed_return:
+  kind: claim
+  description: "Promises guaranteed, assured, risk-free or no-loss returns"
+  class: P
+claim.institutional_access:
+  kind: claim
+  description: "Offers institutional, FPI, QIB, OTC, block-trade, pre-IPO or guaranteed IPO-allotment access to a retail user"
+  class: P
+claim.endorsement:
+  kind: claim
+  description: "A public figure (minister, RBI governor, celebrity, CEO) is said to endorse the platform. attrs: figure"
+  class: P
+request.payment:
+  kind: claim
+  description: "Asks the user to pay. attrs: purpose (deposit, fee, tax, unlock, subscription, penalty); refs: payee and amount entity ids"
+  class: P
+request.fee_to_withdraw:
+  kind: claim
+  description: "Says a tax, fee or charge must be paid before money can be withdrawn"
+  class: P
+request.install_app:
+  kind: claim
+  description: "Asks the user to install an app. attrs: source (store, link, apk)"
+  class: P
+request.remote_access:
+  kind: claim
+  description: "Asks the user to install or open a screen-sharing / remote-access app (AnyDesk, TeamViewer, QuickSupport, RustDesk)"
+  class: P
+request.credentials:
+  kind: claim
+  description: "Asks for an OTP, PIN, password or login id. attrs: kind"
+  class: P
+request.kyc_docs:
+  kind: claim
+  description: "Asks for Aadhaar, PAN, selfie or bank statement over chat"
+  class: P
+request.join_group:
+  kind: claim
+  description: "Asks the user to join a WhatsApp/Telegram VIP or tips group. attrs: platform"
+  class: P
+request.account_handling:
+  kind: claim
+  description: "Offers to trade on the user's behalf or share profits (account handling, 50-50 profit)"
+  class: P
+pressure.urgency:
+  kind: claim
+  description: "Urgency, limited slots or secrecy pressure (only today, don't tell anyone)"
+  class: P
+tip.security_call:
+  kind: claim
+  description: "A buy/sell tip on a specific stock with a target or stop-loss"
+  class: P
+offer.unregulated:
+  kind: claim
+  description: "Offers an unregulated product. attrs: kind (forex, crypto, dabba, deposit_scheme, loan_app, recovery_service)"
+  class: P
+doc.official_notice:
+  kind: claim
+  description: "Looks like an official notice from SEBI, RBI, a court, police or Income Tax demanding payment or action. attrs: issuer"
+  class: P
+threat.legal_action:
+  kind: claim
+  description: "Threatens arrest (digital arrest), account freeze or number disconnection"
+  class: P

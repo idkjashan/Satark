@@ -1,0 +1,453 @@
+# Held-out generalisation evaluation set for the Satark deterministic checker.
+#
+# Written BLIND: authored from the evaluator's own general knowledge of Indian
+# investment-scam patterns and genuine fintech/market communications, BEFORE
+# opening config/lexicons/*, config/claim_rules.yaml, config/entities.yaml,
+# config/signals.yaml, satark/checkers/*, satark/harness/extract/*, or
+# tests/golden/cases.yaml. This file must not be edited after the pipeline
+# run starts (that would defeat the point of a held-out set).
+#
+# 60 messages: 36 scam + 24 genuine.
+# id prefixes encode script for reporting purposes only (lang field is en|hi
+# per the spec — "hi" covers both Devanagari and Hinglish):
+#   en-s*/en-l* = English            (lang: en)
+#   hd-s*/hd-l* = Hindi, Devanagari   (lang: hi)
+#   hg-s*/hg-l* = Hinglish, Latin     (lang: hi)
+# s = scam, l = legit/genuine.
+# Totals: en=25, hi-Devanagari=20, hi-Hinglish=15.
+
+# ============================= SCAMS (36) =============================
+
+# --- English scams (15) ---
+
+- id: en-s01
+  lang: en
+  text: "🚀 JOIN OUR VIP STOCK TRADING GROUP 🚀\nGet GUARANTEED daily profit of ₹10,000-₹25,000!\nOur SEBI expert team has 98% accuracy.\nOnly 50 seats left, join now: bit.ly/3vipTrade9\nDon't miss this golden chance!!"
+  expect: {verdict: scam}
+  type: vip_tip_group
+  note: "Classic VIP tip-group pitch: guaranteed daily profit + fake accuracy stat + urgency + shortener link."
+
+- id: en-s02
+  lang: en
+  text: "Download our premium trading app: play.google.com/store/apps/details?id=com.fake.tradingpro for exclusive IPO access and guaranteed returns. Not available via official listing, alternate secure link: tradeproapp-secure.in/app.apk — install and get ₹500 signup bonus instantly!"
+  expect: {verdict: scam}
+  type: fake_trading_app
+  note: "Fake app distributed via APK sideload outside/alongside Play Store, guaranteed-returns bait, signup bonus."
+
+- id: en-s03
+  lang: en
+  text: "Hi, I am Rajesh Mehta, a SEBI registered investment advisor with 15 years experience. I guarantee 300% returns in just 60 days on my recommended stock. Limited slots, DM me now to start your profit journey."
+  expect: {verdict: scam}
+  type: fake_sebi_advisor
+  note: "False authority claim (SEBI registered) combined with an impossible guaranteed return percentage."
+
+- id: en-s04
+  lang: en
+  text: "Good morning Sir/Mam, this is Priya from Wealth Growth Advisory (SEBI registered). We provide guarnteed profit calls in intraday & options. First 2 calls FREE, join our premium group for just ₹2999/month, pay via UPI: priya.advisor@okaxis. 100% proffit guarantee or refund!"
+  expect: {verdict: scam}
+  type: fake_sebi_advisor
+  note: "Typo'd 'guarnteed'/'proffit', fake SEBI claim, paid tip subscription with UPI collection and refund promise."
+
+- id: en-s05
+  lang: en
+  text: "CONGRATULATIONS! You have been shortlisted under the Anchor/Institutional quota for the upcoming mega IPO, shares worth ₹5 lakh. Block your allotment of 500 shares by paying ₹75,000 processing fee to UPI ID: ipo.allotment@okaxis within 24 hours or lose this opportunity."
+  expect: {verdict: scam}
+  type: fake_ipo_allotment
+  note: "Fake pre-IPO/institutional allotment asking for an upfront 'blocking' fee via UPI under time pressure."
+
+- id: en-s06
+  lang: en
+  text: "🔥BUY ALERT🔥 Sunrise Pharma Ltd CMP 42, TARGET 150 in 15 days!! Our research desk calls have given 200%+ profit in last 3 months. Act fast before price moves. Join premium tips: wa.me/919812345670"
+  expect: {verdict: scam}
+  type: pump_and_dump
+  note: "Pump-and-dump tip with an unrealistic target multiple and a WhatsApp contact link."
+
+- id: en-s07
+  lang: en
+  text: "STOCK TIP OF THE DAY\n\nBUY: ABC Infra\nCMP: 28\nTARGET 1: 45\nTARGET 2: 68\nSL: 24\n\nOur calls have 95% accuracy, last 10 calls all hit target. Subscribe to premium for ₹4999/month only."
+  expect: {verdict: scam}
+  type: pump_and_dump
+  note: "Formatted tip-sheet style pump call with inflated accuracy claim and paid subscription upsell."
+
+- id: en-s08
+  lang: en
+  text: "THIS IS AN OFFICIAL CALL FROM MUMBAI CYBER CRIME CELL. Your Aadhaar number is linked to a money laundering case involving ₹2.5 crore. You are under DIGITAL ARREST. Stay on this video call and do not disconnect. Transfer ₹1,00,000 to the RBI verification account immediately to clear your name, failing which a warrant will be issued. For case reference call our helpline +44 20 7946 0958."
+  expect: {verdict: scam}
+  type: digital_arrest
+  note: "Digital-arrest scam: fake police authority, Aadhaar/money-laundering threat, forced video call, urgent transfer; inconsistent foreign callback number is itself a red flag."
+
+- id: en-s09
+  lang: en
+  text: "Dear Customer, your demat account KYC is incomplete and will be suspended today. Download AnyDesk app from Play Store and share the 9 digit code with our executive to complete verification instantly. Call +91 98765 12340 now."
+  expect: {verdict: scam}
+  type: otp_remote_access
+  note: "Remote-access app (AnyDesk) request disguised as urgent KYC verification for a demat account."
+
+- id: en-s10
+  lang: en
+  text: "URGENT: Unusual login detected on your trading account. To secure your account, reply with the OTP sent to your phone within 10 minutes or your account and funds will be permanently locked."
+  expect: {verdict: scam}
+  type: otp_remote_access
+  note: "Classic OTP-phishing pressure message threatening permanent fund lock-out."
+
+- id: en-s11
+  lang: en
+  text: "R B I   N O T I C E: Your bank account has been flagged for suspicious transactions and will be frozen within 24 hours. Click here to verify your PAN and Aadhaar immediately: tinyurl.com/rbi-verify-kyc to avoid penalty of ₹10,000."
+  expect: {verdict: scam}
+  type: fake_regulatory_notice
+  note: "Fake RBI notice with spaced-out letters (filter evasion), account-freeze threat, PAN/Aadhaar phishing link."
+
+- id: en-s12
+  lang: en
+  text: "Invest with us and earn a FIXED monthly return of ₹8,000 on every ₹50,000 invested, guaranteed for 5 years, zero risk, 100% capital protection. Over 10,000 happy investors already earning. Limited slots, invest today via UPI: growthfund.invest@ybl"
+  expect: {verdict: scam}
+  type: ponzi_fixed_return
+  note: "Ponzi-style fixed/guaranteed return with 'zero risk' claim, a red flag since no legitimate investment guarantees returns."
+
+- id: en-s13
+  lang: en
+  text: "🎉 CRYPTO DOUBLING EVENT 🎉 Send any amount of BTC/USDT to wallet address below and receive DOUBLE within 6 hours! This is a one-time celebration event, verified by our community. Hurry, offer ends midnight! bc1qfakewalletaddress000xyz"
+  expect: {verdict: scam}
+  type: crypto_doubling
+  note: "Crypto-doubling scam: send-to-receive-double wallet trick with manufactured urgency."
+
+- id: en-s14
+  lang: en
+  text: "This is a final notice regarding your pending loan of ₹45,000. Pay immediately via this link paylink-secure.co/pay45k or we will share your details and photos with all your contacts and employer within 2 hours."
+  expect: {verdict: scam}
+  type: loan_harassment
+  note: "Instant-loan-app harassment/blackmail threat with a payment link, common alongside investment-app scams."
+
+- id: en-s15
+  lang: en
+  text: "Earn $500 DAILY with ZERO experience! Our forex signal provider has 99% WIN RATE. Join our VIP Telegram community today, limited free trial for first 20 members only. Link: t.me/forexvipwin"
+  expect: {verdict: scam}
+  type: forex_scam
+  note: "Forex signal scam promising guaranteed daily dollar income with an implausible win rate."
+
+# --- Hindi, Devanagari scams (13) ---
+
+- id: hd-s01
+  lang: hi
+  text: "🚀 हमारे VIP ट्रेडिंग ग्रुप से जुड़ें 🚀\nहर दिन ₹10,000 से ₹20,000 तक की गारंटीड कमाई!\nहमारे एक्सपर्ट्स की सफलता दर 98% है।\nसिर्फ 50 सीट बाकी हैं, अभी जुड़ें: bit.ly/vipgrp99"
+  expect: {verdict: scam}
+  type: vip_tip_group
+  note: "VIP tip-group pitch in Hindi with guaranteed daily earning claim and shortener link."
+
+- id: hd-s02
+  lang: hi
+  text: "हमारा प्रीमियम ट्रेडिंग ऐप डाउनलोड करें और गारंटीड मुनाफा कमाएं। Play Store पर उपलब्ध नहीं है, सीधे यहाँ से APK डाउनलोड करें: tradesecure-app.in/download.apk इंस्टॉल करने पर ₹500 बोनस तुरंत।"
+  expect: {verdict: scam}
+  type: fake_trading_app
+  note: "Fake app pushed as APK sideload outside Play Store, guaranteed profit claim."
+
+- id: hd-s03
+  lang: hi
+  text: "नमस्ते सर, मैं सेबी रजिस्टर्ड एडवाइजर राकेश गुप्ता बोल रहा हूं। मेरे पास एक शेयर है जिसमें ३ दिन में १००% मुनाफा गारंटी है। सिर्फ आज के लिए सीमित सीटें, कॉल करें +91 97654 32109"
+  expect: {verdict: scam}
+  type: fake_sebi_advisor
+  note: "Fake SEBI-registered advisor using Indic digits (३, १००%) for an impossible guaranteed return."
+
+- id: hd-s04
+  lang: hi
+  text: "बधाई हो! आपका चयन आने वाले IPO के इंस्टीट्यूशनल कोटा के लिए हुआ है, ₹5 लाख के शेयर। 500 शेयर ब्लॉक करने के लिए ₹75,000 प्रोसेसिंग फीस इस UPI पर भेजें: ipoquota.invest@okicici, 24 घंटे में वरना मौका खत्म।"
+  expect: {verdict: scam}
+  type: fake_ipo_allotment
+  note: "Fake institutional IPO allotment demanding an upfront blocking fee via UPI under a deadline."
+
+- id: hd-s05
+  lang: hi
+  text: "🔥आज का स्टॉक टिप🔥\nखरीदें: सनराइज फार्मा\nCMP: 42\nटारगेट: 150 (15 दिन में)\nहमारे पिछले 10 कॉल में से 10 सही निकले। प्रीमियम ग्रुप जॉइन करें सिर्फ ₹2999 में।"
+  expect: {verdict: scam}
+  type: pump_and_dump
+  note: "Pump-and-dump stock tip in Hindi with a fictional company and inflated accuracy claim."
+
+- id: hd-s06
+  lang: hi
+  text: "यह मुंबई साइबर क्राइम सेल से कॉल है। आपका आधार नंबर एक मनी लॉन्ड्रिंग केस में शामिल पाया गया है जिसमें २ करोड़ रुपये का लेनदेन है। आप डिजिटल अरेस्ट में हैं, वीडियो कॉल पर बने रहें और तुरंत ₹1,00,000 RBI वेरिफिकेशन खाते में ट्रांसफर करें।"
+  expect: {verdict: scam}
+  type: digital_arrest
+  note: "Digital-arrest scam in Hindi: fake cybercrime authority, Aadhaar/money-laundering threat, forced transfer."
+
+- id: hd-s07
+  lang: hi
+  text: "कस्टम विभाग से सूचना: आपके नाम से एक पार्सल में अवैध सामान पकड़ा गया है। गिरफ्तारी से बचने के लिए तुरंत हमें वीडियो कॉल पर संपर्क करें और जुर्माना जमा करें, वरना पुलिस आपके घर आएगी। कॉल बैक नंबर +92 300 1234567"
+  expect: {verdict: scam}
+  type: digital_arrest
+  note: "Customs/parcel variant of digital-arrest scam; foreign callback number is a classic tell."
+
+- id: hd-s08
+  lang: hi
+  text: "प्रिय ग्राहक, आपका डीमैट अकाउंट KYC अधूरा है और आज बंद हो जाएगा। कृपया AnyDesk ऐप डाउनलोड करें और हमारे एक्जीक्यूटिव को 9 अंकों का कोड बताएं। तुरंत कॉल करें +91 98123 45670"
+  expect: {verdict: scam}
+  type: otp_remote_access
+  note: "Remote-access app request disguised as urgent demat KYC completion, in Hindi."
+
+- id: hd-s09
+  lang: hi
+  text: "RBI सूचना: आपका बैंक खाता संदिग्ध लेनदेन के कारण 24 घंटे में फ्रीज़ हो जाएगा। तुरंत अपना PAN और आधार वेरीफाई करें: tinyurl.com/rbikyc2026, नहीं तो ₹10,000 जुर्माना लगेगा।"
+  expect: {verdict: scam}
+  type: fake_regulatory_notice
+  note: "Fake RBI account-freeze notice phishing for PAN/Aadhaar via a shortened link."
+
+- id: hd-s10
+  lang: hi
+  text: "सेबी चेतावनी सूचना: आपके ट्रेडिंग खाते में अनियमितता पाई गई है। खाता निलंबित होने से बचने के लिए नीचे दिए लिंक पर अपनी जानकारी अपडेट करें: bit.ly/sebi-acc-verify"
+  expect: {verdict: scam}
+  type: fake_regulatory_notice
+  note: "Fake SEBI warning notice phishing for account details via a shortener link."
+
+- id: hd-s11
+  lang: hi
+  text: "हमारी स्कीम में निवेश करें और पाएं हर महीने ₹8,000 फिक्स रिटर्न सिर्फ ₹50,000 के निवेश पर, पूरी तरह गारंटीड, ज़ीरो रिस्क। 5 साल तक मुनाफा पक्का। आज ही जुड़ें, UPI: wealthplan.invest@ybl"
+  expect: {verdict: scam}
+  type: ponzi_fixed_return
+  note: "Ponzi-style fixed/guaranteed monthly return scheme in Hindi with zero-risk claim."
+
+- id: hd-s12
+  lang: hi
+  text: "🎉 क्रिप्टो डबलिंग ऑफर 🎉 अपने BTC वॉलेट से किसी भी राशि का क्रिप्टो भेजें और 6 घंटे में डबल पाएं। यह एक बार का स्पेशल इवेंट है, जल्दी करें, आज रात 12 बजे ऑफर खत्म!"
+  expect: {verdict: scam}
+  type: crypto_doubling
+  note: "Crypto send-to-double scam in Hindi with urgency deadline."
+
+- id: hd-s13
+  lang: hi
+  text: "बिना डीमैट अकाउंट के निफ्टी और बैंक निफ्टी में ट्रेड करें, कोई STT नहीं, कोई ब्रोकरेज नहीं, तुरंत कैश सेटलमेंट। हमारे डब्बा ट्रेडिंग डेस्क से रोज मुनाफा कमाएं, कॉल करें +91 90000 11223"
+  expect: {verdict: scam}
+  type: dabba_trading
+  note: "Illegal off-exchange dabba trading offer bypassing Demat/STT with instant cash settlement."
+
+# --- Hinglish scams (8) ---
+
+- id: hg-s01
+  lang: hi
+  text: "Bhai hamara VIP trading group join kar le, roz ka guarnteed profit 10-15k milta hai sabko. Sirf 50 seats bachi hain, abhi join karo: bit.ly/viptrade22"
+  expect: {verdict: scam}
+  type: vip_tip_group
+  note: "Hinglish VIP tip-group pitch with typo'd 'guarnteed' and shortener link."
+
+- id: hg-s02
+  lang: hi
+  text: "Hello sir, mai SEBI registered advisor Amit Verma bol raha hu. Mere paas ek stock hai jisme 3 hafte mein 200% proffit guaranteed hai. Limited slots available, call karo +91 99887 66550"
+  expect: {verdict: scam}
+  type: fake_sebi_advisor
+  note: "Fake SEBI advisor claim with typo'd 'proffit' and an impossible guaranteed percentage."
+
+- id: hg-s03
+  lang: hi
+  text: "C O N G R A T S !! Aapka naam select hua hai IPO ke institutional quota mein, 5 lakh ke shares. 500 shares block karne ke liye ₹75,000 bhejo is UPI par: ipoalert.quota@paytm, 24 ghante mein warna chance chala jayega."
+  expect: {verdict: scam}
+  type: fake_ipo_allotment
+  note: "Fake IPO allotment with spaced-out 'CONGRATS' (filter evasion) demanding a blocking fee via UPI."
+
+- id: hg-s04
+  lang: hi
+  text: "Yeh Mumbai Cyber Crime se call hai. Aapka Aadhaar ek money laundering case mein involved paya gaya hai, 2 crore ka matter hai. Aap digital arrest mein ho, video call pe bane raho aur turant ₹1,00,000 RBI verification account mein transfer karo."
+  expect: {verdict: scam}
+  type: digital_arrest
+  note: "Digital-arrest scam in Hinglish with fake police authority and forced transfer."
+
+- id: hg-s05
+  lang: hi
+  text: "Sir aapka demat account KYC incomplete hai aur aaj suspend ho jayega. AnyDesk app download karke humare executive ko 9 digit code bata do, turant verify ho jayega. Call: +91 98234 56781"
+  expect: {verdict: scam}
+  type: otp_remote_access
+  note: "Remote-access app request disguised as urgent demat KYC completion, in Hinglish."
+
+- id: hg-s06
+  lang: hi
+  text: "URGENT: Aapka bank account suspicious transaction ki wajah se 24 ghante mein freeze ho jayega. Turant apna PAN aur Aadhaar verify karo yaha: tinyurl.com/kyc-verify-now warna ₹10,000 penalty lagega."
+  expect: {verdict: scam}
+  type: fake_regulatory_notice
+  note: "Fake bank/RBI-style freeze notice phishing for PAN/Aadhaar via shortened link, in Hinglish."
+
+- id: hg-s07
+  lang: hi
+  text: "Crypto doubling event chal raha hai bhai! Apna BTC wallet se kitna bhi crypto bhejo, 6 ghante mein DOUBLE wapas milega. Ye ek baar ka special offer hai, aaj raat 12 baje khatam ho jayega."
+  expect: {verdict: scam}
+  type: crypto_doubling
+  note: "Crypto send-to-double scam in Hinglish with urgency deadline."
+
+- id: hg-s08
+  lang: hi
+  text: "Forex trading se roz $500 guaranteed kamao, zero experience chalega. Humara VIP signal group join karo, pehle 20 members ke liye free trial. Link: t.me/forexwinvip"
+  expect: {verdict: scam}
+  type: forex_scam
+  note: "Forex signal scam promising guaranteed daily dollar income, in Hinglish."
+
+# ============================= GENUINE (24) =============================
+
+# --- English genuine (10) ---
+
+- id: en-l01
+  lang: en
+  text: "SEBI Investor Awareness: Never trust schemes promising guaranteed returns or 'VIP' stock tip groups on WhatsApp/Telegram. Always verify any investment advisor's registration on SEBI's official website before investing."
+  expect: {verdict: legit}
+  type: investor_awareness
+  note: "Genuine awareness message that deliberately uses scam-trigger words ('guaranteed returns', 'VIP') to warn against them."
+
+- id: en-l02
+  lang: en
+  text: "Your OTP for the transaction of ₹15,000 is 482913. Valid for 10 minutes. Do not share this OTP with anyone, including bank officials. - Your Bank"
+  expect: {verdict: legit}
+  type: bank_otp_notice
+  note: "Genuine transactional OTP SMS; mentions OTP/sharing but is the real original message, not a phishing request."
+
+- id: en-l03
+  lang: en
+  text: "Market Update: Nifty falls 3% today amid global sell-off, IT and banking stocks worst hit. Analysts advise investors to stay calm and avoid panic selling."
+  expect: {verdict: legit}
+  type: market_news
+  note: "Ordinary market news headline; drop percentage and alarmist tone could tempt a naive keyword filter."
+
+- id: en-l04
+  lang: en
+  text: "NSE Investor Awareness Message: Never share your trading account password, OTP or login credentials with anyone, not even your broker or relationship manager."
+  expect: {verdict: legit}
+  type: investor_awareness
+  note: "Official exchange awareness message about credential sharing, phrased similarly to the scams it warns against."
+
+- id: en-l05
+  lang: en
+  text: "Reminder: Your SIP of ₹5,000 in HDFC Flexicap Fund will be auto-debited on 5th October. Please ensure sufficient balance in your linked bank account."
+  expect: {verdict: legit}
+  type: sip_reminder
+  note: "Routine mutual-fund SIP auto-debit reminder, no solicitation or urgency."
+
+- id: en-l06
+  lang: en
+  text: "Reliance Industries posts 12% YoY growth in net profit for Q2, beating street estimates. Stock up 2% in early trade."
+  expect: {verdict: legit}
+  type: market_news
+  note: "Standard financial news snippet reporting quarterly results."
+
+- id: en-l07
+  lang: en
+  text: "Contract Note for 02-Oct-2026: Bought 10 shares of TCS @ ₹3,850.00. Total value ₹38,500.00 + brokerage & taxes ₹45.20 = ₹38,545.20. Settlement date 04-Oct-2026."
+  expect: {verdict: legit}
+  type: contract_note
+  note: "Genuine broker contract note confirming an executed trade, with itemised charges."
+
+- id: en-l08
+  lang: en
+  text: "RBI keeps repo rate unchanged at 6.5% in its October monetary policy review. Governor says inflation outlook remains stable."
+  expect: {verdict: legit}
+  type: rbi_policy_news
+  note: "Routine central-bank monetary policy news."
+
+- id: en-l09
+  lang: en
+  text: "Equity Research Note: Initiating coverage on XYZ Ltd with a BUY rating and 12-month target price of ₹450 (25% potential upside from CMP ₹360). Key risks include regulatory changes and input cost inflation. This is not personalized investment advice; please consult your financial advisor. Mutual fund investments are subject to market risks."
+  expect: {verdict: legit}
+  type: broker_research_note
+  note: "Genuine hedged research note with target price and upside %, but includes risk disclaimers that pump-and-dump tips typically omit."
+
+- id: en-l10
+  lang: en
+  text: "GUYS MY SIP FINALLY MATURED TODAY AND I GOT ₹4,50,000 RETURNS AFTER 10 YEARS!! SO HAPPY RIGHT NOW 😍🎉 patience really pays off"
+  expect: {verdict: legit}
+  type: friend_chat
+  note: "Excited genuine personal milestone in ALL CAPS mentioning 'returns', not a solicitation."
+
+# --- Hindi, Devanagari genuine (7) ---
+
+- id: hd-l01
+  lang: hi
+  text: "बैंक कभी भी फोन, SMS या ईमेल पर आपका OTP, पिन या पासवर्ड नहीं मांगता। कृपया सतर्क रहें और किसी के साथ भी अपनी गोपनीय जानकारी साझा न करें।"
+  expect: {verdict: legit}
+  type: bank_otp_notice
+  note: "Genuine Hindi bank fraud-awareness message; mentions OTP/PIN/password only to warn against sharing them."
+
+- id: hd-l02
+  lang: hi
+  text: "प्रिय ग्राहक, आपकी SIP किस्त ₹2,000 दिनांक 5 अक्टूबर को आपके खाते से काटी जाएगी। कृपया पर्याप्त बैलेंस बनाए रखें। - आपका म्यूचुअल फंड"
+  expect: {verdict: legit}
+  type: sip_reminder
+  note: "Routine SIP debit reminder in Hindi, no solicitation."
+
+- id: hd-l03
+  lang: hi
+  text: "सेंसेक्स आज 500 अंक गिरा, निवेशकों के ₹2 लाख करोड़ डूबे। विश्लेषकों का कहना है कि यह वैश्विक बाजारों में बिकवाली का असर है।"
+  expect: {verdict: legit}
+  type: market_news
+  note: "Genuine market-fall news in Hindi with large lakh-crore figures, not a scam pitch."
+
+- id: hd-l04
+  lang: hi
+  text: "सेबी की सलाह: किसी भी निवेश सलाहकार से पैसा निवेश करने से पहले उसका रजिस्ट्रेशन सेबी की वेबसाइट पर जरूर जांचें। गारंटीड रिटर्न का दावा करने वाली स्कीम से सावधान रहें।"
+  expect: {verdict: legit}
+  type: investor_awareness
+  note: "Genuine SEBI-style caution against guaranteed-return schemes, phrased using the same trigger words."
+
+- id: hd-l05
+  lang: hi
+  text: "प्रिय ग्राहक, आपका बैंक स्टेटमेंट तैयार है। नेट बैंकिंग से डाउनलोड करें या नजदीकी शाखा में संपर्क करें। शिकायत के लिए टोल-फ्री नंबर पर कॉल करें।"
+  expect: {verdict: legit}
+  type: bank_statement_notice
+  note: "Routine bank statement availability notice, no links or urgency."
+
+- id: hd-l06
+  lang: hi
+  text: "सूचना: आगामी सोमवार को गांधी जयंती के अवसर पर शेयर बाजार (NSE/BSE) में कोई कारोबार नहीं होगा। मंगलवार से सामान्य कारोबार शुरू होगा।"
+  expect: {verdict: legit}
+  type: market_holiday_notice
+  note: "Genuine exchange holiday announcement."
+
+- id: hd-l07
+  lang: hi
+  text: "मेरे CA ने बताया कि इस साल FD पर ब्याज दर ७% फिक्स है, पिछले साल ६.५% था। क्या यह सही जानकारी है?"
+  expect: {verdict: legit}
+  type: tax_question
+  note: "Casual genuine question using Indic digits and the word 'फिक्स' (fixed), not a scheme pitch."
+
+# --- Hinglish genuine (7) ---
+
+- id: hg-l01
+  lang: hi
+  text: "Bhai mere college group mein koi crypto mein 30% monthly return ka vaada kar raha hai, ye sahi hai kya? Invest karu kya usme?"
+  expect: {verdict: legit}
+  type: friend_chat
+  note: "Genuine question referencing a scam-like offer; the message itself is an inquiry, not a pitch."
+
+- id: hg-l02
+  lang: hi
+  text: "Maine ek stock mein 20,000 invest kiya tha, 3 mahine mein 10% profit hua hai, kya ye normal hai ya zyada lag raha hai?"
+  expect: {verdict: legit}
+  type: friend_chat
+  note: "Genuine personal question about a modest, plausible real return, not a solicitation."
+
+- id: hg-l03
+  lang: hi
+  text: "Yaar maine ek index fund mein SIP start kiya hai, 2000 rupee monthly, long term ke liye accha decision hai kya?"
+  expect: {verdict: legit}
+  type: friend_chat
+  note: "Genuine casual question about a standard SIP investment."
+
+- id: hg-l04
+  lang: hi
+  text: "Aapka demat account holding statement September 2026 ke liye generate ho gaya hai. Broker portal par login karke dekh sakte hain."
+  expect: {verdict: legit}
+  type: demat_statement
+  note: "Routine demat statement availability notice."
+
+- id: hg-l05
+  lang: hi
+  text: "Mera IPO allotment ho gaya Tata Tech ka, 10 shares mile hain, baaki paisa refund 2 working days mein account mein aa jayega."
+  expect: {verdict: legit}
+  type: ipo_allotment_genuine
+  note: "Genuine personal IPO allotment update, no payment request."
+
+- id: hg-l06
+  lang: hi
+  text: "Mera cousin bol raha tha ki ab equity mutual fund pe LTCG tax 12.5% lagta hai, pehle wala rule change ho gaya kya?"
+  expect: {verdict: legit}
+  type: tax_question
+  note: "Genuine tax-rule question, casual family chat."
+
+- id: hg-l07
+  lang: hi
+  text: "Aaj Sensex 500 point gir gaya, FII selling ki wajah se. Analysts bol rahe sab ko patience rakhne ko."
+  expect: {verdict: legit}
+  type: market_news
+  note: "Genuine market news in Hinglish, no solicitation."

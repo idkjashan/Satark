@@ -1,0 +1,357 @@
+# Sources for the registry database (LLD §14.1, §15.2, §16). Owned by B (ingest).
+#
+# Flat map: source_id -> spec. Consumed by satark/ingest (full detail) and by checkers/the API
+# via satark.config.Config.sources, which read only `name`, `group`, `max_age_days` and (for the
+# three live services) `rate`. `group` is the label shown on the About-data screen.
+#
+# kind: sebi_xls | nse_xls | nse_json | nse_csv | crux_gz | curated_csv | curated_yaml | feed_txt | aggregate | live
+# gates: key_pattern (regex the row's key column must match), min_rows, max_drop_pct (vs the
+#        previous good run). A row failing key_pattern is dropped and counted; the source gate
+#        fails (kept_previous) below min_rows or above max_drop_pct. Aggregate and live entries
+#        have no gates: aggregates are computed from their members, live ids are never DB-backed.
+
+# ---- SEBI registered intermediaries (table: intermediary) ------------------------------------
+
+sebi_ia:
+  name: "SEBI Investment Advisers"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_13.xls
+  table: intermediary
+  category: IA
+  as_on: "parsed from the file's title row ('... as on <date>'); falls back to .meta.yaml"
+  gates: {key_pattern: '^INA\d{9}$', min_rows: 800, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy: reproduction allowed after permission by e-mail, source acknowledged"
+
+sebi_ra:
+  name: "SEBI Research Analysts"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_14.xls
+  table: intermediary
+  category: RA
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^INH\d{9}$', min_rows: 1800, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_broker_equity:
+  name: "SEBI Stock Brokers (Equity)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_30.xls
+  table: intermediary
+  category: BROKER
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN[A-Z]\d{9}$', min_rows: 4000, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_broker_fo:
+  name: "SEBI Stock Brokers (Equity Derivatives)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_31.xls
+  table: intermediary
+  category: BROKER
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN[A-Z]\d{9}$', min_rows: 3000, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_broker_currency:
+  name: "SEBI Stock Brokers (Currency Derivatives)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_32.xls
+  table: intermediary
+  category: BROKER
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN[A-Z]\d{9}$', min_rows: 2000, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_broker_commodity:
+  name: "SEBI Stock Brokers (Commodity Derivatives)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_2.xls
+  table: intermediary
+  category: BROKER
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN[A-Z]\d{9}$', min_rows: 1600, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_dp_cdsl:
+  name: "SEBI Depository Participants (CDSL)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_18.xls
+  table: intermediary
+  category: DP
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN-DP-(CDSL-|NSDL-)?\d+-\d{2,4}$', min_rows: 600, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_dp_nsdl:
+  name: "SEBI Depository Participants (NSDL)"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_19.xls
+  table: intermediary
+  category: DP
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN-DP-(CDSL-|NSDL-)?\d+-\d{2,4}$', min_rows: 280, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_pms:
+  name: "SEBI Portfolio Managers"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_33.xls
+  table: intermediary
+  category: PMS
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^INP\d{9}$', min_rows: 400, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_mf:
+  name: "SEBI Mutual Funds"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_23.xls
+  table: intermediary
+  category: MF
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  # pattern_min_rate overrides the global 99% floor: SEBI's own export has exactly one truncated
+  # reg_no ("MF/002/93/") among 61 rows, and with so few rows any single bad one drops below 99%.
+  gates: {key_pattern: '^MF/\d+/\d+/\d+$', min_rows: 45, max_drop_pct: 5, pattern_min_rate: 0.98}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_aif:
+  name: "SEBI Alternative Investment Funds"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_16.xls
+  table: intermediary
+  category: AIF
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^IN/AIF\d/\d{2}-\d{2}/\d+$', min_rows: 1600, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_mb:
+  name: "SEBI Merchant Bankers"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_9.xls
+  table: intermediary
+  category: MB
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^INM\d{9}$', min_rows: 200, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_rta:
+  name: "SEBI Registrars and Share Transfer Agents"
+  group: "SEBI registers"
+  kind: sebi_xls
+  path: data/manual/sebi/intm_10.xls
+  table: intermediary
+  category: RTA
+  as_on: "parsed from the file's title row; falls back to .meta.yaml"
+  gates: {key_pattern: '^INR\d{9}$', min_rows: 60, max_drop_pct: 5}
+  max_age_days: 3
+  licence: "SEBI website policy"
+
+sebi_registers:
+  name: "SEBI registers (all categories)"
+  verify_url: "https://www.sebi.gov.in/sebiweb/other/OtherAction.do?doRecognisedFpi=yes&intmId=13"   # where the user can check it themselves; {value} is the identifier
+  group: "SEBI registers"
+  kind: aggregate
+  members: [sebi_ia, sebi_ra, sebi_broker_equity, sebi_broker_fo, sebi_broker_currency,
+            sebi_broker_commodity, sebi_dp_cdsl, sebi_dp_nsdl, sebi_pms, sebi_mf, sebi_aif,
+            sebi_mb, sebi_rta]
+  max_age_days: 3
+
+# ---- Caution / alert lists (table: caution_entry) ---------------------------------------------
+
+caution_lists:
+  name: "Caution and alert lists"
+  verify_url: "https://www.nseindia.com/"   # where the user can check it themselves; {value} is the identifier
+  group: "Caution lists"
+  kind: curated_csv
+  path: data/manual/caution_entries.csv
+  table: caution_entry
+  as_on: "the newest published_at in the CSV; from .meta.yaml when the CSV is header-only"
+  gates: {key_pattern: '^.+$', min_rows: 0, max_drop_pct: 100}
+  max_age_days: 14
+  licence: "Each row cites its own source_url (NSE/BSE/RBI notice); curated by hand, not scraped"
+
+# ---- Threat feeds (table: blocklist_domain) ----------------------------------------------------
+
+phishing_database:
+  name: "Phishing.Database (active domains)"
+  group: "Threat feeds"
+  kind: feed_txt
+  url: https://raw.githubusercontent.com/Phishing-Database/Phishing.Database/master/phishing-domains-ACTIVE.txt
+  cache: data/cache/feeds/phishing-domains-ACTIVE.txt
+  table: blocklist_domain
+  as_on: "fetch time (--fetch); kept_previous when offline"
+  gates: {key_pattern: '^[a-z0-9.-]+\.[a-z]{2,}$', min_rows: 100000, max_drop_pct: 20}
+  max_age_days: 1
+  licence: "MIT"
+
+hagezi_tif:
+  name: "Hagezi Threat Intelligence Feeds"
+  group: "Threat feeds"
+  kind: feed_txt
+  # "-onlydomains" is the plain-domain-per-line variant (no adblock/wildcard syntax); "mini" is the
+  # size-optimised list the repo recommends for constrained consumers (its own description).
+  url: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.mini-onlydomains.txt
+  url_fallback: https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/tif.medium-onlydomains.txt
+  cache: data/cache/feeds/hagezi-tif.txt
+  table: blocklist_domain
+  as_on: "fetch time (--fetch); kept_previous when offline"
+  gates: {key_pattern: '^[a-z0-9.-]+\.[a-z]{2,}$', min_rows: 50000, max_drop_pct: 20}
+  max_age_days: 2
+  licence: "GPL-3.0 (data used, not redistributed as a package)"
+
+blocklist_local:
+  name: "Satark local blocklist additions"
+  group: "Threat feeds"
+  kind: feed_txt
+  path: data/manual/blocklist_local.txt
+  table: blocklist_domain
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^[a-z0-9.-]+\.[a-z]{2,}$', min_rows: 0, max_drop_pct: 100}
+  max_age_days: 365
+  licence: "Satark-curated"
+
+blocklists:
+  name: "Threat feeds (all)"
+  group: "Threat feeds"
+  kind: aggregate
+  members: [phishing_database, hagezi_tif, blocklist_local]
+  max_age_days: 2
+
+# ---- Reference and curated data -----------------------------------------------------------------
+
+official_domains:
+  name: "Official domains (regulators, exchanges, brokers, banks, AMCs)"
+  group: "Reference data"
+  kind: curated_yaml
+  path: data/manual/official_domains.csv
+  extra: config/brands.yaml
+  table: official_domain
+  as_on: "from .meta.yaml next to official_domains.csv"
+  gates: {key_pattern: '^[a-z0-9.-]+\.[a-z]{2,}$', min_rows: 50, max_drop_pct: 10}
+  max_age_days: 30
+  licence: "Wikidata CC0 (via brands.yaml) + hand-verified from AMFI's public app list"
+
+nse_broker_apps:
+  name: "NSE brokers' mobile apps"
+  verify_url: "https://www.nseindia.com/"   # where the user can check it themselves; {value} is the identifier
+  group: "Exchange lists"
+  kind: nse_json
+  path: data/manual/nse/broker_apps.json
+  table: app_registry
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z][a-zA-Z0-9_]*)+$', min_rows: 400, max_drop_pct: 10}
+  max_age_days: 30
+  licence: "NSE terms: automated collection barred; snapshot saved by hand, production needs written permission"
+
+nse_broker_social:
+  name: "NSE brokers' social-media handles"
+  group: "Exchange lists"
+  kind: nse_json
+  path: data/manual/nse/broker_social.json
+  table: social_handle
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^.+$', min_rows: 300, max_drop_pct: 10}
+  max_age_days: 30
+  licence: "NSE terms (as above)"
+
+nse_debarred:
+  name: "NSE list of SEBI-debarred entities"
+  verify_url: "https://www.nseindia.com/static/regulations/member-sebi-debarred-entities"   # where the user can check it themselves; {value} is the identifier
+  group: "Exchange lists"
+  kind: nse_xls
+  path: data/manual/nse/debarred.xls
+  table: debarred
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^.{2,}$', min_rows: 10000, max_drop_pct: 5}
+  max_age_days: 30
+  licence: "NSE terms (as above)"
+
+nse_equity_list:
+  name: "NSE listed equity securities (EQUITY_L)"
+  group: "Exchange lists"
+  kind: nse_csv
+  path: data/manual/nse/EQUITY_L.csv
+  table: listed_security
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^[A-Z0-9&-]+$', min_rows: 1500, max_drop_pct: 5}
+  max_age_days: 30
+  licence: "NSE terms (as above)"
+
+crux_india:
+  name: "Chrome UX Report India top list"
+  group: "Reference data"
+  kind: crux_gz
+  path: data/manual/crux/in_202608.csv.gz
+  table: popularity
+  as_on: "from .meta.yaml (the CrUX data month, not the download date)"
+  gates: {key_pattern: '^[a-z0-9.-]+\.[a-z]{2,}$', min_rows: 200000, max_drop_pct: 10}
+  max_age_days: 60
+  licence: "CrUX data CC BY 4.0"
+
+psp_handles:
+  name: "UPI handle to bank/app map"
+  group: "Reference data"
+  kind: curated_csv
+  path: data/manual/psp_handles.csv
+  table: psp_handle
+  as_on: "from .meta.yaml"
+  gates: {key_pattern: '^[a-z0-9]+$', min_rows: 10, max_drop_pct: 10}
+  max_age_days: 180
+  licence: "Hand-curated from the SEBI @valid circular and publicly documented PSP handle prefixes"
+
+# ---- Live services (no table; the executor reads only `rate` and `max_age_days`) --------------
+
+rdap:
+  name: "RDAP domain registration lookup"
+  verify_url: "https://lookup.icann.org/en/lookup?name={value}"   # where the user can check it themselves; {value} is the identifier
+  group: "Live services"
+  kind: live
+  rate: "5/1s"
+  max_age_days: 7
+
+play:
+  name: "Google Play store listing"
+  verify_url: "https://play.google.com/store/apps/details?id={value}"   # where the user can check it themselves; {value} is the identifier
+  group: "Live services"
+  kind: live
+  rate: "1/1s"
+  max_age_days: 1
+
+safe_browsing:
+  name: "Google Safe Browsing (optional, needs SATARK_SAFE_BROWSING_KEY)"
+  verify_url: "https://transparencyreport.google.com/safe-browsing/search?url={value}"   # where the user can check it themselves; {value} is the identifier
+  group: "Live services"
+  kind: live
+  rate: "5/1s"
+  max_age_days: 1
+
+unshorten:
+  name: "Link unshortener"
+  group: "Live services"
+  kind: live
+  rate: "5/1s"
+  max_age_days: 1

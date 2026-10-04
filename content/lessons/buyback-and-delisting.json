@@ -1,0 +1,85 @@
+{
+  "id": "buyback-and-delisting",
+  "icon": "🏷️",
+  "minutes": 2,
+  "title": {
+    "en": "Buyback and delisting offers",
+    "hi": "बायबैक और डीलिस्टिंग ऑफ़र"
+  },
+  "tactic": {
+    "en": "Tactic: fee for a payout that does not need one — a real buyback or delisting payment comes through your broker and the exchange, never to a personal UPI ID.",
+    "hi": "तरीका: ऐसे भुगतान के लिए फ़ीस माँगना जिसमें फ़ीस होती ही नहीं — असली बायबैक या डीलिस्टिंग का पैसा ब्रोकर और एक्सचेंज के रास्ते आता है, किसी निजी UPI ID पर नहीं।"
+  },
+  "tacticKey": "fee_for_payout",
+  "steps": [
+    {
+      "text": {
+        "en": "In a buyback, a company offers to buy back some of its own shares from shareholders at a stated price. Taking part is optional.",
+        "hi": "बायबैक में कंपनी अपने ही कुछ शेयर शेयरधारकों से एक बताई गई क़ीमत पर वापस ख़रीदने का ऑफ़र देती है। हिस्सा लेना ज़रूरी नहीं, आपकी मर्ज़ी है।"
+      }
+    },
+    {
+      "text": {
+        "en": "In delisting, a company's shares stop trading on an exchange, following a process laid down by SEBI (Securities and Exchange Board of India) rules.",
+        "hi": "डीलिस्टिंग में कंपनी के शेयर किसी एक्सचेंज पर ट्रेड होना बंद हो जाते हैं। यह SEBI (भारतीय प्रतिभूति और विनिमय बोर्ड) के नियमों की तय प्रक्रिया से होता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "A real offer is public: details appear on the exchange website. If you choose to tender (offer) your shares, you do it through your own broker during the exchange's tender window.",
+        "hi": "असली ऑफ़र सार्वजनिक होता है: जानकारी एक्सचेंज की वेबसाइट पर होती है। शेयर टेंडर (पेश) करने हों तो अपने ही ब्रोकर के ज़रिए, एक्सचेंज की टेंडर विंडो के दौरान करते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Money for accepted shares is settled into your bank account through your broker. You are never asked to pay anyone first, and you never share an OTP for it.",
+        "hi": "स्वीकार हुए शेयरों का पैसा आपके ब्रोकर के ज़रिए आपके बैंक खाते में आता है। इसके लिए पहले किसी को पैसे नहीं देने होते और OTP भी नहीं बताना होता।"
+      }
+    },
+    {
+      "text": {
+        "en": "Scam pattern: a call or message about a \"buyback\" or \"delisting compensation\" asks for a fee, \"processing charge\", OTP, or a transfer to a personal UPI ID. Stop and check with your broker or the exchange.",
+        "hi": "ठगी का पैटर्न: \"बायबैक\" या \"डीलिस्टिंग मुआवज़े\" के नाम पर कॉल या मैसेज फ़ीस, \"प्रोसेसिंग चार्ज\", OTP या किसी निजी UPI ID में ट्रांसफ़र माँगता है। रुकें और अपने ब्रोकर या एक्सचेंज से जाँचें।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "A genuine offer reaches you through the channel you already use (your broker); a scam asks you to leave that channel and pay a stranger.",
+    "hi": "असली ऑफ़र उसी रास्ते से आता है जो आप पहले से इस्तेमाल करते हैं (आपका ब्रोकर); ठगी आपसे वह रास्ता छोड़कर किसी अजनबी को पैसे देने को कहती है।"
+  },
+  "source": "https://investor.sebi.gov.in/",
+  "quiz": [
+    {
+      "question": {
+        "en": "How do you take part in a genuine buyback offer?",
+        "hi": "असली बायबैक ऑफ़र में हिस्सा कैसे लेते हैं?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Through your own broker, in the exchange's tender window", "hi": "अपने ब्रोकर के ज़रिए, एक्सचेंज की टेंडर विंडो में"}, "correct": true},
+        {"id": "b", "text": {"en": "By paying a processing fee to a caller", "hi": "कॉल करने वाले को प्रोसेसिंग फ़ीस देकर"}, "correct": false},
+        {"id": "c", "text": {"en": "By sharing your demat OTP on a link sent by message", "hi": "मैसेज में आए लिंक पर अपना डीमैट OTP बताकर"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Tendering goes through your broker and the exchange. Nobody outside that chain needs a fee, OTP or UPI payment.",
+        "hi": "टेंडर ब्रोकर और एक्सचेंज के ज़रिए होता है। इस कड़ी के बाहर किसी को फ़ीस, OTP या UPI भुगतान नहीं चाहिए।"
+      },
+      "tactic": "fee_for_payout"
+    },
+    {
+      "question": {
+        "en": "A message says: \"Delisting compensation of ₹85,000 is ready. Send ₹2,500 processing charge to this UPI ID.\" What is this?",
+        "hi": "मैसेज कहता है: \"डीलिस्टिंग मुआवज़े के ₹85,000 तैयार हैं। इस UPI ID पर ₹2,500 प्रोसेसिंग चार्ज भेजें।\" यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Fee for a payout that does not need one — a scam; do not pay, check with your broker", "hi": "ऐसे भुगतान की फ़ीस जिसमें फ़ीस होती ही नहीं — ठगी है; भुगतान न करें, ब्रोकर से जाँचें"}, "correct": true},
+        {"id": "b", "text": {"en": "A normal delisting procedure", "hi": "डीलिस्टिंग की सामान्य प्रक्रिया"}, "correct": false},
+        {"id": "c", "text": {"en": "Pay a smaller fee to test it", "hi": "जाँचने के लिए कम फ़ीस भेजकर देखें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Payments for tendered shares arrive in your bank account through your broker. A request to send money first, especially to a personal UPI ID, is the scam.",
+        "hi": "टेंडर किए शेयरों का पैसा ब्रोकर के ज़रिए आपके बैंक खाते में आता है। पहले पैसे भेजने की माँग, ख़ासकर निजी UPI ID पर, ठगी है।"
+      },
+      "tactic": "fee_for_payout"
+    }
+  ]
+}

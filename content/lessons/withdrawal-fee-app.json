@@ -1,0 +1,80 @@
+{
+  "id": "withdrawal-fee-app",
+  "icon": "💸",
+  "minutes": 2,
+  "title": {
+    "en": "The \"tax before withdrawal\" trap",
+    "hi": "\"निकासी से पहले टैक्स\" का जाल"
+  },
+  "tactic": {
+    "en": "Tactic: pay to withdraw — if you must pay a fee, \"tax\" or \"GST\" to get your own money out, it is always a scam.",
+    "hi": "तरीका: निकालने के लिए भुगतान — अपना ही पैसा निकालने के लिए \"टैक्स\", \"GST\" या फ़ीस माँगना हमेशा स्कैम होता है।"
+  },
+  "tacticKey": "pay_to_withdraw",
+  "steps": [
+    {
+      "text": {
+        "en": "A trading or crypto app shows your investment has grown into a large profit — but it is just a number on a screen.",
+        "hi": "एक ट्रेडिंग या क्रिप्टो ऐप दिखाता है कि आपका इन्वेस्टमेंट बढ़कर बड़ा मुनाफ़ा बन गया है — पर यह सिर्फ़ स्क्रीन पर एक नंबर है।"
+      }
+    },
+    {
+      "text": {
+        "en": "When you request a withdrawal, \"support\" says you must first pay 20–30% as \"income tax\" or \"GST\" on the profit.",
+        "hi": "जब आप निकासी की रिक्वेस्ट करते हैं, \"सपोर्ट\" कहता है कि पहले मुनाफ़े पर 20–30% \"इनकम टैक्स\" या \"GST\" भरना होगा।"
+      }
+    },
+    {
+      "text": {
+        "en": "This sounds official, but no app ever collects tax for the government — tax is paid directly to the Income Tax Department, never to an app.",
+        "hi": "यह सुनने में सरकारी लगता है, पर कोई भी ऐप सरकार के लिए टैक्स नहीं लेता — टैक्स सीधे इनकम टैक्स डिपार्टमेंट को दिया जाता है, किसी ऐप को नहीं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Pay the \"tax\" and a new charge appears — a \"conversion fee\", then a \"compliance fee\". It never ends; the money never arrives.",
+        "hi": "\"टैक्स\" भर दें तो एक नया चार्ज आता है — \"कन्वर्ज़न फ़ीस\", फिर \"कंप्लायंस फ़ीस\"। यह कभी ख़त्म नहीं होता; पैसा कभी नहीं मिलता।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like an ATM that shows ₹1 lakh in your balance but charges a fee every time before letting you take any out — and the fee never stops.",
+    "hi": "यह वैसा है जैसे कोई ATM बैलेंस में ₹1 लाख दिखाए, पर हर बार निकालने से पहले फ़ीस माँगे — और यह फ़ीस कभी ख़त्म न हो।"
+  },
+  "source": "https://cybercrime.gov.in",
+  "sim": "S1",
+  "quiz": [
+    {
+      "question": {
+        "en": "\"Support\" writes: \"Your profit is ₹2,40,000. Pay 18% GST (₹43,200) to release the full amount to your bank.\" What is this?",
+        "hi": "\"सपोर्ट\" लिखता है: \"आपका मुनाफ़ा ₹2,40,000 है। पूरी राशि बैंक में भेजने के लिए 18% GST (₹43,200) भरें।\" यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Pay to withdraw — refuse and report; no platform collects GST this way", "hi": "निकालने के लिए भुगतान — मना करें और रिपोर्ट करें; कोई प्लेटफ़ॉर्म इस तरह GST नहीं लेता"}, "correct": true},
+        {"id": "b", "text": {"en": "Pay it — GST is a real tax, so this is legitimate", "hi": "भर दें — GST असली टैक्स है, इसलिए यह सही है"}, "correct": false},
+        {"id": "c", "text": {"en": "Ask for a GST invoice first, then pay", "hi": "पहले GST इनवॉइस माँगें, फिर भरें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "GST and income tax are paid to the government directly, never to a trading app's support team. This demand only shows the \"profit\" was never real.",
+        "hi": "GST और इनकम टैक्स सीधे सरकार को दिया जाता है, किसी ट्रेडिंग ऐप के सपोर्ट को नहीं। यह माँग बस यह बताती है कि \"मुनाफ़ा\" असली कभी था ही नहीं।"
+      },
+      "tactic": "pay_to_withdraw"
+    },
+    {
+      "question": {
+        "en": "You pay the \"tax\", and now the app asks for a \"bank compliance fee\" before it will release funds. What does this confirm?",
+        "hi": "आप \"टैक्स\" भर देते हैं, और अब ऐप पैसा भेजने से पहले एक \"बैंक कंप्लायंस फ़ीस\" माँगता है। यह क्या साबित करता है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "It is a scam — each new fee appears only because the last one worked", "hi": "यह स्कैम है — हर नया चार्ज सिर्फ़ इसलिए आता है क्योंकि पिछला काम कर गया"}, "correct": true},
+        {"id": "b", "text": {"en": "The platform is just being extra careful with compliance", "hi": "प्लेटफ़ॉर्म सिर्फ़ कंप्लायंस को लेकर ज़्यादा सावधान है"}, "correct": false},
+        {"id": "c", "text": {"en": "This is the final step — pay it", "hi": "यह आख़िरी क़दम है — इसे भर दें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A genuine withdrawal needs no fee at all. Every new fee is proof there was never any plan to pay you.",
+        "hi": "असली निकासी के लिए किसी फ़ीस की ज़रूरत नहीं होती। हर नया चार्ज यही साबित करता है कि आपको पैसा देने की कोई योजना कभी थी ही नहीं।"
+      },
+      "tactic": "pay_to_withdraw"
+    }
+  ]
+}

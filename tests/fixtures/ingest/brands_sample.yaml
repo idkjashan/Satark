@@ -1,0 +1,3 @@
+brands:
+  - {id: sampleregulator, name: "Sample Regulator", kind: regulator, aliases: [sampleregulator], domains: [sampleregulator.gov.in]}
+  - {id: samplebroker, name: "Sample Broker", kind: broker, aliases: [samplebroker], domains: [samplebroker.com, www.samplebroker.com]}

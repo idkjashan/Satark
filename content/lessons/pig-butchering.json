@@ -1,0 +1,96 @@
+{
+  "id": "pig-butchering",
+  "icon": "💔",
+  "minutes": 2,
+  "title": {
+    "en": "The long-con \"friendship\" investment",
+    "hi": "लंबे समय का \"दोस्ती\" वाला इन्वेस्टमेंट जाल"
+  },
+  "tactic": {
+    "en": "Tactic: long-con trust — weeks of online friendship or romance build trust before the investment ask ever comes.",
+    "hi": "तरीका: लंबा भरोसा-जाल — इन्वेस्टमेंट की बात आने से पहले हफ़्तों तक दोस्ती या रोमांस से भरोसा बनाया जाता है।"
+  },
+  "tacticKey": "romance_trust_building",
+  "steps": [
+    {
+      "text": {
+        "en": "A stranger messages you on Instagram, WhatsApp or a dating app, and a warm friendship builds over weeks — no money is mentioned at all.",
+        "hi": "कोई अजनबी आपको Instagram, WhatsApp या डेटिंग ऐप पर मैसेज करता है, और हफ़्तों में एक गहरी दोस्ती बन जाती है — पैसे की बात बिलकुल नहीं होती।"
+      }
+    },
+    {
+      "text": {
+        "en": "Once you trust them, they mention how their \"investment app\" or \"crypto platform\" made them rich, and offer to guide you too.",
+        "hi": "जब भरोसा बन जाता है, वे बताते हैं कि उनके \"इन्वेस्टमेंट ऐप\" या \"क्रिप्टो प्लेटफ़ॉर्म\" ने उन्हें मालामाल कर दिया, और आपको भी गाइड करने की पेशकश करते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "You invest a small amount first, see it \"grow\" on screen, and are encouraged to put in your savings, a loan, or even gold.",
+        "hi": "आप पहले थोड़ा इन्वेस्ट करते हैं, स्क्रीन पर उसे \"बढ़ते\" देखते हैं, और फिर अपनी बचत, लोन या सोना भी लगाने के लिए प्रोत्साहित किया जाता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "When you try to withdraw, the app blocks it and asks for a fee — then the \"friend\" disappears, along with everything you put in.",
+        "hi": "जब आप निकालने की कोशिश करते हैं, ऐप रोक देता है और फ़ीस माँगता है — फिर वह \"दोस्त\" भी ग़ायब हो जाता है, आपके पूरे पैसे के साथ।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's the long game of a con artist who spends weeks earning your trust before ever asking for a rupee — the friendship itself is the trap.",
+    "hi": "यह एक धोखेबाज़ की लंबी चाल है जो पैसे माँगने से पहले हफ़्तों तक भरोसा जीतता है — दोस्ती ख़ुद ही जाल है।"
+  },
+  "source": "https://cybercrime.gov.in",
+  "sim": "S1",
+  "quiz": [
+    {
+      "question": {
+        "en": "An online friend of two months says their crypto mentor can double your money, and offers to set up an account for you. What is this?",
+        "hi": "दो महीने से चैट कर रहा एक ऑनलाइन दोस्त कहता है कि उसका क्रिप्टो मेंटर आपका पैसा दोगुना कर सकता है, और आपके लिए अकाउंट बनाने की पेशकश करता है। यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Long-con trust — a real friend never profits from steering you into an app", "hi": "लंबा भरोसा-जाल — असली दोस्त कभी आपको किसी ऐप में भेजकर फ़ायदा नहीं कमाता"}, "correct": true},
+        {"id": "b", "text": {"en": "A genuine favour from a close friend", "hi": "एक क़रीबी दोस्त की सच्ची मदद"}, "correct": false},
+        {"id": "c", "text": {"en": "Safe, since you've known them two months", "hi": "सुरक्षित है, क्योंकि दो महीने से जान-पहचान है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Two months of chatting proves nothing. Anyone who steers you toward a specific app or \"mentor\" for money is building trust in order to spend it.",
+        "hi": "दो महीने की चैट कुछ साबित नहीं करती। जो कोई आपको पैसों के लिए किसी ऐप या \"मेंटर\" की तरफ़ भेजे, वह भरोसा इसलिए बना रहा है ताकि उसे भुना सके।"
+      },
+      "tactic": "romance_trust_building"
+    },
+    {
+      "question": {
+        "en": "You've invested ₹50,000 through this friend's app and it now shows ₹2,00,000 profit. What should you check first?",
+        "hi": "आपने इस दोस्त के ऐप में ₹50,000 इन्वेस्ट किए हैं और अब वह ₹2,00,000 मुनाफ़ा दिखा रहा है। आपको सबसे पहले क्या जाँचना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Try to withdraw a small amount right now, before adding any more money", "hi": "और पैसे जोड़ने से पहले, अभी थोड़ी-सी रकम निकालने की कोशिश करें"}, "correct": true},
+        {"id": "b", "text": {"en": "Add more money first, to reach a round number", "hi": "पहले एक गोल आँकड़े तक पहुँचने के लिए और पैसे जोड़ें"}, "correct": false},
+        {"id": "c", "text": {"en": "Wait for the mentor's signal before withdrawing", "hi": "निकालने से पहले मेंटर के इशारे का इंतज़ार करें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A profit you cannot freely withdraw right now is not real. Test it small, before you ever add more money.",
+        "hi": "जो मुनाफ़ा आप अभी आज़ादी से निकाल नहीं सकते, वह असली नहीं है। और पैसे जोड़ने से पहले इसे छोटी रकम से परख लें।"
+      },
+      "tactic": "pay_to_withdraw"
+    },
+    {
+      "question": {
+        "en": "What should you do before investing through anyone you only know online?",
+        "hi": "सिर्फ़ ऑनलाइन जानने वाले किसी व्यक्ति के ज़रिए इन्वेस्ट करने से पहले आपको क्या करना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Check the app or broker on the SEBI register yourself, independent of what they tell you", "hi": "वे जो भी बताएं, उससे अलग, ख़ुद ऐप या ब्रोकर को SEBI रजिस्टर में जाँच लें"}, "correct": true},
+        {"id": "b", "text": {"en": "Trust it, since they shared screenshots of their own profits", "hi": "भरोसा कर लें, क्योंकि उन्होंने अपने मुनाफ़े के स्क्रीनशॉट भेजे हैं"}, "correct": false},
+        {"id": "c", "text": {"en": "Ask them to send their own KYC documents as proof", "hi": "उनसे ख़ुद के KYC दस्तावेज़ सबूत के तौर पर माँगें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Screenshots and documents are easy to fake. Only an independent check against the official SEBI register tells you if an entity is real.",
+        "hi": "स्क्रीनशॉट और दस्तावेज़ बनावटी हो सकते हैं। सिर्फ़ SEBI के आधिकारिक रजिस्टर से की गई अपनी जाँच ही बताती है कि कोई असली है या नहीं।"
+      },
+      "tactic": "romance_trust_building"
+    }
+  ]
+}

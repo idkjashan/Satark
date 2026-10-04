@@ -1,0 +1,9 @@
+# Satark local blocklist additions, one registrable domain per line, lower case.
+# Seed only with domains Satark's own research has directly verified (e.g. an active, confirmed
+# scam site referenced in SEBI/NSE press releases we hold locally). Never add a domain "to be safe" --
+# an unverified entry here would make the blocklist checker report a false "known bad site" to a
+# frightened user, which is worse than reporting "could not check".
+#
+# Currently empty: the Oct 2026 research pass verified no additional domain beyond what
+# Phishing.Database and Hagezi's feed already cover. Add rows here, one domain per line, as
+# Satark's own investigations turn up confirmed scam domains not yet in the public feeds.

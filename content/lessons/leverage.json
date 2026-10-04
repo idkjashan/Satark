@@ -1,0 +1,68 @@
+{
+  "id": "leverage",
+  "icon": "⚖️",
+  "minutes": 2,
+  "title": {
+    "en": "What leverage does to your money",
+    "hi": "लीवरेज आपके पैसे का क्या करता है"
+  },
+  "tactic": {
+    "en": "Tactic: hidden leverage — borrowed money multiplies both gains and losses, fast.",
+    "hi": "तरीका: छिपा हुआ लीवरेज — उधार का पैसा मुनाफ़े और नुक़सान दोनों को तेज़ी से कई गुना बढ़ा देता है।"
+  },
+  "tacticKey": "leverage_trap",
+  "sim": "S3",
+  "steps": [
+    {
+      "text": {
+        "en": "Leverage means trading with more money than you actually put in.",
+        "hi": "लीवरेज का मतलब है: आपके पास जितना पैसा है, उससे ज़्यादा से ट्रेड करना।"
+      },
+      "visual": "leverage-bar"
+    },
+    {
+      "text": {
+        "en": "At 8 times leverage, your ₹10,000 controls about ₹80,000 of position.",
+        "hi": "8 गुना लीवरेज पर, आपके ₹10,000 से लगभग ₹80,000 की पोज़िशन चलती है।"
+      }
+    },
+    {
+      "text": {
+        "en": "Leverage multiplies your losses just as fast as it multiplies gains.",
+        "hi": "लीवरेज नुक़सान को भी उतनी ही तेज़ी से बढ़ाता है, जितना मुनाफ़े को।"
+      }
+    },
+    {
+      "text": {
+        "en": "A market fall of about 12% can wipe out your entire margin.",
+        "hi": "बाज़ार में क़रीब 12% की गिरावट आपका पूरा मार्जिन ख़त्म कर सकती है।"
+      }
+    },
+    {
+      "text": {
+        "en": "SEBI found 87.7% of individual F&O traders lost money in FY26 — ₹91,685 crore in total.",
+        "hi": "SEBI ने पाया कि FY26 में 87.7% खुदरा F&O ट्रेडर्स को नुक़सान हुआ — कुल ₹91,685 करोड़।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a see-saw with you on the far end: a small push on the other side throws you much further.",
+    "hi": "यह सी-सॉ (झूले) जैसा है, जहाँ आप दूर वाले सिरे पर हैं: दूसरी तरफ़ की हल्की धक्का भी आपको बहुत दूर उछाल देती है।"
+  },
+  "quiz": {
+    "question": {
+      "en": "At 8 times leverage, about how much does the market have to fall to wipe out your margin?",
+      "hi": "8 गुना लीवरेज पर, मार्जिन ख़त्म होने के लिए बाज़ार को कितना गिरना होगा?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "About 12%", "hi": "लगभग 12%"}, "correct": true},
+      {"id": "b", "text": {"en": "About 50%", "hi": "लगभग 50%"}, "correct": false},
+      {"id": "c", "text": {"en": "About 90%", "hi": "लगभग 90%"}, "correct": false}
+    ],
+    "explain": {
+      "en": "At 8x leverage, each 1% market move changes your margin by about 8%. A 12% fall is close to a full wipeout.",
+      "hi": "8 गुना लीवरेज पर, बाज़ार की हर 1% चाल आपके मार्जिन को लगभग 8% बदल देती है। 12% गिरावट से मार्जिन लगभग ख़त्म हो जाता है।"
+    },
+    "tactic": "leverage_trap"
+  }
+}

@@ -1,0 +1,5 @@
+url: https://data.iana.org/rdap/dns.json
+fetched_on: 2026-10-03
+as_on: 2026-09-30
+licence: IANA bootstrap registry (public, RFC 9224)
+note: RDAP bootstrap file mapping TLDs to RDAP servers; used by link.rdap_age

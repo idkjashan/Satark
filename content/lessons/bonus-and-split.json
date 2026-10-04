@@ -1,0 +1,85 @@
+{
+  "id": "bonus-and-split",
+  "icon": "🧮",
+  "minutes": 2,
+  "title": {
+    "en": "Bonus shares and stock splits",
+    "hi": "बोनस शेयर और स्टॉक स्प्लिट"
+  },
+  "tactic": {
+    "en": "Tactic: fee to claim what is already yours — a real bonus or split is credited to your demat account automatically, with no payment to anyone.",
+    "hi": "तरीका: जो पहले से आपका है उसे पाने के लिए फ़ीस माँगना — असली बोनस या स्प्लिट आपके डीमैट खाते में अपने-आप जुड़ता है, किसी को कोई भुगतान नहीं करना होता।"
+  },
+  "tacticKey": "fee_to_claim",
+  "steps": [
+    {
+      "text": {
+        "en": "A bonus issue gives existing shareholders extra shares of the same company, for example 1 new share for every 1 held. The company pays for it from its own reserves.",
+        "hi": "बोनस इश्यू में कंपनी मौजूदा शेयरधारकों को उसी कंपनी के अतिरिक्त शेयर देती है, जैसे हर 1 शेयर पर 1 नया शेयर। इसका ख़र्च कंपनी अपने रिज़र्व से उठाती है।"
+      }
+    },
+    {
+      "text": {
+        "en": "A stock split divides each share into smaller parts. One share of face value ₹10 can become two shares of face value ₹5.",
+        "hi": "स्टॉक स्प्लिट में हर शेयर छोटे हिस्सों में बँट जाता है। ₹10 अंकित मूल्य वाला एक शेयर ₹5 अंकित मूल्य वाले दो शेयर बन सकता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "In both cases you hold more shares, but each share's price adjusts down. Your total holding value stays about the same just after the event; the market can still move the price afterwards.",
+        "hi": "दोनों मामलों में आपके पास शेयर ज़्यादा हो जाते हैं, पर हर शेयर की क़ीमत उसी हिसाब से घट जाती है। इवेंट के ठीक बाद आपकी कुल होल्डिंग की क़ीमत लगभग वही रहती है; उसके बाद बाज़ार भाव बदल सकता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "Shares are added to your demat account for holders on the record date. You do not apply, pay or share an OTP (one-time password) to receive them.",
+        "hi": "रिकॉर्ड डेट पर जो शेयरधारक होते हैं, उनके डीमैट खाते में शेयर जुड़ जाते हैं। इसके लिए आवेदन, भुगतान या OTP (वन-टाइम पासवर्ड) देने की ज़रूरत नहीं होती।"
+      }
+    },
+    {
+      "text": {
+        "en": "A caller or message that says \"pay a fee or tax to release your bonus shares\" is the scam. Check the real announcement on the exchange's website or with your broker.",
+        "hi": "जो कॉल या मैसेज कहे \"बोनस शेयर पाने के लिए फ़ीस या टैक्स भरें\", वही ठगी है। असली घोषणा एक्सचेंज की वेबसाइट पर या अपने ब्रोकर से जाँचें।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "Cutting a ₹100 note into two halves does not make you richer; a bonus or split changes the number of pieces, not the total value.",
+    "hi": "₹100 के नोट के दो टुकड़े कर देने से आप अमीर नहीं होते; बोनस या स्प्लिट टुकड़ों की गिनती बदलता है, कुल क़ीमत नहीं।"
+  },
+  "source": "https://investor.sebi.gov.in/",
+  "quiz": [
+    {
+      "question": {
+        "en": "You hold 100 shares at ₹200 each. After a 1:1 bonus you hold 200 shares. About what is the price per share, ignoring market moves?",
+        "hi": "आपके पास ₹200 वाले 100 शेयर हैं। 1:1 बोनस के बाद 200 शेयर हो गए। बाज़ार की चाल छोड़ दें तो हर शेयर की क़ीमत लगभग कितनी होगी?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "About ₹100, so total value stays about ₹20,000", "hi": "लगभग ₹100, यानी कुल क़ीमत लगभग ₹20,000 ही रहती है"}, "correct": true},
+        {"id": "b", "text": {"en": "₹200, so your total value doubles", "hi": "₹200, यानी आपकी कुल क़ीमत दोगुनी हो जाती है"}, "correct": false},
+        {"id": "c", "text": {"en": "₹400", "hi": "₹400"}, "correct": false}
+      ],
+      "explain": {
+        "en": "More shares at a lower price: the company's value did not change, only the number of pieces it is divided into.",
+        "hi": "शेयर ज़्यादा, क़ीमत कम: कंपनी की क़ीमत नहीं बदली, सिर्फ़ उसके हिस्सों की गिनती बदली है।"
+      },
+      "tactic": "bonus_split_value"
+    },
+    {
+      "question": {
+        "en": "A caller says your bonus shares are on hold and you must pay a ₹4,000 \"release fee\" by UPI. What is this?",
+        "hi": "कॉल करने वाला कहता है कि आपके बोनस शेयर रुके हैं और ₹4,000 की \"रिलीज़ फ़ीस\" UPI से भरनी होगी। यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Fee to claim what is already yours — a scam; do not pay, check with your broker", "hi": "जो पहले से आपका है उसके लिए फ़ीस — ठगी है; भुगतान न करें, ब्रोकर से जाँचें"}, "correct": true},
+        {"id": "b", "text": {"en": "A normal step of every bonus issue", "hi": "हर बोनस इश्यू का सामान्य चरण"}, "correct": false},
+        {"id": "c", "text": {"en": "Pay half now and half later", "hi": "आधा अभी और आधा बाद में दें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Bonus shares are credited to the demat account automatically. No one needs a fee, OTP or UPI payment from you to release them.",
+        "hi": "बोनस शेयर डीमैट खाते में अपने-आप जुड़ते हैं। उन्हें देने के लिए किसी को आपसे फ़ीस, OTP या UPI भुगतान नहीं चाहिए।"
+      },
+      "tactic": "fee_to_claim"
+    }
+  ]
+}

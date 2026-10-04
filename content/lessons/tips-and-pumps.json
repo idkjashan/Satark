@@ -1,0 +1,66 @@
+{
+  "id": "tips-and-pumps",
+  "icon": "📣",
+  "minutes": 2,
+  "title": {
+    "en": "How a pump-and-dump tip works",
+    "hi": "पंप-एंड-डंप टिप कैसे काम करती है"
+  },
+  "tactic": {
+    "en": "Tactic: pump and dump — a hyped tip drives a price up just so insiders can sell into it.",
+    "hi": "तरीका: पंप-एंड-डंप — एक हाइप की हुई टिप दाम ऊपर चढ़ाती है, सिर्फ़ ताकि इनसाइडर उसी में अपने शेयर बेच सकें।"
+  },
+  "tacticKey": "pump_and_dump",
+  "steps": [
+    {
+      "text": {
+        "en": "In a pump-and-dump, operators quietly buy a small stock first.",
+        "hi": "पंप-एंड-डंप में, ऑपरेटर पहले चुपचाप एक छोटा शेयर ख़रीद लेते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Then a tip channel hypes it: \"buy now, upper circuit guaranteed\".",
+        "hi": "फिर एक टिप चैनल उसका ख़ूब प्रचार करता है: \"अभी ख़रीदो, अपर सर्किट पक्का\"।"
+      }
+    },
+    {
+      "text": {
+        "en": "As more people buy, the price rises — and operators sell into that demand.",
+        "hi": "जब ज़्यादा लोग ख़रीदते हैं, दाम बढ़ता है — और ऑपरेटर उसी माँग में अपने शेयर बेच देते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "After operators sell, the price collapses, and late buyers are left holding losses.",
+        "hi": "ऑपरेटरों के बेचने के बाद दाम गिर जाता है, और देर से ख़रीदने वाले नुक़सान में रह जाते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "A SEBI-registered research analyst never guarantees a return on any tip.",
+        "hi": "SEBI-रजिस्टर्ड रिसर्च एनालिस्ट किसी भी टिप पर कभी मुनाफ़े की गारंटी नहीं देता।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like musical chairs: the music (the hype) stops right after the operators have already found their seats.",
+    "hi": "यह म्यूज़िकल चेयर के खेल जैसा है: संगीत (हाइप) तभी रुकता है जब ऑपरेटरों को अपनी कुर्सी मिल चुकी होती है।"
+  },
+  "quiz": {
+    "question": {
+      "en": "A Telegram channel posts \"Buy XYZ now, upper circuit guaranteed, operator is in.\" What is this most likely?",
+      "hi": "एक Telegram चैनल लिखता है \"XYZ अभी ख़रीदो, अपर सर्किट पक्का, ऑपरेटर लगा है।\" यह सबसे ज़्यादा क्या लगता है?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "A pump-and-dump scheme", "hi": "एक पंप-एंड-डंप स्कीम"}, "correct": true},
+      {"id": "b", "text": {"en": "Genuine registered research", "hi": "असली रजिस्टर्ड रिसर्च"}, "correct": false},
+      {"id": "c", "text": {"en": "A SEBI-approved alert", "hi": "SEBI की मंज़ूर की हुई सूचना"}, "correct": false}
+    ],
+    "explain": {
+      "en": "\"Operator\" and \"upper circuit guaranteed\" are classic pump-and-dump language. Report such tips on SEBI's Market Intelligence portal.",
+      "hi": "\"ऑपरेटर\" और \"अपर सर्किट पक्का\" जैसे शब्द पंप-एंड-डंप स्कीम में आम हैं। ऐसी टिप SEBI के मार्केट इंटेलिजेंस पोर्टल पर रिपोर्ट करें।"
+    },
+    "tactic": "pump_and_dump"
+  }
+}

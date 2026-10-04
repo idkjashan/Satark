@@ -1,0 +1,76 @@
+# Known organisations and public figures (seed; extend freely).
+# Used by: deterministic `claim.impersonates` extraction (aliases found in the text), link.official /
+# link.lookalike / link.domain_rules (official domains), and the ingest job (official_domain table).
+# kind: regulator | government | exchange | depository | industry | broker | bank | amc | payments | celebrity
+# aliases are matched case-insensitively on word boundaries; avoid aliases that are common words.
+brands:
+  # ---- regulators, government, market infrastructure ----
+  - {id: sebi, name: "SEBI", kind: regulator, aliases: [sebi, "securities and exchange board", सेबी], domains: [sebi.gov.in]}
+  - {id: rbi, name: "Reserve Bank of India", kind: regulator, aliases: [rbi, "reserve bank", आरबीआई, "रिज़र्व बैंक", "रिजर्व बैंक"], domains: [rbi.org.in]}
+  - {id: irdai, name: "IRDAI", kind: regulator, aliases: [irdai, irda], domains: [irdai.gov.in]}
+  - {id: pfrda, name: "PFRDA", kind: regulator, aliases: [pfrda], domains: [pfrda.org.in]}
+  - {id: ifsca, name: "IFSCA", kind: regulator, aliases: [ifsca], domains: [ifsca.gov.in]}
+  - {id: nse, name: "National Stock Exchange", kind: exchange, aliases: [nse, "national stock exchange", एनएसई], domains: [nseindia.com]}
+  - {id: bse, name: "BSE", kind: exchange, aliases: [bse, "bombay stock exchange", बीएसई], domains: [bseindia.com]}
+  - {id: mcx, name: "MCX", kind: exchange, aliases: [mcx], domains: [mcxindia.com]}
+  - {id: nsdl, name: "NSDL", kind: depository, aliases: [nsdl], domains: [nsdl.co.in, nsdl.com]}
+  - {id: cdsl, name: "CDSL", kind: depository, aliases: [cdsl], domains: [cdslindia.com]}
+  - {id: amfi, name: "AMFI", kind: industry, aliases: [amfi, "association of mutual funds"], domains: [amfiindia.com]}
+  - {id: npci, name: "NPCI", kind: industry, aliases: [npci], domains: [npci.org.in, bhimupi.org.in]}
+  - {id: incometax, name: "Income Tax Department", kind: government, aliases: ["income tax department", "income tax dept", आयकर], domains: [incometax.gov.in]}
+  - {id: cbi, name: "CBI", kind: government, aliases: [cbi, "central bureau of investigation", सीबीआई], domains: [cbi.gov.in]}
+  - {id: ed, name: "Enforcement Directorate", kind: government, aliases: ["enforcement directorate", ईडी], domains: [enforcementdirectorate.gov.in]}
+  - {id: cybercrime, name: "National Cyber Crime Reporting Portal", kind: government, aliases: ["cyber crime cell", "cyber police", "cybercrime portal"], domains: [cybercrime.gov.in]}
+  - {id: trai, name: "TRAI", kind: government, aliases: [trai], domains: [trai.gov.in]}
+  - {id: dot, name: "Department of Telecommunications", kind: government, aliases: ["department of telecommunications", "sanchar saathi"], domains: [dot.gov.in, sancharsaathi.gov.in]}
+  - {id: pib, name: "PIB", kind: government, aliases: [pib, "press information bureau"], domains: [pib.gov.in]}
+  - {id: mfcentral, name: "MF Central", kind: industry, aliases: ["mf central"], domains: [mfcentral.com]}
+  - {id: cams, name: "CAMS", kind: industry, aliases: [cams], domains: [camsonline.com]}
+  - {id: kfintech, name: "KFintech", kind: industry, aliases: [kfintech, karvy], domains: [kfintech.com]}
+  # ---- brokers ----
+  - {id: zerodha, name: "Zerodha", kind: broker, aliases: [zerodha, "zerodha kite"], domains: [zerodha.com]}
+  - {id: groww, name: "Groww", kind: broker, aliases: [groww], domains: [groww.in]}
+  - {id: angelone, name: "Angel One", kind: broker, aliases: ["angel one", angelone, "angel broking"], domains: [angelone.in, angelbroking.com]}
+  - {id: upstox, name: "Upstox", kind: broker, aliases: [upstox], domains: [upstox.com]}
+  - {id: icicidirect, name: "ICICI Securities", kind: broker, aliases: [icicidirect, "icici direct", "icici securities"], domains: [icicidirect.com]}
+  - {id: hdfcsec, name: "HDFC Securities", kind: broker, aliases: ["hdfc securities", hdfcsec], domains: [hdfcsec.com]}
+  - {id: kotaksec, name: "Kotak Securities", kind: broker, aliases: ["kotak securities", "kotak neo"], domains: [kotaksecurities.com]}
+  - {id: 5paisa, name: "5paisa", kind: broker, aliases: [5paisa], domains: [5paisa.com]}
+  - {id: motilal, name: "Motilal Oswal", kind: broker, aliases: ["motilal oswal"], domains: [motilaloswal.com]}
+  - {id: sharekhan, name: "Sharekhan", kind: broker, aliases: [sharekhan], domains: [sharekhan.com]}
+  - {id: paytmmoney, name: "Paytm Money", kind: broker, aliases: ["paytm money"], domains: [paytmmoney.com]}
+  - {id: dhan, name: "Dhan", kind: broker, aliases: ["dhan app", "dhan.co"], domains: [dhan.co]}
+  - {id: fyers, name: "Fyers", kind: broker, aliases: [fyers], domains: [fyers.in]}
+  - {id: sbisec, name: "SBI Securities", kind: broker, aliases: ["sbi securities", "sbicap securities"], domains: [sbisecurities.in]}
+  - {id: axisdirect, name: "Axis Direct", kind: broker, aliases: ["axis direct", axisdirect], domains: [axisdirect.in]}
+  # ---- banks ----
+  - {id: sbi, name: "State Bank of India", kind: bank, aliases: [sbi, "state bank of india", एसबीआई, "स्टेट बैंक"], domains: [sbi.co.in, onlinesbi.sbi, sbi.bank.in]}
+  - {id: hdfcbank, name: "HDFC Bank", kind: bank, aliases: ["hdfc bank"], domains: [hdfcbank.com]}
+  - {id: icicibank, name: "ICICI Bank", kind: bank, aliases: ["icici bank"], domains: [icicibank.com]}
+  - {id: axisbank, name: "Axis Bank", kind: bank, aliases: ["axis bank"], domains: [axisbank.com]}
+  - {id: kotakbank, name: "Kotak Mahindra Bank", kind: bank, aliases: ["kotak mahindra bank", "kotak bank"], domains: [kotak.com]}
+  - {id: pnb, name: "Punjab National Bank", kind: bank, aliases: [pnb, "punjab national bank"], domains: [pnbindia.in]}
+  - {id: bob, name: "Bank of Baroda", kind: bank, aliases: ["bank of baroda"], domains: [bankofbaroda.in]}
+  - {id: canara, name: "Canara Bank", kind: bank, aliases: ["canara bank"], domains: [canarabank.com]}
+  - {id: unionbank, name: "Union Bank of India", kind: bank, aliases: ["union bank of india"], domains: [unionbankofindia.co.in]}
+  - {id: yesbank, name: "Yes Bank", kind: bank, aliases: ["yes bank"], domains: [yesbank.in]}
+  - {id: indusind, name: "IndusInd Bank", kind: bank, aliases: [indusind], domains: [indusind.com]}
+  - {id: idfcfirst, name: "IDFC First Bank", kind: bank, aliases: ["idfc first"], domains: [idfcfirstbank.com]}
+  # ---- mutual funds (AMCs) ----
+  - {id: sbimf, name: "SBI Mutual Fund", kind: amc, aliases: ["sbi mutual fund", "sbi mf"], domains: [sbimf.com]}
+  - {id: hdfcmf, name: "HDFC Mutual Fund", kind: amc, aliases: ["hdfc mutual fund", "hdfc mf"], domains: [hdfcfund.com]}
+  - {id: icicipru, name: "ICICI Prudential Mutual Fund", kind: amc, aliases: ["icici prudential mutual fund", "icici pru mf"], domains: [icicipruamc.com]}
+  - {id: nipponmf, name: "Nippon India Mutual Fund", kind: amc, aliases: ["nippon india mutual fund", "nippon mf"], domains: [nipponindiaim.com]}
+  - {id: axismf, name: "Axis Mutual Fund", kind: amc, aliases: ["axis mutual fund", "axis mf"], domains: [axismf.com]}
+  - {id: kotakmf, name: "Kotak Mutual Fund", kind: amc, aliases: ["kotak mutual fund", "kotak mf"], domains: [kotakmf.com]}
+  # ---- payment apps ----
+  - {id: phonepe, name: "PhonePe", kind: payments, aliases: [phonepe], domains: [phonepe.com]}
+  - {id: paytm, name: "Paytm", kind: payments, aliases: [paytm], domains: [paytm.com]}
+  # ---- public figures often faked in "endorsement" scams (T7) ----
+  - {id: fm, name: "Finance Minister Nirmala Sitharaman", kind: celebrity, aliases: ["nirmala sitharaman", "finance minister", "वित्त मंत्री"], domains: []}
+  - {id: pm, name: "Prime Minister Narendra Modi", kind: celebrity, aliases: ["narendra modi", "pm modi", "prime minister", "मोदी जी", "प्रधानमंत्री"], domains: []}
+  - {id: rbigov, name: "RBI Governor", kind: celebrity, aliases: ["rbi governor", "sanjay malhotra", "shaktikanta das", "आरबीआई गवर्नर"], domains: []}
+  - {id: ambani, name: "Mukesh Ambani", kind: celebrity, aliases: ["mukesh ambani", "मुकेश अंबानी"], domains: []}
+  - {id: tata, name: "Ratan Tata", kind: celebrity, aliases: ["ratan tata", "रतन टाटा"], domains: []}
+  - {id: murthy, name: "Narayana Murthy", kind: celebrity, aliases: ["narayana murthy", "sudha murty", "sudha murthy"], domains: []}
+  - {id: musk, name: "Elon Musk", kind: celebrity, aliases: ["elon musk"], domains: []}

@@ -1,0 +1,616 @@
+# tests/golden/heldout_v2.yaml
+#
+# 60 NEW held-out messages for a blind generalisation test of the Satark
+# deterministic checker. Written WITHOUT opening config/lexicons/*,
+# config/claim_rules.yaml, config/entities.yaml, config/signals.yaml,
+# satark/checkers/*, satark/harness/extract/*, tests/golden/cases.yaml,
+# tests/golden/heldout.yaml, or tests/golden/entities.yaml — so none of
+# this wording is reverse-engineered from the rules it will be scored
+# against. All names, phone numbers, UPI ids, links and app ids below are
+# fictional; no real SEBI registration numbers are used.
+#
+# Composition: 36 scam + 24 legit; lang "hi" covers both Devanagari Hindi
+# and Hinglish (per instructions), "en" is English. 24 en / 36 hi overall
+# (18 Devanagari + 18 Hinglish within the "hi" tag).
+
+- id: hv2_001
+  lang: en
+  text: |-
+    Hi, this is Priya from TradeZenith support. Your profit of ₹1,84,000 is ready for withdrawal, but as per new RBI guidelines a one-time 18% withdrawal tax must be paid first to unlock your wallet. Pay ₹33,120 to UPI id tradezenith.tax@ybl within 2 hours or your account gets frozen immediatly.
+  expect:
+    verdict: scam
+  type: fake_trading_app_tax
+  note: |-
+    Classic fake-tax-before-withdrawal lock on a trading app "profit", fabricated RBI rule, short deadline.
+
+- id: hv2_002
+  lang: hi
+  text: |-
+    bhai maine Zencoin Trader app se 2.3 lakh kama liya but withdraw karne pe bol rahe 15% TDS pehle jama karo warna account band ho jayega 😭 kisi ne aisa dekha hai kya, UPI id hai zencoin.tds@okicici
+  expect:
+    verdict: scam
+  type: fake_trading_app_tax
+  note: |-
+    Victim describing the fake-TDS-before-withdrawal trap in casual Hinglish, asking peers for validation.
+
+- id: hv2_003
+  lang: en
+  text: |-
+    Greetings! I am Arjun Malhotra, SEBI registered research analyst with 12 yrs experience in equity advisory. We provide 100% accurate intraday & positional calls. Last month our clients made avg 40% returns. Join our advisory for just Rs 4999/month, limited seats. Reply YES to book your slot.
+  expect:
+    verdict: scam
+  type: fake_sebi_adviser
+  note: |-
+    Self-declared "SEBI registered" advisor with no checkable registration detail, inflated accuracy/return claims, paid tips.
+
+- id: hv2_004
+  lang: hi
+  text: |-
+    नमस्कार निवेशक मित्र, मैं विकास शर्मा, एक अनुभवी शेयर बाज़ार सलाहकार हूँ। हमारी टीम सेबी से रजिस्टर्ड है और रोज़ाना २-३ सटीक इंट्राडे कॉल देती है। पिछले महीने हमारे क्लाइंट्स ने औसतन ₹85,000 का मुनाफा कमाया। आज ही जॉइन करें, पहला हफ्ता बिल्कुल फ्री है, उसके बाद केवल ₹2999 प्रति माह।
+  expect:
+    verdict: scam
+  type: fake_sebi_adviser
+  note: |-
+    Hindi pitch claiming SEBI registration with no verifiable number, free-trial hook into paid daily tips.
+
+- id: hv2_005
+  lang: hi
+  text: |-
+    OPERATOR CALL 🔥🔥 kal subah is penny stock mein BIG NEWS aane wala hai, price abhi ₹8 hai 3 din mein ₹25 tak jayega, promoter khud buy kar raha hai. Jitna ho sake load kar lo, yeh chance dobara nahi aayega 🚀
+  expect:
+    verdict: scam
+  type: pump_operator_tip
+  note: |-
+    Pump-and-dump tip framed as insider "operator" info on a low-price stock with a concrete price target.
+
+- id: hv2_006
+  lang: hi
+  text: |-
+    दोस्तों, हमारे पास एक कन्फर्म "ऑपरेटर" टिप है। एक स्मॉल कैप कंपनी में बड़ा अनाउंसमेंट होने वाला है, स्टॉक ₹12 से ₹40 जा सकता है अगले हफ्ते। यह जानकारी सीमित लोगों को दी जा रही है, आगे किसी को मत बताना। अभी एंट्री ले लो।
+  expect:
+    verdict: scam
+  type: pump_operator_tip
+  note: |-
+    Secretive insider-style tip on a small-cap with a specific price target and exclusivity pressure.
+
+- id: hv2_007
+  lang: en
+  text: |-
+    🎯 PROFIT KING SIGNALS 🎯 Our premium Telegram group has a 92% win rate on Nifty & Banknifty options. Members made 3x their capital in just 6 weeks. First 50 users get lifetime access for Rs 999 only (actual price Rs 15,000). Pay via UPI profitking.signals@okaxis and send screenshot to unlock group link.
+  expect:
+    verdict: scam
+  type: premium_signal_group
+  note: |-
+    Inflated win-rate claim, fake scarcity discount, one-time payment for a "lifetime" options-signal group.
+
+- id: hv2_008
+  lang: hi
+  text: |-
+    yaar is options signal group ka win rate 90%+ hai, maine khud last week 18k se 54k bana liya 😍 abhi join karo sirf 499 mein, kal se price double ho jayega. link: bit.ly/sureshot-opt
+  expect:
+    verdict: scam
+  type: premium_signal_group
+  note: |-
+    Peer-testimonial pitch for a paid options-signal group with an exaggerated profit story and price-hike urgency.
+
+- id: hv2_009
+  lang: hi
+  text: |-
+    *बहुत बार फॉरवर्ड किया गया*
+    शेयर बाज़ार में कमाई का सुनहरा मौका! हमारा प्रीमियम सिग्नल ग्रुप पिछले 6 महीने से 88% सफलता दर के साथ चल रहा है। रोज़ाना 2 इंट्राडे कॉल, टारगेट और स्टॉपलॉस के साथ। सिर्फ ₹1500 प्रति माह में जॉइन करें और हर महीने ₹50,000+ कमाने वाले सैकड़ों सदस्यों में शामिल हों। सीटें सीमित हैं, आज ही रजिस्टर करें 🙏
+  expect:
+    verdict: scam
+  type: premium_signal_group
+  note: |-
+    Long chain-forward pitching a paid signals group with a specific success rate and monthly earnings promise.
+
+- id: hv2_010
+  lang: en
+  text: |-
+    Exclusive HNI Quota Alert: We have reserved institutional category allotment for the upcoming NovaTech Industries IPO before listing. Guaranteed allotment + 150% listing gain expected. Minimum investment Rs 2,00,000. Limited slots, contact our RM on +91 98xxx xxxxx to block your quota today.
+  expect:
+    verdict: scam
+  type: fake_ipo_hni_quota
+  note: |-
+    Fabricated "guaranteed allotment" via a non-existent institutional/HNI quota with a specific listing-gain promise.
+
+- id: hv2_011
+  lang: hi
+  text: |-
+    sir ek unlisted company ka IPO aa raha hai, pre-IPO shares abhi se mil rahe hain HNI quota mein, listing pe 3x guarantee hai. minimum 1 lakh lagana hoga, booking jaldi karo kal rate badh jayega
+  expect:
+    verdict: scam
+  type: fake_ipo_hni_quota
+  note: |-
+    Pre-IPO/unlisted-shares pitch promising a guaranteed multiple on listing through an unofficial "HNI quota".
+
+- id: hv2_012
+  lang: hi
+  text: |-
+    ग्रीन वैली फार्मलैंड स्कीम में निवेश करें और हर महीने फिक्स्ड ₹3,000 प्रति लाख रिटर्न पाएं, पूरी तरह सुरक्षित और रियल एस्टेट बैक्ड। 3 साल में पैसा डबल। हमारे 2000+ सदस्य पहले से मुनाफा कमा रहे हैं। आज ही ₹50,000 से शुरू करें और एक नया मेंबर लाने पर अतिरिक्त कमीशन पाएं।
+  expect:
+    verdict: scam
+  type: ponzi_fixed_return
+  note: |-
+    Farmland-backed fixed monthly return plus referral commission — fixed "safe" yield plus recruitment is the classic Ponzi tell.
+
+- id: hv2_013
+  lang: hi
+  text: |-
+    Suvarna Gold Chit Fund mein invest karo, fixed 2.5% monthly return guarantee hai, gold se backed hai bilkul safe. 2 saal mein double paisa. Already 5000+ log joined hain, aapka relationship manager call karega details ke liye.
+  expect:
+    verdict: scam
+  type: ponzi_fixed_return
+  note: |-
+    Gold-backed chit-fund pitch with a fixed monthly percentage "guarantee" — the fixed-return promise is the red flag, not the gold.
+
+- id: hv2_014
+  lang: en
+  text: |-
+    🚀 CryptoVault Staking is LIVE! Stake any amount of USDT and earn 1.5% DAILY garunteed. Your $500 becomes $1000 in just 45 days. No lock-in, withdraw anytime. Limited slots for new stakers, register now: cryptovault-stake.xyz
+  expect:
+    verdict: scam
+  type: crypto_doubling_staking
+  note: |-
+    Guaranteed daily percentage staking yield with a doubling timeline — an unsustainable fixed-return crypto promise.
+
+- id: hv2_015
+  lang: en
+  text: |-
+    We are excited to announce the BitDouble community pool. Deposit your crypto and our AI arbitrage bot doubles it in 7 days, fully automated, zero risk. Over 10,000 investors already doubled their funds. Deposit address will be shared once you join our VIP Telegram.
+  expect:
+    verdict: scam
+  type: crypto_doubling_staking
+  note: |-
+    "AI arbitrage bot" framing to justify an impossible 7-day doubling claim, gated behind a VIP group.
+
+- id: hv2_016
+  lang: hi
+  text: |-
+    crypto mein double karne ka mauka hai bro, maine khud 20k ko 7 din mein 40k banaya staking pool se, admin bhot trusted hai telegram pe, DM karo join karne ke liye 💰💰
+  expect:
+    verdict: scam
+  type: crypto_doubling_staking
+  note: |-
+    Personal-testimonial crypto-doubling pitch funnelling into a private Telegram DM before any deposit details are shown.
+
+- id: hv2_017
+  lang: en
+  text: |-
+    Trade Forex & Binary Options with QuantFX Global and earn up to 85% profit per trade in just 60 seconds. Our AI-powered algorithm has a 95% accuracy rate. Start with just $50, withdraw profits instantly. Download now: quantfx-global.app/download.apk
+  expect:
+    verdict: scam
+  type: forex_binary_app
+  note: |-
+    60-second binary-option trades with an implausible AI accuracy figure and a sideloaded APK link outside app stores.
+
+- id: hv2_018
+  lang: hi
+  text: |-
+    bhai ye forex binary trading app try kar, 1 minute ke trade mein 80% tak profit milta hai, maine $30 se $300 bana liya ek hafte mein. app ka apk link bhej raha hu, bas signal follow karna hai
+  expect:
+    verdict: scam
+  type: forex_binary_app
+  note: |-
+    Peer referral into a binary-options APK app promising short-duration high-probability trades.
+
+- id: hv2_019
+  lang: hi
+  text: |-
+    भाई साहब, एक्सचेंज के झंझट में क्यों पड़ना, हमारे साथ सीधे डब्बा ट्रेडिंग करो। बिना डीमैट अकाउंट के, कम मार्जिन में बड़ा पोजीशन ले सकते हो, STT और ब्रोकरेज की भी बचत होगी। सिर्फ WhatsApp पर पोजीशन बताओ, हिसाब हर शुक्रवार सेटल होगा।
+  expect:
+    verdict: scam
+  type: dabba_trading
+  note: |-
+    Off-exchange "dabba" trading pitch bypassing demat/clearing — unregulated bets settled informally outside SEBI oversight.
+
+- id: hv2_020
+  lang: hi
+  text: |-
+    yaar dabba trading mein margin bahut kam lagta hai, exchange wale charges bhi nahi lagte, sirf whatsapp pe bol do kitne lot lena hai, same day profit nikal sakte ho cash mein
+  expect:
+    verdict: scam
+  type: dabba_trading
+  note: |-
+    Casual pitch for unregulated off-exchange trading, emphasizing low margin and cash settlement outside any exchange record.
+
+- id: hv2_021
+  lang: hi
+  text: |-
+    यह कॉल मुंबई साइबर क्राइम ब्रांच से है। आपके आधार नंबर से जुड़े बैंक अकाउंट का इस्तेमाल एक मनी लॉन्ड्रिंग केस में हुआ है। जब तक जांच पूरी नहीं होती, आप 'डिजिटल अरेस्ट' में हैं, घर से बाहर नहीं जा सकते और किसी को इस कॉल के बारे में नहीं बता सकते। वेरिफिकेशन के लिए अपनी सारी बैंक डिटेल्स और एक छोटी सी 'क्लीयरेंस फीस' तुरंत जमा करनी होगी, वरना गिरफ्तारी वारंट जारी हो जाएगा।
+  expect:
+    verdict: scam
+  type: digital_arrest
+  note: |-
+    Fake cyber-crime-branch "digital arrest" call demanding a clearance fee and secrecy under threat of arrest.
+
+- id: hv2_022
+  lang: en
+  text: |-
+    This is an automated call from Customs Department. A parcel booked under your Aadhaar number containing illegal substances has been seized at Mumbai airport. To avoid a non-bailable warrant, press 1 to speak to an officer immediately and complete identity verification.
+  expect:
+    verdict: scam
+  type: digital_arrest
+  note: |-
+    Fake customs/parcel-seizure IVR opener used to funnel victims into a digital-arrest style extortion call.
+
+- id: hv2_023
+  lang: en
+  text: |-
+    Dear Customer, your Demat account KYC is incomplete and will be suspended within 24 hrs as per SEBI norms. Update immediatly: kyc-verify-cdsl.info/update Failure to comply will freeze all holdings.
+  expect:
+    verdict: scam
+  type: fake_official_notice_kyc
+  note: |-
+    Fake KYC-suspension deadline linking to a lookalike (not the real CDSL/NSDL) domain to harvest credentials.
+
+- id: hv2_024
+  lang: hi
+  text: |-
+    सूचना: आपका PAN कार्ड आधार से लिंक नहीं है, 48 घंटे में लिंक नहीं किया तो आपका डीमैट अकाउंट और बैंक खाता फ्रीज हो जाएगा। तुरंत लिंक करें: pan-aadhar-link.co.in/verify
+  expect:
+    verdict: scam
+  type: fake_official_notice_kyc
+  note: |-
+    Fake PAN-Aadhaar linking deadline with an account-freeze threat driving to a non-government domain.
+
+- id: hv2_025
+  lang: hi
+  text: |-
+    ALERT: aapka trading account KYC expire ho gaya hai, SEBI ke naye rule ke According 24 hours mein update nahi kiya to account band ho jayega. yaha click karke update karo: sebi-kyc-update.net/login
+  expect:
+    verdict: scam
+  type: fake_official_notice_kyc
+  note: |-
+    Fabricated SEBI KYC-expiry deadline with a phishing link styled to look official.
+
+- id: hv2_026
+  lang: en
+  text: |-
+    Hi, this is Rohit from your broker's technical support. We're migrating your trading account to a new server tonight, to avoid any data loss please install AnyDesk from the Play Store and share the 9-digit code so our engineer can complete it from our end.
+  expect:
+    verdict: scam
+  type: otp_remote_access
+  note: |-
+    Fake "technical migration" pretext to get a remote-access AnyDesk code, which hands full device control to the scammer.
+
+- id: hv2_027
+  lang: hi
+  text: |-
+    सर, मैं आपके बैंक से बोल रहा हूँ, आपके कार्ड में एक गलत ट्रांजैक्शन दिख रहा है जिसे अभी ब्लॉक करना ज़रूरी है। कृपया मोबाइल पर आया OTP मुझे बताएं ताकि हम तुरंत इसे रिवर्स कर सकें, वरना पैसा कट जाएगा।
+  expect:
+    verdict: scam
+  type: otp_remote_access
+  note: |-
+    Fake fraud-reversal pretext pressuring the victim to read out an OTP that should never be shared.
+
+- id: hv2_028
+  lang: en
+  text: |-
+    Facing issues with your broker app? Call our dedicated customer care at +44 20 xxxx xxxx for instant resolution of trading, withdrawal and KYC issues, available 24x7.
+  expect:
+    verdict: scam
+  type: fake_customer_care
+  note: |-
+    Fake "customer care" number planted to intercept distressed users searching for help online.
+
+- id: hv2_029
+  lang: hi
+  text: |-
+    trading app ka paisa stuck hai? hamara verified support number try karo +91 98xxx xxxxx, 2 min mein resolve ho jayega, bas apna account ID aur OTP bata dena verification ke liye
+  expect:
+    verdict: scam
+  type: fake_customer_care
+  note: |-
+    Impersonated "verified support" line that asks for account ID and OTP together — real support never needs the OTP.
+
+- id: hv2_030
+  lang: en
+  text: |-
+    BREAKING: In a leaked video, Finance Minister endorses a new govt-backed trading platform 'BharatWealth AI' that guarantees 10x returns in 3 months for all Indian citizens. Limited registration open today only, link in bio. Don't miss this govt initiative!
+  expect:
+    verdict: scam
+  type: deepfake_endorsement
+  note: |-
+    Fabricated minister endorsement used to lend false government legitimacy to a guaranteed-returns platform.
+
+- id: hv2_031
+  lang: hi
+  text: |-
+    *फॉरवर्डेड मैसेज*
+    देखिए यह वीडियो 🎥, मशहूर अभिनेता ने खुद इस नए इन्वेस्टमेंट ऐप 'धनवर्षा' को लॉन्च किया है, इसमें ₹10,000 लगाकर एक महीने में ₹1,00,000 कमाया जा सकता है। सेलिब्रिटी ने खुद गारंटी दी है, इंटरव्यू में साफ बोला। लिंक डिस्क्रिप्शन में है, जल्दी रजिस्टर करें।
+  expect:
+    verdict: scam
+  type: deepfake_endorsement
+  note: |-
+    Claimed celebrity video endorsement used to back an implausible 10x-in-a-month investment app, spread as a forward.
+
+- id: hv2_032
+  lang: en
+  text: |-
+    Earn Rs 3000-5000 daily from home! Simple task: like YouTube videos and rate products, 30 mins work. Join our Telegram group to start today, no investment needed initially, recieve payment weekly. (After onboarding, group later asks for a 'refundable' deposit to unlock higher-paying 'investment tasks'.)
+  expect:
+    verdict: scam
+  type: job_task_scam
+  note: |-
+    Task-job funnel — free easy tasks build trust, then escalate to a deposit-based "investment task" stage.
+
+- id: hv2_033
+  lang: hi
+  text: |-
+    घर बैठे रोज़ाना ₹2,000-3,000 कमाएं! सिर्फ प्रोडक्ट रिव्यू लिखें और वीडियो लाइक करें, कोई इन्वेस्टमेंट नहीं चाहिए शुरुआत में। जॉइन करने के लिए टेलीग्राम लिंक पर क्लिक करें। (कुछ दिनों बाद टास्क पूरा करने के लिए छोटी राशि जमा करने को कहा जाता है, जिसे 'वॉलेट रिचार्ज' बताया जाता है।)
+  expect:
+    verdict: scam
+  type: job_task_scam
+  note: |-
+    Part-time "like and earn" job offer with no upfront cost that later shifts to wallet top-ups framed as tasks.
+
+- id: hv2_034
+  lang: hi
+  text: |-
+    part time job: daily 1-2 hours kaam karo, youtube video like karke 1500-2500 rupees roz kamao, bina kisi investment ke. interested logo telegram pe join karo, task leader sab samjha denge. (agle level ke 'paid task' ke liye wallet mein paisa daalna padta hai)
+  expect:
+    verdict: scam
+  type: job_task_scam
+  note: |-
+    Same escalation pattern — risk-free tasks first, paid-task wallet deposit introduced once trust is built.
+
+- id: hv2_035
+  lang: en
+  text: |-
+    URGENT: We understand you lost money in a fraudulent trading app. Our legal recovery team specializes in getting scammed funds back through cyber cell connections, 70% success rate. We only charge a 10% processing fee upfront to initiate the case, no fee no refund guarantee.
+  expect:
+    verdict: scam
+  type: recovery_agent_scam
+  note: |-
+    "Fund recovery" service demanding an upfront processing fee — legitimate recovery via police/SEBI SCORES never charges a fee.
+
+- id: hv2_036
+  lang: hi
+  text: |-
+    क्या आपका पैसा किसी फ्रॉड ऐप में फंस गया है? हमारी साइबर रिकवरी टीम आपका पैसा वापस दिला सकती है, हमने अब तक ५००+ लोगों का पैसा वापस करवाया है। सिर्फ केस शुरू करने के लिए ₹५,000 एडवांस फीस लगेगी, बाकी पैसा वापस आने के बाद।
+  expect:
+    verdict: scam
+  type: recovery_agent_scam
+  note: |-
+    Fraud-recovery pitch requiring an advance fee before any funds are returned — the fee itself is the scam.
+
+- id: hv2_037
+  lang: en
+  text: |-
+    Dear Customer, OTP for your HDFC Securities login is 482193. Valid for 10 minutes. Do not share this OTP with anyone, including bank officials. - HDFC Securities
+  expect:
+    verdict: legit
+  type: bank_otp_notice
+  note: |-
+    Standard OTP message; only "trigger" word is urgency, but it explicitly warns not to share — opposite of a scam ask.
+
+- id: hv2_038
+  lang: en
+  text: |-
+    Your SIP of Rs 5,000 in Parag Parikh Flexi Cap Fund has been successfully processed on 03-Oct-2026. Folio No: 8827xxxx. Current NAV: Rs 71.42. - Mutual Fund Central
+  expect:
+    verdict: legit
+  type: amc_transaction_notice
+  note: |-
+    Routine, factual SIP debit confirmation from a mutual fund RTA — no claims, no links, no urgency.
+
+- id: hv2_039
+  lang: hi
+  text: |-
+    aapka Zerodha account mein ₹12,340 ka fund add ho gaya hai via UPI, available balance ab ₹45,670 hai. koi action nahi chahiye, yeh sirf confirmation hai.
+  expect:
+    verdict: legit
+  type: broker_fund_notice
+  note: |-
+    Plain balance-update confirmation with no call to action, link, or payment request.
+
+- id: hv2_040
+  lang: en
+  text: |-
+    SEBI Investor Awareness: Beware of unregistered advisors promising 'guaranteed returns', 'double your money in 30 days' or 'SEBI-approved' trading apps. SEBI never calls investors to collect money or asks for OTP/remote access. Verify any advisor's registration on sebi.gov.in before investing. Report frauds at SEBI SCORES.
+  expect:
+    verdict: legit
+  type: sebi_awareness_quoting_scam_phrases
+  note: |-
+    HARD: contains the exact bait phrases ("guaranteed returns", "double your money") that a keyword filter flags, but it is itself the warning against them.
+
+- id: hv2_041
+  lang: hi
+  text: |-
+    निवेशक सावधानी: जो लोग आपसे कहें कि "गारंटीड रिटर्न" मिलेगा या "30 दिन में पैसा डबल" होगा, उनसे सावधान रहें। कोई भी वास्तविक सलाहकार मुनाफे की गारंटी नहीं दे सकता। निवेश से पहले सलाहकार का रजिस्ट्रेशन सेबी की वेबसाइट पर ज़रूर चेक करें। - सेबी निवेशक जागरूकता
+  expect:
+    verdict: legit
+  type: sebi_awareness_quoting_scam_phrases
+  note: |-
+    HARD: Hindi SEBI-style awareness message quoting the same "guaranteed return / double in 30 days" bait language to warn against it.
+
+- id: hv2_042
+  lang: hi
+  text: |-
+    PSA: koi bhi aapko "sure shot tip" ya "90% win rate" bol kar paisa maange to samajh jao scam hai. Exchange ya SEBI kabhi WhatsApp/Telegram pe aise tips nahi bhejte. apna paisa sirf registered broker ke through hi invest karo.
+  expect:
+    verdict: legit
+  type: sebi_awareness_quoting_scam_phrases
+  note: |-
+    HARD: casual Hinglish awareness post reusing scam catchphrases ("sure shot tip", "90% win rate") inside a warning, not a pitch.
+
+- id: hv2_043
+  lang: en
+  text: |-
+    Market Wrap: Sensex closed up 1.2% at 84,210, Nifty gained 1.1% to settle at 25,680. IT and banking stocks led the rally after strong Q2 earnings. FIIs were net buyers for the third straight session.
+  expect:
+    verdict: legit
+  type: market_news
+  note: |-
+    Routine factual index-level market report with percentages — descriptive, no recommendation or call to action.
+
+- id: hv2_044
+  lang: hi
+  text: |-
+    बाज़ार अपडेट: आज सेंसेक्स 650 अंक चढ़कर 84,200 पर बंद हुआ, निफ्टी ने भी 1% की बढ़त के साथ 25,650 का स्तर छुआ। ऑटो और बैंकिंग शेयरों में सबसे ज़्यादा खरीदारी देखी गई।
+  expect:
+    verdict: legit
+  type: market_news
+  note: |-
+    Standard Hindi financial-news recap with index percentages, purely informational.
+
+- id: hv2_045
+  lang: hi
+  text: |-
+    aaj market thoda volatile raha, Nifty 0.8% neeche band hua profit booking ki wajah se, lekin midcap stocks mein buying dikhi. analysts ka kehna hai ki ye short term correction hai.
+  expect:
+    verdict: legit
+  type: market_news
+  note: |-
+    Casual market commentary, no stock tip or call to action, purely descriptive sentiment.
+
+- id: hv2_046
+  lang: hi
+  text: |-
+    yaar mera SIP 2 saal se chal raha hai index fund mein, 5000 monthly. soch raha hoon ab 8000 kar du ya ek aur fund add karu diversification ke liye. tujhe kya lagta hai, large cap ya flexi cap better rahega abhi ke market mein?
+  expect:
+    verdict: legit
+  type: friend_sip_advice
+  note: |-
+    Genuine peer question about increasing/diversifying an existing SIP — no promise of returns.
+
+- id: hv2_047
+  lang: hi
+  text: |-
+    भाई मैंने 3 महीने पहले एक SIP शुरू की थी ₹2,000 की, पर समझ नहीं आ रहा कि यह सही फंड है या नहीं। क्या तुम बता सकते हो कि लॉन्ग टर्म के लिए इंडेक्स फंड बेहतर रहता है या एक्टिव मैनेज्ड फंड?
+  expect:
+    verdict: legit
+  type: friend_sip_advice
+  note: |-
+    Honest beginner question comparing index vs active mutual funds — financial literacy seeking, no scam framing.
+
+- id: hv2_048
+  lang: en
+  text: |-
+    Hey, I just got my first salary hike. Should I bump up my SIP amount or start a separate SIP for a short-term goal like a bike in 2 years? What did you do?
+  expect:
+    verdict: legit
+  type: friend_sip_advice
+  note: |-
+    Ordinary personal-finance planning question between friends, no risk signals at all.
+
+- id: hv2_049
+  lang: en
+  text: |-
+    Fwd from Dad: Reminder from Zerodha — Vantage Electronics Ltd IPO closes for subscription today 5pm. Price band Rs 142-150, lot size 100 shares. You can apply via UPI mandate in the Console app if interested. Allotment is as per SEBI's standard lottery process for retail investors, not guaranteed.
+  expect:
+    verdict: legit
+  type: genuine_ipo_reminder
+  note: |-
+    HARD-ish: real broker-style IPO closing reminder; explicitly says allotment is lottery-based and not guaranteed, unlike a fake-quota pitch.
+
+- id: hv2_050
+  lang: hi
+  text: |-
+    papa ne forward kiya: IPO ka last date aaj hai, apply karna hai to Console app khol ke UPI mandate approve kar dena, lot size aur price band app mein hi dikh jayega. jaldi karo 5 baje tak time hai
+  expect:
+    verdict: legit
+  type: genuine_ipo_reminder
+  note: |-
+    Family forward of a routine, time-bound broker IPO-application reminder — urgency is a real deadline, not a scam hook.
+
+- id: hv2_051
+  lang: hi
+  text: |-
+    बच्चों, आज हम कंपाउंडिंग समझेंगे। अगर आप ₹१०,००० हर महीने १२% वार्षिक अनुमानित रिटर्न पर २० साल तक निवेश करें, तो आपका कुल निवेश लगभग ₹२४ लाख होगा, लेकिन कंपाउंडिंग की वजह से अंतिम राशि लगभग ₹१ करोड़ से ज़्यादा हो सकती है। याद रखें, यह एक अनुमानित कैलकुलेशन है, असली रिटर्न मार्केट पर निर्भर करता है, कोई गारंटी नहीं होती।
+  expect:
+    verdict: legit
+  type: teacher_compounding_explainer
+  note: |-
+    HARD-ish: large lakh/crore figures and a return assumption could trip a keyword filter, but it is a textbook compounding lesson that flags returns as unguaranteed.
+
+- id: hv2_052
+  lang: en
+  text: |-
+    Today's lesson: the power of compounding. If you invest Rs 5,000/month starting at age 25 versus starting at age 35, assuming the same average return, the earlier investor ends up with nearly double the corpus by retirement — purely because of extra years of compounding, not a higher return rate. Time in the market matters more than timing the market.
+  expect:
+    verdict: legit
+  type: teacher_compounding_explainer
+  note: |-
+    Standard financial-literacy classroom explanation of compounding using illustrative, clearly hypothetical numbers.
+
+- id: hv2_053
+  lang: en
+  text: |-
+    To clarify your query: since you sold the equity shares after holding for 14 months, the gain qualifies as Long-Term Capital Gains (LTCG). LTCG on listed equity above Rs 1.25 lakh in a financial year is taxed at 12.5% without indexation, as per the current rules. Your short-term gains from the other trade will be taxed at 20% under STCG.
+  expect:
+    verdict: legit
+  type: ca_capital_gains_explainer
+  note: |-
+    HARD-ish: "gain" and specific percentages resemble scam-tip phrasing, but it is a factual LTCG/STCG tax explanation, no investment pitch.
+
+- id: hv2_054
+  lang: hi
+  text: |-
+    dekho simple hai, agar tune stock 1 saal se zyada hold kiya hai to usko long term gain maanege, aur jo tax lagta hai wo short term se kam hota hai. agar within 1 year becha hai to short term capital gain tax lagega jo thoda zyada hai. ITR file karte time dono ko alag se dikhana padta hai.
+  expect:
+    verdict: legit
+  type: ca_capital_gains_explainer
+  note: |-
+    Casual CA-to-client explanation of LTCG vs STCG tax treatment and ITR filing — educational, no investment claim.
+
+- id: hv2_055
+  lang: hi
+  text: |-
+    bro tera jo mutual fund redeem hua hai usme bhi capital gain tax lagega agar profit hua hai to, equity fund hai to LTCG ya STCG dono mein se jo applicable ho wahi lagega, debt fund ka rule thoda alag hai ab naye tax slab ke hisaab se.
+  expect:
+    verdict: legit
+  type: ca_capital_gains_explainer
+  note: |-
+    Informal tax guidance distinguishing equity vs debt mutual fund capital-gains treatment, purely explanatory.
+
+- id: hv2_056
+  lang: en
+  text: |-
+    SBI is pleased to offer a special FD scheme 'Amrit Vrishti' at 7.25% p.a. for a tenure of 444 days for deposits below Rs 2 crore, effective till 31-Oct-2026. Senior citizens get an additional 0.5% p.a. Visit your nearest branch or the YONO app to book.
+  expect:
+    verdict: legit
+  type: genuine_fd_rate_notice
+  note: |-
+    HARD: a specific high-sounding rate and deadline could resemble a scheme pitch, but it names a real bank and app and is independently verifiable.
+
+- id: hv2_057
+  lang: hi
+  text: |-
+    पोस्ट ऑफिस की नई टाइम डिपॉजिट स्कीम में 5 साल के लिए 7.5% वार्षिक ब्याज मिल रहा है, पूरी तरह से सरकार द्वारा गारंटीड सुरक्षित स्कीम है। नज़दीकी पोस्ट ऑफिस में जाकर खाता खुलवा सकते हैं।
+  expect:
+    verdict: legit
+  type: genuine_fd_rate_notice
+  note: |-
+    HARD: "guaranteed" appears legitimately here because post-office time deposits are sovereign-guaranteed, unlike a scheme falsely claiming one.
+
+- id: hv2_058
+  lang: en
+  text: |-
+    Weekly Research Note — Equirise Research (SEBI Registered Research Analyst). We maintain a BUY rating on Infosys with a 12-month target price of Rs 2,100, based on strong deal wins and margin expansion. This is for informational purposes only; investments are subject to market risk. Please read the full disclosure and disclaimer on our website before acting on this recommendation. Past performance is not indicative of future returns.
+  expect:
+    verdict: legit
+  type: legit_research_newsletter
+  note: |-
+    HARD: "target price", "BUY rating" and "recommendation" overlap with tip-channel scam vocabulary, but includes mandatory risk disclosure/disclaimer.
+
+- id: hv2_059
+  lang: hi
+  text: |-
+    साप्ताहिक रिसर्च नोट: हमारी रिसर्च टीम ने TCS पर 'होल्ड' रेटिंग बनाए रखी है, 12 महीने का टारगेट प्राइस ₹4,200 है। कृपया ध्यान दें कि यह केवल सूचना के लिए है, निवेश से पहले अपना खुद का विश्लेषण करें या वित्तीय सलाहकार से सलाह लें। बाज़ार जोखिम के अधीन है।
+  expect:
+    verdict: legit
+  type: legit_research_newsletter
+  note: |-
+    HARD: target price and "research team" phrasing mirror fake-advisor pitches, but the disclaimer and advice to seek independent counsel set it apart.
+
+- id: hv2_060
+  lang: hi
+  text: |-
+    अगर आपका पैसा किसी फ्रॉड ट्रेडिंग ऐप या सलाहकार की वजह से फंस गया है, तो किसी एजेंट को फीस देकर 'रिकवरी' करवाने की कोशिश ना करें, यह खुद एक धोखा हो सकता है। इसके बदले SEBI SCORES पोर्टल (scores.sebi.gov.in) पर मुफ्त में शिकायत दर्ज करें या नज़दीकी साइबर क्राइम हेल्पलाइन 1930 पर कॉल करें।
+  expect:
+    verdict: legit
+  type: genuine_recovery_info
+  note: |-
+    HARD: mentions "recovery" and "fee", same vocabulary as the recovery-agent scam, but is the official free-complaint counter-message.

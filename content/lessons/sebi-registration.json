@@ -1,0 +1,66 @@
+{
+  "id": "sebi-registration",
+  "icon": "🛡️",
+  "minutes": 2,
+  "title": {
+    "en": "What a SEBI registration means",
+    "hi": "SEBI रजिस्ट्रेशन का मतलब क्या है"
+  },
+  "tactic": {
+    "en": "Tactic: fake registration — scammers quote a real person's SEBI number under a fake name.",
+    "hi": "तरीका: फ़र्ज़ी रजिस्ट्रेशन — स्कैमर किसी असली व्यक्ति का SEBI नंबर नकली नाम के साथ इस्तेमाल करते हैं।"
+  },
+  "tacticKey": "fake_registration",
+  "steps": [
+    {
+      "text": {
+        "en": "A SEBI registration number means a person passed exams and follows SEBI's rules.",
+        "hi": "SEBI रजिस्ट्रेशन नंबर का मतलब है: उस व्यक्ति ने परीक्षा पास की और SEBI के नियम मानता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "It does not mean they can guarantee you any return, ever.",
+        "hi": "इसका मतलब यह नहीं कि वह आपको किसी मुनाफ़े की गारंटी दे सकता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "Anyone can type a real-looking number. Always check it yourself on SEBI's register.",
+        "hi": "कोई भी असली जैसा दिखने वाला नंबर टाइप कर सकता है। हमेशा ख़ुद SEBI के रजिस्टर में जाँचें।"
+      }
+    },
+    {
+      "text": {
+        "en": "Since 1 October 2025, registered advisers collect payments only through @valid UPI IDs.",
+        "hi": "1 अक्टूबर 2025 से, रजिस्टर्ड एडवाइज़र पैसे सिर्फ़ @valid UPI ID पर लेते हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Never pay a personal UPI ID, even if the name looks exactly right.",
+        "hi": "कभी भी पर्सनल UPI ID पर पैसे न भेजें, नाम सही लगने पर भी।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like a driving licence: it proves someone passed a test, not that they will drive safely for you.",
+    "hi": "यह ड्राइविंग लाइसेंस जैसा है: यह साबित करता है कि कोई टेस्ट पास हुआ, यह नहीं कि वह आपके लिए अच्छा चलाएगा।"
+  },
+  "quiz": {
+    "question": {
+      "en": "A message gives a SEBI registration number that looks correct. What should you do?",
+      "hi": "एक मैसेज में SEBI रजिस्ट्रेशन नंबर सही दिख रहा है। आपको क्या करना चाहिए?"
+    },
+    "options": [
+      {"id": "a", "text": {"en": "Look it up yourself on SEBI's official register", "hi": "ख़ुद SEBI के आधिकारिक रजिस्टर में देखें"}, "correct": true},
+      {"id": "b", "text": {"en": "Trust it because it has the right number of digits", "hi": "भरोसा करें क्योंकि अंकों की गिनती सही है"}, "correct": false},
+      {"id": "c", "text": {"en": "Ask the sender to confirm their own number", "hi": "भेजने वाले से ही उसका नंबर कन्फ़र्म करने को कहें"}, "correct": false}
+    ],
+    "explain": {
+      "en": "Scammers often use a real person's registration number under a fake name. Only SEBI's own register shows who a number truly belongs to.",
+      "hi": "स्कैमर अक्सर किसी असली व्यक्ति का नंबर नकली नाम के साथ इस्तेमाल करते हैं। सिर्फ़ SEBI का अपना रजिस्टर बताता है कि नंबर असल में किसका है।"
+    },
+    "tactic": "fake_registration"
+  }
+}

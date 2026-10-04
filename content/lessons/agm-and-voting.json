@@ -1,0 +1,85 @@
+{
+  "id": "agm-and-voting",
+  "icon": "🗳️",
+  "minutes": 2,
+  "title": {
+    "en": "AGM resolutions and e-voting",
+    "hi": "AGM प्रस्ताव और ई-वोटिंग"
+  },
+  "tactic": {
+    "en": "Tactic: fake voting link — a look-alike e-voting page asks for your login, OTP or PAN (Permanent Account Number) instead of a vote.",
+    "hi": "तरीका: नकली वोटिंग लिंक — मिलती-जुलती ई-वोटिंग पेज वोट के बदले आपका लॉगिन, OTP या PAN (परमानेंट अकाउंट नंबर) माँगता है।"
+  },
+  "tacticKey": "fake_voting_link",
+  "steps": [
+    {
+      "text": {
+        "en": "An AGM (Annual General Meeting) is the yearly meeting where a company's shareholders can vote on proposals called resolutions, such as approving accounts or appointing directors.",
+        "hi": "AGM (वार्षिक आम बैठक) कंपनी की साल में एक बार होने वाली बैठक है, जिसमें शेयरधारक प्रस्तावों (रेज़ोल्यूशन) पर वोट दे सकते हैं, जैसे खाते मंज़ूर करना या डायरेक्टर नियुक्त करना।"
+      }
+    },
+    {
+      "text": {
+        "en": "Each share usually carries votes, so a shareholder's voting power depends on how many shares they hold on the cut-off date.",
+        "hi": "आमतौर पर हर शेयर के साथ वोट जुड़ा होता है, इसलिए शेयरधारक की वोटिंग ताक़त इस पर निर्भर है कि कट-ऑफ़ तारीख़ को उसके पास कितने शेयर हैं।"
+      }
+    },
+    {
+      "text": {
+        "en": "Listed companies offer e-voting through a depository (NSDL or CDSL) platform, or through their registrar. The notice of the AGM sent by the company explains the steps.",
+        "hi": "लिस्टेड कंपनियाँ ई-वोटिंग डिपॉज़िटरी (NSDL या CDSL) के प्लेटफ़ॉर्म या अपने रजिस्ट्रार के ज़रिए देती हैं। कंपनी का भेजा AGM नोटिस इसके चरण बताता है।"
+      }
+    },
+    {
+      "text": {
+        "en": "Voting only records your choice on each resolution. It never needs you to pay money, share your demat PIN, or give a one-time password for a transaction.",
+        "hi": "वोटिंग सिर्फ़ हर प्रस्ताव पर आपकी पसंद दर्ज करती है। इसके लिए पैसे देने, डीमैट PIN बताने या किसी लेन-देन का OTP देने की ज़रूरत नहीं होती।"
+      }
+    },
+    {
+      "text": {
+        "en": "Scam pattern: a message with an unknown link says \"vote now or your shares will be blocked\" and asks for login, OTP or PAN. Instead, open the depository or registrar site by typing its address yourself.",
+        "hi": "ठगी का पैटर्न: अनजान लिंक वाला मैसेज कहता है \"अभी वोट करें वरना शेयर ब्लॉक हो जाएँगे\" और लॉगिन, OTP या PAN माँगता है। इसके बजाय डिपॉज़िटरी या रजिस्ट्रार की साइट का पता ख़ुद टाइप करके खोलें।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "A real ballot only asks which option you choose; a fake one asks for your account keys.",
+    "hi": "असली बैलेट सिर्फ़ पूछता है कि आप कौन-सा विकल्प चुनते हैं; नकली बैलेट आपके खाते की चाबियाँ माँगता है।"
+  },
+  "source": "https://investor.sebi.gov.in/",
+  "quiz": [
+    {
+      "question": {
+        "en": "Where does genuine e-voting for a listed company's AGM happen?",
+        "hi": "लिस्टेड कंपनी के AGM की असली ई-वोटिंग कहाँ होती है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "On the depository or registrar platform named in the company's AGM notice", "hi": "कंपनी के AGM नोटिस में बताए डिपॉज़िटरी या रजिस्ट्रार के प्लेटफ़ॉर्म पर"}, "correct": true},
+        {"id": "b", "text": {"en": "On any link a caller sends you", "hi": "कॉल करने वाले के भेजे किसी भी लिंक पर"}, "correct": false},
+        {"id": "c", "text": {"en": "By transferring a small voting fee on UPI", "hi": "UPI से छोटी-सी वोटिंग फ़ीस भेजकर"}, "correct": false}
+      ],
+      "explain": {
+        "en": "The company's notice names the e-voting platform. Type that address yourself instead of tapping a link from a message.",
+        "hi": "कंपनी का नोटिस ई-वोटिंग प्लेटफ़ॉर्म बताता है। मैसेज का लिंक दबाने की जगह वह पता ख़ुद टाइप करें।"
+      },
+      "tactic": "fake_voting_link"
+    },
+    {
+      "question": {
+        "en": "A \"voting\" page asks for your demat login, an OTP and your PAN. What is this?",
+        "hi": "एक \"वोटिंग\" पेज आपका डीमैट लॉगिन, OTP और PAN माँगता है। यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "A fake voting link — close it and do not enter anything", "hi": "नकली वोटिंग लिंक — इसे बंद करें और कुछ न भरें"}, "correct": true},
+        {"id": "b", "text": {"en": "Normal verification for every AGM vote", "hi": "हर AGM वोट की सामान्य जाँच"}, "correct": false},
+        {"id": "c", "text": {"en": "Enter only the OTP, not the PAN", "hi": "सिर्फ़ OTP भरें, PAN नहीं"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A vote needs no payment and no OTP for a transaction. Entering login, OTP or PAN on a look-alike page hands your account details to the scammer.",
+        "hi": "वोट के लिए भुगतान या किसी लेन-देन का OTP नहीं चाहिए। मिलते-जुलते पेज पर लॉगिन, OTP या PAN भरने से आपके खाते की जानकारी ठग के हाथ में चली जाती है।"
+      },
+      "tactic": "fake_voting_link"
+    }
+  ]
+}

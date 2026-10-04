@@ -1,0 +1,5 @@
+url: "https://www.amfiindia.com/list-of-mobile-application"
+fetched_on: "2026-10-03"
+as_on: "2026-10-03"
+licence: "Hand-curated from AMFI's public 'List of mobile application' page (name, SEBI reg no, website per AMC); combined at ingest with config/brands.yaml (Wikidata CC0 seed)."
+note: "Registrable domains computed with satark.infra.norm.registrable_domain from each AMC's own website link on that AMFI page."

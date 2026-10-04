@@ -1,0 +1,17 @@
+# Harness modes (LLD §10.2). A mode = which planner, LLM roles, limits and privacy levels a run uses.
+check:
+  planner: rules
+  roles: [extract, assess, explain]  # each is used only if the ModelRouter has a model for it
+  limits: {tool_calls: 24, max_waves: 3, verdict_deadline_s: 9, run_deadline_s: 12, extract_wait_s: 6, explain_timeout_s: 4,
+           agent_steps: 2, agent_deadline_s: 35, judge_timeout_s: 45}  # the AI review: loop of up to 2 steps, then the judge
+  # The rule pass answers first; the AI review then refines it. Skip the review (and its cost) when the
+  # rules alone already reached HIGH_RISK on registry, official-list or threat-feed facts.
+  assess_skip_when_sure: true
+  ai_concurrency: 2       # AI reviews in flight at once (a local GPU serves one model call at a time)
+  ai_queue_wait_s: 15     # longer than this in the queue: the rule verdict is the answer
+  allow_privacy: [local, public_only]
+chat:
+  planner: rules  # pasted identifiers are checked first; with a model: plan -> execute -> answer (respond.py)
+  roles: [respond]
+  limits: {tool_calls: 8, run_deadline_s: 15, agent_steps: 2, agent_deadline_s: 25}
+  allow_privacy: [local, public_only]

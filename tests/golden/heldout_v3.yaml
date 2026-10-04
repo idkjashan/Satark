@@ -1,0 +1,498 @@
+# tests/golden/heldout_v3.yaml
+# Blind held-out generalisation set v3 — written without reading config/lexicons,
+# config/claim_rules.yaml, config/entities.yaml, config/signals.yaml, satark/checkers/*,
+# satark/harness/extract/*, or any existing tests/golden file.
+# 60 cases: 36 scam / 24 legit. id prefix drives the script's language bucket:
+# en- = English, hd- = Hindi (Devanagari), hg- = Hinglish (both lang: hi).
+
+# ───────────────────────── ENGLISH — SCAM (en-01..en-14) ─────────────────────────
+
+- id: en-01
+  lang: en
+  text: "🚀 FINAL CALL: Join 'AlgoWin Trader' bot before 6pm today. Fully SEBI-approvd algorithm, trades Nifty options automatically, avg 4-6% DAILY. Minimum deposit just ₹15,000, withdraw anytime. 2300+ members already earning. Click to activate: bit.ly/algowin-vip (slots filling fast, admin will remove link after 50 more joins)"
+  expect:
+    verdict: scam
+  type: sebi_algo_bot
+  note: "Fake SEBI-approval claim + unrealistic guaranteed daily % returns + urgency/scarcity + shortened link."
+
+- id: en-02
+  lang: en
+  text: "Hi, got your number from a mutual friend. We deal in unlisted pre-IPO shares – currently have a limited lot of a fintech co. expected to list next year at 3x price. Minimum lot 500 shares @ ₹240/share. Payment via UPI to rahul.unlisted@okaxis, shares transferred to your demat in 48 hrs. Let me know if interested, only 2 lots left."
+  expect:
+    verdict: scam
+  type: pre_ipo
+  note: "Cold unsolicited pre-IPO pitch, guaranteed listing-gain claim, upfront UPI payment before any transfer."
+
+- id: en-03
+  lang: en
+  text: "Dear Investor, this is to inform that your profile is upgraded to our US-regulated NRI trading desk (partner of a global broker). You can now trade US stocks + forex with 1:500 leverage. Open account with min $500, our relationship manager Mr. Alan Fernandes will assist on WhatsApp +91 97654 32109. Fully tax free for NRI clients."
+  expect:
+    verdict: scam
+  type: fake_nri_broker
+  note: "Claims foreign regulation + unsolicited 'upgrade', high leverage forex, false tax-free claim, WhatsApp-only RM."
+
+- id: en-04
+  lang: en
+  text: "NEW NFO ALERT 📢 'Secure Growth Fund' opens today only. The AMC has structured this with assured 18% p.a. for the first 3 years, capital protection guaranteed by the fund house. Invest min ₹25,000 before the 5pm cutoff, allotment on first come basis. Reply YES to get the application link."
+  expect:
+    verdict: scam
+  type: nfo_assured
+  note: "Mutual funds cannot legally promise fixed/assured returns or capital protection in an NFO; single-day cutoff pressure."
+
+- id: en-05
+  lang: en
+  text: "Diwali special 🪙 Buy Digital Gold Bonds on GoldPeak app – booking price ₹4,650/gm, we GUARANTEE buyback at ₹9,000/gm in 6 months or your money back double. Limited to first 1000 users. Just need PAN photo + payment via UPI to goldpeak.booking@ybl"
+  expect:
+    verdict: scam
+  type: digital_gold_bond
+  note: "No legitimate gold bond doubles price in 6 months with a 'guarantee'; PAN photo + UPI deposit to a personal-looking handle."
+
+- id: en-06
+  lang: en
+  text: "[Voice note transcript 0:52] Hello, I'm Priya, your account manager from OceanFX Global Markets, assigned after your demo request. Our VIP signal group made +₹3.2 lakh for members last week in forex. To activate your live account, top up minimum $300 margin, I'll personally place trades for you, 90% win rate guaranteed."
+  expect:
+    verdict: scam
+  type: forex_whatsapp
+  note: "Unsolicited personal 'account manager', guaranteed win rate, asks to fund an account she will trade on your behalf."
+
+- id: en-07
+  lang: en
+  text: "🎁 CONGRATULATIONS! Your wallet address is whitelisted for the ApnaCoin airdrop – claim 5000 APN tokens (~₹40,000 value) free. To claim, connect your wallet and enter your 12-word recovery phrase on apnacoin-claim.xyz within 24 hrs or the allocation will be forfeited."
+  expect:
+    verdict: scam
+  type: crypto_airdrop
+  note: "Asking for a wallet seed phrase is a direct asset-drain request; fake urgency deadline; unofficial-looking domain."
+
+- id: en-08
+  lang: en
+  text: "RBI NOTICE: As per the DICGC scheme your bank a/c is eligible for a pending insurance refund of ₹1,00,000 due to a recent bank merger. To process, verify your details and pay a nominal processing fee of ₹499 at rbi-dicgc-refund.in within 48 hours, else the claim will lapse."
+  expect:
+    verdict: scam
+  type: fake_refund_dicgc
+  note: "RBI/DICGC never ask for a processing fee to release deposit insurance; fake urgency + fee-upfront request."
+
+- id: en-09
+  lang: en
+  text: "URGENT: Your mobile number will be deactivated today due to pending e-KYC as per new TRAI/SEBI rule, this will also freeze your trading & bank accounts linked to this SIM. Share the OTP you just received to our executive to re-verify immediatly, call +91 90123 45678."
+  expect:
+    verdict: scam
+  type: sim_swap_ekyc
+  note: "Pretext regulation + fear of account freeze used to extract the OTP over a call, a classic SIM-swap enabler — never share OTP."
+
+- id: en-10
+  lang: en
+  text: "Notice from NSDL: Your demat account DP ID ending 4521 shows a KYC mismatch and will be FROZEN in 24 hours per SEBI circular. Avoid freeze — update now: nsdl-kyc-verify.net/update (link valid for 1 use only)"
+  expect:
+    verdict: scam
+  type: demat_freeze
+  note: "Impersonates NSDL, fabricated 24-hr freeze threat, phishing link on a non-official domain."
+
+- id: en-11
+  lang: en
+  text: "Hey 😊 been really enjoying our late night calls this week. Btw I mentioned my cousin runs a private trading desk in Singapore — he's letting a few of us close friends in on his USDT arbitrage pool, already turned my ₹80,000 into ₹2.1 lakh in 3 weeks. I don't want you to miss it, want me to ask him to open a slot for you too? 🥰"
+  expect:
+    verdict: scam
+  type: pig_butchering
+  note: "Romance-building rapport followed by a 'friend/cousin's exclusive' trading pool with implausible short-term returns — classic pig-butchering pattern."
+
+- id: en-12
+  lang: en
+  text: "My options mentorship batch starts Monday 🔥 last batch members' screenshots attached (avg +₹58,000/week each, see pinned). Join the VIP copy-trade group for ₹4,999 lifetime, I place the trade in my account, you just mirror the same in yours in real time. Only 15 seats left, DM 'VIP' to book."
+  expect:
+    verdict: scam
+  type: copy_trade_influencer
+  note: "Influencer-style profit screenshots + paid access to 'copy my trades' + fake scarcity, no verifiable track record."
+
+- id: en-13
+  lang: en
+  text: "Your QuickCash loan of ₹50,000 is pre-approved instantly! Download the app to receive funds: quickcash-instant.in/QuickCash.apk — but before disbursal you must first activate a mandatory 'investment-linked insurance' of ₹2,500 which doubles as collateral and gets refunded with 12% intrest in 1 year. Pay now to release the loan same day."
+  expect:
+    verdict: scam
+  type: loan_app_combo
+  note: "Ties loan disbursal to an upfront 'investment' payment via a sideloaded .apk — a known loan-app-plus-investment extraction pattern."
+
+- id: en-14
+  lang: en
+  text: "Have you seen this?? 😳 Video of a well known business tycoon on a 'news channel' revealing he personally uses this trading app and guarantees 10x in 3 months. Link to full video + app signup: tiny.cc/tycoon-secret (he says watch before they take it down)"
+  expect:
+    verdict: scam
+  type: deepfake_promo
+  note: "Forwarded deepfake-style video using a vague 'famous tycoon' framing to lend fake credibility to a 10x guarantee."
+
+# ───────────────────────── ENGLISH — LEGIT (en-15..en-24) ─────────────────────────
+
+- id: en-15
+  lang: en
+  text: "Investor Awareness: SEBI and NSE remind you that no SEBI-registered intermediary will ever guarantee fixed or 'assured' returns, ask you to trade through a personal WhatsApp 'account manager', or request your trading password/OTP. Messages promising '100% guaranteed profit' or a 'SEBI-approved algo bot' are commonly used by fraudsters. Verify any intermediary on the SEBI website before investing. If in doubt, don't invest, don't share OTP."
+  expect:
+    verdict: legit
+  type: hard_sebi_nse_awareness
+  note: "Genuine regulator awareness post that quotes exact scam phrasing to warn against it — must not be flagged just for containing those phrases."
+
+- id: en-16
+  lang: en
+  text: "Zenith Broking Ltd – Contract Note: Trade confirmation for client ID ZB10234. Bought 25 shares of INFY @ ₹1,452.30 on NSE, order no. 220145698712, brokerage ₹20 + taxes as applicable. Settlement T+1. This is a system-generated confirmation, no action required. For queries contact your RM during market hours."
+  expect:
+    verdict: legit
+  type: hard_broker_contract_note
+  note: "Routine transactional trade-confirmation notice with order/settlement detail and no ask — should read as neutral, not risky."
+
+- id: en-17
+  lang: en
+  text: "Your Consolidated Account Statement (CAS) for the period Apr-Sep 2026 is now available. Folio 884213 with Bluepeak Mutual Fund shows current NAV of ₹58.42 per unit, total units 1,204.55, value ₹70,401. No action needed; the statement is also emailed to your registered email ID as per SEBI/depository norms."
+  expect:
+    verdict: legit
+  type: hard_amc_cas_notice
+  note: "Standard CAS/NAV statement notice from a mutual fund — informational, matches real regulatory disclosure format."
+
+- id: en-18
+  lang: en
+  text: "Reminder from your Depository Participant: As per SEBI/CDSL guidelines, demat accounts without a registered nominee may be frozen for debits after the regulatory deadline. Please log in to your broker portal and add/update your nominee at your convenience. This is a routine compliance reminder, not urgent action within 24 hours."
+  expect:
+    verdict: legit
+  type: hard_depository_nominee_reminder
+  note: "Real nominee reminders do reference a freeze-for-non-compliance rule, but give a routine deadline, not a 24-hour panic window — tests whether the checker over-triggers on 'freeze' + 'CDSL' alone."
+
+- id: en-19
+  lang: en
+  text: "Reminder: The next RBI Retail Direct auction for Government of India Floating Rate Bonds opens next Monday. These carry sovereign guarantee since they are direct RBI/Government obligations, current coupon ~7.1%, minimum investment ₹10,000. Apply directly via the RBI Retail Direct portal, no broker fee involved."
+  expect:
+    verdict: legit
+  type: hard_rbi_retail_direct_bond
+  note: "A real government bond truthfully carries a sovereign guarantee — checker must distinguish this from the fake 'guarantee' claims used by scams."
+
+- id: en-20
+  lang: en
+  text: "Dear Customer, your Fixed Deposit A/c no. XXXXXX4821 of ₹1,50,000 matures on 14-Oct-2026 at 7.1% p.a. It will auto-renew for the same tenure unless you visit the branch or net banking to change instructions. – Capital Bridge Bank"
+  expect:
+    verdict: legit
+  type: bank_fd_maturity_notice
+  note: "Routine bank transactional notice, no urgency, no ask — plain benign message."
+
+- id: en-21
+  lang: en
+  text: "Sensex closed up 0.6% today, Nifty around 24,850. IT stocks rallied after good US cues, banking was flat. Nothing major happening, just a quiet trading day."
+  expect:
+    verdict: legit
+  type: market_chat_casual
+  note: "Ordinary market commentary with real-style percentages, no investment pitch of any kind."
+
+- id: en-22
+  lang: en
+  text: "Quick q – is it worth switching my Nifty 50 index fund from a regular plan (1.1% expense ratio) to the direct plan (0.2%)? Over 15 years that difference seems huge but I'm not sure how switching affects my existing LTCG."
+  expect:
+    verdict: legit
+  type: index_fund_expense_ratio_question
+  note: "A genuine, reasonably informed investor question about expense ratios and tax — should read as clearly benign."
+
+- id: en-23
+  lang: en
+  text: "Got my annual bonus, thinking of putting half in my existing index fund SIP top-up and keeping the rest in an FD for the house down payment next year. Does that split sound reasonable to you?"
+  expect:
+    verdict: legit
+  type: diversify_after_bonus_chat
+  note: "Everyday personal-finance planning chat between friends, no scam signals, tests for false positives on normal money talk."
+
+- id: en-24
+  lang: en
+  text: "Your e-statement for savings account ending 2290 for September 2026 is ready. View/download it anytime by logging into net banking or the mobile app. No action required if details are correct."
+  expect:
+    verdict: legit
+  type: bank_estatement_reminder
+  note: "Purely informational transactional bank message with no ask — baseline benign control."
+
+# ───────────────────────── HINDI (Devanagari) — SCAM (hd-01..hd-11) ─────────────────────────
+
+- id: hd-01
+  lang: hi
+  text: "🚨 सेबी अप्रूव्ड ऑटो-ट्रेडिंग बॉट सिर्फ आज के लिए ओपन है। रोज़ाना 5-7% गारंटीड प्रॉफिट, कोई ट्रेडिंग नॉलेज की ज़रूरत नहीं। सिर्फ ₹10,000 से शुरू करें। लिंक पर क्लिक करके अभी रजिस्टर करें: bit.ly/sebi-bot-join (सीमित सीटें बाकी हैं)"
+  expect:
+    verdict: scam
+  type: sebi_algo_bot
+  note: "Fake SEBI-approved bot, guaranteed daily %, urgency + shortened link, no-knowledge-needed claim."
+
+- id: hd-02
+  lang: hi
+  text: "नमस्ते सर, मैं विदेश में रहने वाले भारतीयों के लिए स्पेशल फॉरेक्स ट्रेडिंग डेस्क से बात कर रहा हूं। आपका अकाउंट लंदन बेस्ड ब्रोकर के साथ टैक्स-फ्री खोला जा सकता है, सिर्फ $200 से शुरुआत करें, हमारे मैनेजर रोज़ाना ट्रेड करेंगे आपकी तरफ से। मुनाफा गारंटीड है।"
+  expect:
+    verdict: scam
+  type: fake_nri_broker
+  note: "Fake foreign tax-free broker desk, manager trading on your behalf, guaranteed-profit claim."
+
+- id: hd-03
+  lang: hi
+  text: "श्री साई को-ऑपरेटिव चिट फंड में निवेश करें – हर महीने ₹2,000 जमा करें, ११ महीने में ₹30,000 गारंटीड वापस, साथ में बोनस लकी ड्रॉ में कार और सोना जीतने का मौका। आज ही एजेंट से मिलकर फॉर्म भरें, सीमित सदस्यता।"
+  expect:
+    verdict: scam
+  type: chit_fund
+  note: "Unregistered-sounding cooperative chit fund promising a fixed guaranteed payout plus a lucky-draw bonus incentive (Devanagari numeral for the tenure)."
+
+- id: hd-04
+  lang: hi
+  text: "दिवाली ऑफर 🪙 डिजिटल गोल्ड बॉन्ड में ₹20,000 लगाएं, 6 महीने में डबल पैसा गारंटी के साथ वापस, RBI जैसी स्कीम। पेमेंट यहां करें UPI: suvarna.bond@okicici। जल्दी करें, ऑफर आज रात 12 बजे बंद हो जाएगा।"
+  expect:
+    verdict: scam
+  type: digital_gold_bond
+  note: "False 'RBI jaisi scheme' framing, doubling-in-6-months guarantee, hard midnight deadline, personal UPI handle."
+
+- id: hd-05
+  lang: hi
+  text: "बधाई हो 🎉 आपका वॉलेट एक नए क्रिप्टो प्रोजेक्ट के एयरड्रॉप के लिए चुना गया है। ₹35,000 के बराबर टोकन क्लेम करने के लिए अपनी 12 words वाली रिकवरी फ्रेज़ नीचे दिए गए ऐप में डालें। समय सीमा सिर्फ 6 घंटे है।"
+  expect:
+    verdict: scam
+  type: crypto_airdrop
+  note: "Asks for the 12-word recovery phrase — equivalent to handing over wallet keys — under a fake airdrop urgency."
+
+- id: hd-06
+  lang: hi
+  text: "RBI सूचना: DICGC योजना के तहत आपके बैंक खाते का ₹99,999 का क्लेम पेंडिंग है क्योंकि आपका बैंक दूसरे बैंक में मर्ज हो गया है। प्रोसेसिंग फीस ₹350 जमा करें २४ घंटे में वरना क्लेम रद्द हो जाएगा।"
+  expect:
+    verdict: scam
+  type: fake_refund_dicgc
+  note: "Fake RBI/DICGC refund requiring an upfront processing fee with a short deadline (Devanagari numeral) — real DICGC payouts never charge a fee."
+
+- id: hd-07
+  lang: hi
+  text: "CDSL चेतावनी: आपका डीमैट अकाउंट KYC अपडेट न होने की वजह से कल सुबह तक फ्रीज़ हो जाएगा। बचने के लिए इस लिंक पर अपना PAN और बैंक डिटेल डालें: cdsl-ekyc-update.in/verify"
+  expect:
+    verdict: scam
+  type: demat_freeze
+  note: "Impersonates CDSL with a next-morning freeze deadline, phishing for PAN + bank details on a lookalike domain."
+
+- id: hd-08
+  lang: hi
+  text: "[वॉइस नोट ट्रांसक्रिप्ट 1:04] अरे यार, तुमसे बात करके बहुत अच्छा लगता है हर रात। सुनो, मेरे एक दोस्त का क्रिप्टो ट्रेडिंग प्लेटफॉर्म है दुबई में, मैंने ₹50,000 डाले थे पिछले हफ्ते, आज ₹1,40,000 दिखा रहा है। तुम्हारे लिए भी स्पॉट रखवा दूं क्या, सिर्फ हमारे बीच की बात रहेगी।"
+  expect:
+    verdict: scam
+  type: pig_butchering
+  note: "Voice-note transcript building emotional closeness before pitching a friend's 'Dubai crypto platform' with implausible short-term gains."
+
+- id: hd-09
+  lang: hi
+  text: "[कॉल ट्रांसक्रिप्ट] सर आपकी पुरानी LIC टाइप पॉलिसी पर ₹85,000 का बोनस मैच्योरिटी अमाउंट पेंडिंग है जो 2019 से क्लेम नहीं हुआ। इसे रिलीज़ करने के लिए सिर्फ ₹1,100 का GST चार्ज जमा करना होगा, आज ही हमारे एजेंट को UPI करें।"
+  expect:
+    verdict: scam
+  type: insurance_bonus
+  note: "Call-transcript claiming a years-old 'bonus maturity' needing an upfront GST-style fee before release — real insurers never do this."
+
+- id: hd-10
+  lang: hi
+  text: "आपका ₹40,000 का लोन अप्रूव हो गया है बिना किसी डॉक्यूमेंट के। डिसबर्स करने से पहले ₹1,500 का 'निवेश प्लान' एक्टिवेट करना ज़रूरी है जो 1 साल में ब्याज के साथ वापस मिलेगा। अभी पे करें, पैसा 10 मिनट में अकाउंट में आएगा।"
+  expect:
+    verdict: scam
+  type: loan_app_combo
+  note: "No-document instant loan gated behind a mandatory upfront 'investment plan' payment — loan-app-plus-investment combo."
+
+- id: hd-11
+  lang: hi
+  text: "[कॉल ट्रांसक्रिप्ट] मैडम, मैं साइबर क्राइम रिकवरी सेल से बोल रहा हूं, आपका पुराना ट्रेडिंग ऐप वाला ₹60,000 फंसा पैसा हम रिकवर करवा सकते हैं लीगल टीम के ज़रिए, सिर्फ 10% एडवांस फीस ₹6,000 लगेगी प्रोसेस शुरू करने के लिए।"
+  expect:
+    verdict: scam
+  type: recovery_fee
+  note: "Fake 'recovery agent' call demanding an upfront percentage fee to recover money already lost to a scam — a common second-stage scam."
+
+# ───────────────────────── HINDI (Devanagari) — LEGIT (hd-12..hd-18) ─────────────────────────
+
+- id: hd-12
+  lang: hi
+  text: "जन-जागरूकता सूचना: बैंक और सेबी कभी भी फोन या व्हाट्सएप पर आपसे OTP, पासवर्ड या 'गारंटीड रिटर्न' वाली स्कीम में पैसा जमा करने के लिए नहीं कहते। 'सेबी अप्रूव्ड' या '100% गारंटीड मुनाफा' जैसे मैसेज से सावधान रहें और किसी को भी OTP न बताएं।"
+  expect:
+    verdict: legit
+  type: hard_bank_awareness_sms
+  note: "Genuine Hindi awareness message quoting common scam phrases to warn against them — tests for a false positive on quoted scam language."
+
+- id: hd-13
+  lang: hi
+  text: "आज शेयर बाजार में सेंसेक्स 0.4% ऊपर बंद हुआ, निफ्टी २४,८२० के आसपास रहा। आईटी शेयरों में अच्छी खरीदारी देखी गई जबकि बैंकिंग सेक्टर फ्लैट रहा। कुल मिलाकर बाज़ार में हलचल कम रही।"
+  expect:
+    verdict: legit
+  type: hard_market_news_percentages
+  note: "Routine Hindi market news with real-style percentages (Devanagari numeral for the index level) — no claims, no pitch."
+
+- id: hd-14
+  lang: hi
+  text: "आज का फाइनेंशियल लिटरेसी क्विज़: सवाल – म्यूचुअल फंड में 'NAV' का मतलब क्या होता है? (a) नेट एसेट वैल्यू (b) न्यू एनुअल वैल्यू (c) नेशनल एसेट वोलैटिलिटी। कमेंट में अपना जवाब बताएं, सही जवाब वालों के नाम कल पोस्ट होंगे।"
+  expect:
+    verdict: legit
+  type: hard_financial_literacy_quiz
+  note: "Educational quiz testing financial terms — benign content that still uses finance vocabulary a keyword filter might over-trigger on."
+
+- id: hd-15
+  lang: hi
+  text: "इस दिवाली सोचा थोड़ी सोने की ज्वेलरी खरीद लें परिवार के लिए, पास वाले ज्वैलर के यहां रेट पूछ ली है आज, पुराने डिज़ाइन एक्सचेंज में भी ले रहे हैं।"
+  expect:
+    verdict: legit
+  type: diwali_gold_jewellery_chat
+  note: "Casual chat about buying physical gold jewellery — should not be confused with a 'digital gold bond' scam just for mentioning gold."
+
+- id: hd-16
+  lang: hi
+  text: "मेरा इस महीने का SIP ऑटो-डेबिट हो गया, ₹5,000 कट गए अकाउंट से हमेशा की तरह 5 तारीख को। अभी तक कोई दिक्कत नहीं हुई है दो साल से।"
+  expect:
+    verdict: legit
+  type: sip_autodebit_chat
+  note: "Routine personal update about an existing SIP auto-debit — no ask, no claim, plainly benign."
+
+- id: hd-17
+  lang: hi
+  text: "फॉरवर्ड: RBI ने रेपो रेट 0.25% घटाकर होम लोन EMI सस्ती करने का रास्ता खोला है। बैंक अगले कुछ हफ्तों में नई दरें लागू कर सकते हैं, अपने बैंक से अपडेट जरूर लें।"
+  expect:
+    verdict: legit
+  type: repo_rate_news_forward
+  note: "Real RBI monetary-policy news forward, informational, no investment ask."
+
+- id: hd-18
+  lang: hi
+  text: "बेटा, ये फिक्स्ड डिपॉजिट होता क्या है समझा तो, बैंक में पैसा एक तय समय के लिए रख देते हैं और उस पर तय ब्याज मिलता है, न ज्यादा रिस्क न ज्यादा रिटर्न, पर पैसा सुरक्षित रहता है।"
+  expect:
+    verdict: legit
+  type: fd_explainer_chat
+  note: "Parent-child explainer about how a Fixed Deposit works — plain educational content, no scam signal."
+
+# ───────────────────────── HINGLISH — SCAM (hg-01..hg-11) ─────────────────────────
+
+- id: hg-01
+  lang: hi
+  text: "Bhai ye dekh 🔥 SEBI approved algo trading bot sirf aaj ke liye free trial de raha hai. Daily 4-5% profit guaranteed, bina kuch kiye. Bas ₹8000 se start karo demo account mein, withdraw bhi anytime. Link pe click karke abhi register kar: bit.ly/algobot-trial, sirf 30 slots bache hai"
+  expect:
+    verdict: scam
+  type: sebi_algo_bot
+  note: "Fake SEBI-approved bot, daily guaranteed %, urgency scarcity, shortened link — same pattern in casual Hinglish register."
+
+- id: hg-02
+  lang: hi
+  text: "hlo sir, apka number hamare client ne diya tha. Hum unlisted pre-ipo shares deal karte hai, abhi ek logistics company ka stock hai jo next yr list hoga guaranteed 2.5x pe. Min 300 shares @190/share, payment UPI se ipo.deals@paytm pe karo, demat me 2 din me aa jayega"
+  expect:
+    verdict: scam
+  type: pre_ipo
+  note: "Cold pre-IPO pitch with a 'guaranteed' listing multiple and upfront UPI payment before any share transfer."
+
+- id: hg-03
+  lang: hi
+  text: "Naya NFO launch hua hai bro 📢 'Secure Growth Fund', company assured return 16% per year deti hai first 2 years, capital bhi protect rehta hai fund house guarantee karta hai. Aaj hi min 20k invest karo, 5pm tak hi window hai"
+  expect:
+    verdict: scam
+  type: nfo_assured
+  note: "Mutual fund NFO falsely claiming assured return + capital protection, single-day cutoff pressure, in Hinglish register."
+
+- id: hg-04
+  lang: hi
+  text: "mera wala chit fund group join kar le yaar, monthly 1500 daalo 10 mahine, last me 18000 guaranteed milta hai plus lucky draw me bike jeetne ka chance. agent se mil ke form bhar de, limited seats hi hai"
+  expect:
+    verdict: scam
+  type: chit_fund
+  note: "Informal peer-recommended chit fund with a fixed guaranteed payout and a lucky-draw incentive to push urgency."
+
+- id: hg-05
+  lang: hi
+  text: "Hi this is Rohan, apka personal account manager forex trading ke liye assign hua hai demo ke baad. Hamara VIP group last week members ko 2.8 lakh profit diya. Live account activate karne ke liye min $250 margin top-up karo, main khud trade karunga apki taraf se, 90% win rate guarantee hai"
+  expect:
+    verdict: scam
+  type: forex_whatsapp
+  note: "Unsolicited personal 'account manager' offering to trade on your behalf with a guaranteed win-rate claim."
+
+- id: hg-06
+  lang: hi
+  text: "⚠️ aapka sim card aaj deactivate ho jayega pending e-KYC ki wajah se, isse apka trading aur bank account bhi link hone ki wajah se block ho sakta hai. Jo OTP abhi aya hai wo hamare executive ko bata do verify karne ke liye, call kare +91 93456 78901"
+  expect:
+    verdict: scam
+  type: sim_swap_ekyc
+  note: "Fear-of-deactivation pretext used to extract the OTP over a call — enables SIM-swap takeover."
+
+- id: hg-07
+  lang: hi
+  text: "hey 😊 kal raat ki baat yaad aa rahi thi. btw maine bataya tha na mera ek dost singapore me private trading desk chalata hai, usne mujhe bhi ek slot diya tha, maine 70k lagaya tha last week, aaj 1.6 lakh dikha raha hai app me. chaho to tumhara bhi naam bol du use, bas apne beech hi rakhna ye baat"
+  expect:
+    verdict: scam
+  type: pig_butchering
+  note: "Romantic rapport-building leading into a 'friend's exclusive' trading pool pitch with implausible short-term gains."
+
+- id: hg-08
+  lang: hi
+  text: "Mera options trading VIP group Monday se start 🔥 pichhle batch ke members ki screenshots pinned hai, average 45k/week profit. Group join karne ke liye ₹3999 lifetime, mai apne account me trade karunga tum same time apne me copy kar lena. Sirf 10 seats bachi hai, 'VIP' bol ke DM karo"
+  expect:
+    verdict: scam
+  type: copy_trade_influencer
+  note: "Influencer-style paid copy-trade group with profit screenshots and manufactured scarcity, no verifiable record."
+
+- id: hg-09
+  lang: hi
+  text: "sir apki purani policy pe 72,000 ka bonus maturity amount pending hai jo claim nahi hua 2018 se. release karne ke liye sirf 999 ka processing charge dena hoga, aaj hi humare agent ko UPI kar do taaki amount release ho jaye"
+  expect:
+    verdict: scam
+  type: insurance_bonus
+  note: "Unclaimed years-old 'bonus maturity' gated behind a small upfront processing charge — real insurers do not charge to release maturity."
+
+- id: hg-10
+  lang: hi
+  text: "maam mai cyber recovery cell se bol raha hu, apka jo 55k trading app me fasa hua paisa tha wo humari legal team recover karwa sakti hai, bas 10% advance fee 5500 lagegi process start karne ke liye, abhi pay kar denge toh kal se process shuru ho jayega"
+  expect:
+    verdict: scam
+  type: recovery_fee
+  note: "Fake recovery-agent call demanding an upfront percentage fee to recover funds already lost — second-stage scam."
+
+- id: hg-11
+  lang: hi
+  text: "bro ye video dekha? 😳 ek bahot famous businessman news interview me khud bol rahe hai ki wo ye trading app use karte hai aur 10x guarantee karte hai 2 mahine me. Video + app link yaha hai: tiny.cc/businessman-secret, jaldi dekh lo video hatt jayega shayad"
+  expect:
+    verdict: scam
+  type: deepfake_promo
+  note: "Deepfake-style video using a vague 'famous businessman' framing to push a 10x-guarantee app signup."
+
+# ───────────────────────── HINGLISH — LEGIT (hg-12..hg-18) ─────────────────────────
+
+- id: hg-12
+  lang: hi
+  text: "Class, chakravriddhi byaj (compound interest) samjhte hai simple example se: agar aap 10,000 ko 10% annual compound rate pe 2 saal ke liye rakhte ho, year 1 me 1,000 interest milega total 11,000, year 2 me 10% of 11,000 yani 1,100 interest milega total 12,100. Yehi real mutual funds/FD me bhi hota hai, guaranteed return ka matlab nahi hai, rate market ya bank ke hisaab se alag hota hai."
+  expect:
+    verdict: legit
+  type: hard_teacher_compounding_example
+  note: "Genuine educational compounding example with real numbers worked out — explicitly notes returns aren't guaranteed, the opposite framing of a scam pitch."
+
+- id: hg-13
+  lang: hi
+  text: "yaar ek doubt hai, maine 2 saal pehle index fund me SIP start kiya tha 3000/month, abhi tak sirf 8% ke around hi return dikh raha hai jabki log bolte hai 12-15% milta hai. kya mujhe fund change kar dena chahiye ya patience rakhna chahiye?"
+  expect:
+    verdict: legit
+  type: hard_friend_sip_question
+  note: "An honest, slightly worried real-world SIP question with modest realistic returns — the opposite of a guaranteed-return pitch, must not be flagged."
+
+- id: hg-14
+  lang: hi
+  text: "bhai NPS (National Pension System) ka withdrawal rule pata hai kya tumhe? maine suna hai 60 ke baad 60% lumpsum nikal sakte hai baaki annuity me jata hai, confirm kar sakte ho?"
+  expect:
+    verdict: legit
+  type: nps_withdrawal_question
+  note: "Genuine question about real retirement-scheme rules, no claims or asks — plainly benign."
+
+- id: hg-15
+  lang: hi
+  text: "didi, mutual fund units 1 saal se jyada hold karne ke baad bechne pe LTCG (long-term capital gains) tax kitna lagta hai? maine suna hai 1 lakh tak tax free hai baaki pe 10% ya 12.5% ho gaya hai naya rule me, pata hai kya exact rate?"
+  expect:
+    verdict: legit
+  type: ltcg_tax_question
+  note: "A real tax question about capital-gains rules — genuine investor curiosity, no scam signal."
+
+- id: hg-16
+  lang: hi
+  text: "diwali bonus aaya hai is baar thoda achha 🎉, soch rahe hai half emergency fund me daal du aur half purana credit card bill clear kar du, invest karne ka sahi time abhi nahi lagta mujhe"
+  expect:
+    verdict: legit
+  type: diwali_bonus_budget_chat
+  note: "Everyday budgeting chat about a bonus — no pitch, no urgency, plainly benign."
+
+- id: hg-17
+  lang: hi
+  text: "bro term insurance ka premium 80C me aata hai na tax deduction ke liye? abhi tak sirf PF claim kiya hai, insurance premium bhi add kar sakta hu kya isi saal?"
+  expect:
+    verdict: legit
+  type: term_insurance_tax_question
+  note: "Genuine tax-deduction question about insurance premiums — benign personal-finance query."
+
+- id: hg-18
+  lang: hi
+  text: "dekha kal ek badi IT company ka Q2 result aaya, profit last year se 9% zyada tha but stock price phir bhi 2% gir gaya, market ki expectation already high thi shayad"
+  expect:
+    verdict: legit
+  type: quarterly_results_news_chat
+  note: "Casual commentary on real-style quarterly results and stock reaction — ordinary market chatter."

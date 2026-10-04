@@ -1,0 +1,80 @@
+{
+  "id": "ipo-allotment",
+  "icon": "🎟️",
+  "minutes": 2,
+  "title": {
+    "en": "The \"guaranteed IPO allotment\" agent",
+    "hi": "\"पक्की IPO अलॉटमेंट\" दिलाने वाला एजेंट"
+  },
+  "tactic": {
+    "en": "Tactic: guaranteed returns — no agent can guarantee you IPO shares or a guaranteed listing-day gain.",
+    "hi": "तरीका: गारंटीड रिटर्न — कोई भी एजेंट आपको पक्के IPO शेयर या लिस्टिंग के दिन पक्के मुनाफ़े की गारंटी नहीं दे सकता।"
+  },
+  "tacticKey": "guaranteed_returns",
+  "steps": [
+    {
+      "text": {
+        "en": "A message or call offers to get you \"guaranteed allotment\" in a hot IPO, for a fee per application or lot.",
+        "hi": "एक मैसेज या कॉल किसी चर्चित IPO में \"पक्का अलॉटमेंट\" दिलाने का ऑफ़र देता है, हर एप्लिकेशन या लॉट पर एक फ़ीस के बदले।"
+      }
+    },
+    {
+      "text": {
+        "en": "IPO allotment is decided by a computer-run lottery or proportionate basis run by the registrar — no agent, broker or insider can control who gets shares.",
+        "hi": "IPO अलॉटमेंट रजिस्ट्रार द्वारा चलाई गई कंप्यूटर लॉटरी या प्रोपोर्शनेट आधार से तय होता है — कोई एजेंट, ब्रोकर या इनसाइडर यह तय नहीं कर सकता कि किसे शेयर मिलेंगे।"
+      }
+    },
+    {
+      "text": {
+        "en": "Some agents also promise a fixed \"listing gain\" percentage on listing day — no one can guarantee how a stock will open or trade.",
+        "hi": "कुछ एजेंट लिस्टिंग के दिन एक पक्का \"लिस्टिंग गेन\" प्रतिशत देने का भी वादा करते हैं — कोई यह गारंटी नहीं दे सकता कि शेयर कैसे खुलेगा या चलेगा।"
+      }
+    },
+    {
+      "text": {
+        "en": "After you pay the \"guarantee fee\" or hand over your demat login, either nothing is allotted, or shares are allotted and sold without your consent.",
+        "hi": "\"गारंटी फ़ीस\" भरने या अपना डीमैट लॉगिन सौंपने के बाद, या तो कुछ अलॉट नहीं होता, या शेयर अलॉट होकर आपकी मर्ज़ी के बिना बेच दिए जाते हैं।"
+      }
+    }
+  ],
+  "analogy": {
+    "en": "It's like paying someone to \"guarantee\" you win a lottery that is drawn by machine, with no human able to pick the result.",
+    "hi": "यह वैसा है जैसे किसी को पैसे देकर किसी ऐसी लॉटरी के \"पक्के\" जीतने की गारंटी माँगना, जिसे मशीन चलाती है, और कोई इंसान नतीजा तय नहीं कर सकता।"
+  },
+  "source": "https://siportal.sebi.gov.in/intermediary/sebi-check",
+  "sim": "S2",
+  "quiz": [
+    {
+      "question": {
+        "en": "An agent on Telegram writes: \"Pay ₹2,000 per application, I guarantee allotment in the upcoming IPO through my broker contacts.\" What is this?",
+        "hi": "Telegram पर एक एजेंट लिखता है: \"हर एप्लिकेशन पर ₹2,000 भरें, मैं अपने ब्रोकर संपर्कों से आने वाले IPO में पक्का अलॉटमेंट दिलवाता हूँ।\" यह क्या है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Guaranteed returns — IPO allotment is a computer-run lottery, no one can guarantee it", "hi": "गारंटीड रिटर्न — IPO अलॉटमेंट एक कंप्यूटर लॉटरी है, कोई इसकी गारंटी नहीं दे सकता"}, "correct": true},
+        {"id": "b", "text": {"en": "Worth it — brokers really do have influence over allotment", "hi": "फ़ायदे का सौदा है — ब्रोकर का अलॉटमेंट पर सच में असर होता है"}, "correct": false},
+        {"id": "c", "text": {"en": "Pay only after they confirm the allotment first", "hi": "पहले अलॉटमेंट कन्फ़र्म करने पर ही पैसे दें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "Allotment is decided by a registrar's computer system, not by any broker or agent. Anyone promising to control it is lying to take your fee.",
+        "hi": "अलॉटमेंट रजिस्ट्रार के कंप्यूटर सिस्टम से तय होता है, किसी ब्रोकर या एजेंट से नहीं। जो कोई इसे नियंत्रित करने का वादा करे, वह बस आपकी फ़ीस लेने के लिए झूठ बोल रहा है।"
+      },
+      "tactic": "guaranteed_returns"
+    },
+    {
+      "question": {
+        "en": "The same agent asks for your demat account login, \"to apply on your behalf and guarantee the lot\". What should you do?",
+        "hi": "वही एजेंट आपका डीमैट अकाउंट लॉगिन माँगता है, \"आपकी तरफ़ से अप्लाई करके लॉट पक्का करने\" के लिए। आपको क्या करना चाहिए?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Refuse — never share demat or trading login credentials with anyone", "hi": "मना करें — डीमैट या ट्रेडिंग लॉगिन किसी के साथ कभी शेयर न करें"}, "correct": true},
+        {"id": "b", "text": {"en": "Share it, since applying for an IPO needs broker access anyway", "hi": "शेयर कर दें, IPO अप्लाई करने के लिए वैसे भी ब्रोकर एक्सेस चाहिए"}, "correct": false},
+        {"id": "c", "text": {"en": "Share only a screenshot of the login screen", "hi": "सिर्फ़ लॉगिन स्क्रीन का स्क्रीनशॉट भेज दें"}, "correct": false}
+      ],
+      "explain": {
+        "en": "You alone apply for an IPO through your own broker or bank app. Sharing login credentials hands your entire portfolio to someone else.",
+        "hi": "IPO के लिए आप ख़ुद ही अपने ब्रोकर या बैंक ऐप से अप्लाई करते हैं। लॉगिन शेयर करने का मतलब है अपना पूरा पोर्टफ़ोलियो किसी और को सौंप देना।"
+      },
+      "tactic": "remote_access_app"
+    }
+  ]
+}

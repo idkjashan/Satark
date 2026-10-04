@@ -1,0 +1,318 @@
+{
+  "intents": [
+    {
+      "id": "verify_adviser",
+      "patterns": ["verify adviser", "verify advisor", "is registered", "genuine adviser", "real adviser",
+        "check adviser", "asli advisor", "registered hai kya", "रजिस्टर्ड है क्या", "असली एडवाइज़र", "सलाहकार सही है"],
+      "answer": {
+        "en": "Go to SEBI's register and search the name or number yourself. A registered adviser never guarantees returns.",
+        "hi": "SEBI के रजिस्टर में जाकर ख़ुद नाम या नंबर से जाँचें। रजिस्टर्ड एडवाइज़र कभी मुनाफ़े की गारंटी नहीं देता।"
+      },
+      "actions": ["verify_sebi_register"],
+      "chips": {
+        "en": ["What is SEBI Check?", "Is this app real?"],
+        "hi": ["SEBI Check क्या है?", "क्या यह ऐप असली है?"]
+      }
+    },
+    {
+      "id": "valid_upi",
+      "patterns": ["valid upi", "@valid", "sebi check", "upi handle", "validhdfc", "valid id kya hai",
+        "यूपीआई वैलिड", "सेबी चेक", "वैलिड यूपीआई"],
+      "answer": {
+        "en": "Since 1 October 2025, registered intermediaries collect payments only through @valid UPI IDs like name.brk@validhdfc. Look for the green thumbs-up triangle, or verify on SEBI Check.",
+        "hi": "1 अक्टूबर 2025 से, रजिस्टर्ड कंपनियाँ सिर्फ़ @valid UPI ID पर पैसे लेती हैं, जैसे name.brk@validhdfc। हरे त्रिकोण में thumbs-up देखें, या SEBI Check पर जाँचें।"
+      },
+      "actions": ["verify_sebi_check"],
+      "chips": {
+        "en": ["How do I verify an adviser?", "Where do I report this?"],
+        "hi": ["मैं एडवाइज़र को कैसे जाँचूँ?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "is_app_real",
+      "patterns": ["is this app real", "fake app", "app genuine", "verified label", "play store", "asli app",
+        "ऐप असली है", "नकली ऐप", "वेरिफ़ाइड लेबल"],
+      "answer": {
+        "en": "Install broker apps only from the Google Play Store, and look for the \"Verified\" label. A direct .apk link is a strong warning sign.",
+        "hi": "ब्रोकर का ऐप सिर्फ़ Google Play Store से इंस्टॉल करें, और \"Verified\" लेबल देखें। सीधी .apk फ़ाइल का लिंक बड़ा ख़तरे का संकेत है।"
+      },
+      "actions": ["dont_install"],
+      "chips": {
+        "en": ["I already paid — help", "Why is this risky?"],
+        "hi": ["मैंने पैसे भेज दिए — मदद करें", "यह ख़तरनाक क्यों है?"]
+      }
+    },
+    {
+      "id": "already_paid",
+      "patterns": ["i paid", "i already paid", "sent money", "lost money", "maine paisa bhej diya",
+        "paisa bhej diya", "मैंने पैसे भेज दिए", "पैसा चला गया", "ठग लिया", "पैसे लगाए", "पैसे फँस गए", "निकालने के लिए टैक्स", "निकासी के लिए फीस", "paise fas gaye"],
+      "answer": {
+        "en": "Act within the golden hour. Call 1930 or report at cybercrime.gov.in right now, and call your bank to flag the transaction.",
+        "hi": "गोल्डन ऑवर में तुरंत कार्रवाई करें। अभी 1930 पर कॉल करें या cybercrime.gov.in पर रिपोर्ट करें, और अपने बैंक को भी बताएं।"
+      },
+      "actions": ["report_1930", "draft_complaint"],
+      "chips": {
+        "en": ["How do I report this?", "Where do I report this?"],
+        "hi": ["मैं कैसे रिपोर्ट करूँ?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "how_to_report",
+      "patterns": ["how to report", "where to report", "file complaint", "shikayat kaise", "report kaise karu",
+        "शिकायत कैसे करें", "कहाँ रिपोर्ट करें", "शिकायत कहाँ करें", "रिपोर्ट कैसे करें"],
+      "answer": {
+        "en": "Call 1930 or use cybercrime.gov.in for any fraud. Use Chakshu for a suspicious call with no money lost yet. SCORES is only for SEBI-registered entities.",
+        "hi": "किसी भी धोखाधड़ी के लिए 1930 पर कॉल करें या cybercrime.gov.in इस्तेमाल करें। बिना पैसे गए शक की कॉल के लिए Chakshu है। SCORES सिर्फ़ SEBI-रजिस्टर्ड कंपनियों के लिए है।"
+      },
+      "actions": ["report_1930", "report_chakshu"],
+      "chips": {
+        "en": ["I already paid — help", "What is SEBI Check?"],
+        "hi": ["मैंने पैसे भेज दिए — मदद करें", "SEBI Check क्या है?"]
+      }
+    },
+    {
+      "id": "guaranteed_returns",
+      "patterns": ["guaranteed return", "assured return", "fixed daily profit", "no loss", "double your money",
+        "pakka profit", "गारंटीड रिटर्न", "पक्का मुनाफ़ा", "डबल पैसा"],
+      "answer": {
+        "en": "No one can guarantee a return on any investment, ever. A registered adviser is barred from promising one too.",
+        "hi": "कोई भी इन्वेस्टमेंट पर मुनाफ़े की गारंटी नहीं दे सकता, कभी नहीं। रजिस्टर्ड एडवाइज़र को भी गारंटी देने की मनाही है।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Teach me more about this", "Why is this risky?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "यह ख़तरनाक क्यों है?"]
+      }
+    },
+    {
+      "id": "vip_tip_group",
+      "patterns": ["vip group", "telegram tips", "vip channel", "tips group", "operator wala stock",
+        "वीआईपी ग्रुप", "टिप्स ग्रुप", "ऑपरेटर वाला स्टॉक"],
+      "answer": {
+        "en": "A \"VIP\" tips group is a classic trap. Leave it, and never trade on a stranger's tip.",
+        "hi": "\"VIP\" टिप्स ग्रुप एक जाना-पहचाना जाल है। उसे छोड़ दें, और किसी अनजान की टिप पर कभी ट्रेड न करें।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Why is this risky?", "Where do I report this?"],
+        "hi": ["यह ख़तरनाक क्यों है?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "institutional_ipo",
+      "patterns": ["institutional account", "ipo allotment", "qib account", "pre-ipo", "guaranteed allotment",
+        "इंस्टिट्यूशनल अकाउंट", "आईपीओ एलॉटमेंट पक्का"],
+      "answer": {
+        "en": "There is no such thing as a guaranteed IPO allotment or a retail \"institutional account\". Apply for IPOs only through your own bank or broker.",
+        "hi": "कोई भी \"गारंटीड आईपीओ एलॉटमेंट\" या रिटेल के लिए \"इंस्टिट्यूशनल अकाउंट\" नहीं होता। IPO के लिए सिर्फ़ अपने बैंक या ब्रोकर से अप्लाई करें।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Why is this risky?", "Where do I report this?"],
+        "hi": ["यह ख़तरनाक क्यों है?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "fake_sebi_notice",
+      "patterns": ["sebi notice", "stt dues", "sebi penalty", "sebi letter", "dnvs", "सेबी नोटिस",
+        "सेबी पेनाल्टी", "एसटीटी"],
+      "answer": {
+        "en": "Verify any SEBI letter on SEBI's own Document Number Verification System (DNVS). SEBI emails only come from an @sebi.gov.in address.",
+        "hi": "कोई भी SEBI लेटर SEBI के अपने DNVS (दस्तावेज़ सत्यापन सिस्टम) पर जाँचें। SEBI का ईमेल सिर्फ़ @sebi.gov.in से आता है।"
+      },
+      "actions": ["verify_dnvs"],
+      "chips": {
+        "en": ["Why is this risky?", "Where do I report this?"],
+        "hi": ["यह ख़तरनाक क्यों है?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "remote_access",
+      "patterns": ["anydesk", "teamviewer", "quicksupport", "remote access", "screen share",
+        "रिमोट एक्सेस", "स्क्रीन शेयर"],
+      "answer": {
+        "en": "Never install a remote-access app for anyone. It lets them see and control your phone, including banking apps.",
+        "hi": "किसी के लिए भी रिमोट-एक्सेस ऐप इंस्टॉल न करें। इससे वे आपका फ़ोन देख और कंट्रोल कर सकते हैं, बैंकिंग ऐप भी।"
+      },
+      "actions": ["dont_install", "report_1930"],
+      "chips": {
+        "en": ["I already paid — help", "Where do I report this?"],
+        "hi": ["मैंने पैसे भेज दिए — मदद करें", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    },
+    {
+      "id": "digital_arrest",
+      "patterns": ["digital arrest", "video call arrest", "cbi officer called", "police called me",
+        "डिजिटल अरेस्ट", "सीबीआई अफ़सर", "पुलिस की कॉल"],
+      "answer": {
+        "en": "No police or court ever arrests you over a video call or demands money to avoid arrest. Hang up and call 1930.",
+        "hi": "कोई भी पुलिस या कोर्ट वीडियो कॉल पर गिरफ़्तार नहीं करती, या गिरफ़्तारी से बचने के लिए पैसे नहीं माँगती। कॉल काटें और 1930 पर कॉल करें।"
+      },
+      "actions": ["report_1930"],
+      "chips": {
+        "en": ["Where do I report this?", "Who are you?"],
+        "hi": ["मैं इसकी शिकायत कहाँ करूँ?", "आप कौन हैं?"]
+      }
+    },
+    {
+      "id": "learn_compounding",
+      "patterns": ["what is compounding", "compounding kya hai", "chakravriddhi kya hai",
+        "कंपाउंडिंग क्या है", "चक्रवृद्धि क्या है"],
+      "answer": {
+        "en": "Compounding means your returns earn their own returns, so growth speeds up over time. No one can guarantee a compounding rate.",
+        "hi": "कंपाउंडिंग का मतलब है आपका मुनाफ़ा भी आगे मुनाफ़ा कमाता है, इससे बढ़त समय के साथ तेज़ होती है। कोई भी कंपाउंडिंग रेट की गारंटी नहीं दे सकता।"
+      },
+      "actions": ["lesson_compounding"],
+      "chips": {
+        "en": ["Teach me more about this", "Why is this risky?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "यह ख़तरनाक क्यों है?"]
+      }
+    },
+    {
+      "id": "learn_volatility",
+      "patterns": ["what is volatility", "volatility kya hai", "price swing kya hai", "वोलैटिलिटी क्या है"],
+      "answer": {
+        "en": "Volatility means how much and how fast a price swings. A small option premium does not mean small risk.",
+        "hi": "वोलैटिलिटी का मतलब है दाम कितनी तेज़ी से ऊपर-नीचे होता है। छोटा ऑप्शन प्रीमियम छोटे रिस्क का मतलब नहीं है।"
+      },
+      "actions": ["sim_s3"],
+      "chips": {
+        "en": ["Teach me more about this", "Why is this risky?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "यह ख़तरनाक क्यों है?"]
+      }
+    },
+    {
+      "id": "learn_diversification",
+      "patterns": ["what is diversification", "diversification kya hai", "डायवर्सिफिकेशन क्या है",
+        "विविधीकरण क्या है"],
+      "answer": {
+        "en": "Diversification means spreading money across unrelated assets, so one failure doesn't sink you. Many tips from one channel are not diversified.",
+        "hi": "डायवर्सिफिकेशन का मतलब है पैसा अलग-अलग जगह लगाना, ताकि एक नुक़सान आपको पूरी तरह न डुबाए। एक ही चैनल की कई टिप्स डायवर्सिफिकेशन नहीं हैं।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Teach me more about this", "How do I verify an adviser?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "मैं एडवाइज़र को कैसे जाँचूँ?"]
+      }
+    },
+    {
+      "id": "learn_leverage",
+      "patterns": ["what is leverage", "leverage kya hai", "लीवरेज क्या है"],
+      "answer": {
+        "en": "Leverage means controlling a bigger position than your own cash, using margin. It multiplies losses just as fast as gains.",
+        "hi": "लीवरेज का मतलब है अपने पैसे से ज़्यादा बड़ी पोज़िशन चलाना, मार्जिन के सहारे। यह नुक़सान को भी मुनाफ़े जितनी तेज़ी से बढ़ाता है।"
+      },
+      "actions": ["lesson_leverage", "sim_s3"],
+      "chips": {
+        "en": ["Teach me more about this", "Why is this risky?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "यह ख़तरनाक क्यों है?"]
+      }
+    },
+    {
+      "id": "learn_fund_costs",
+      "patterns": ["what is nav", "nav kya hai", "एनएवी क्या है", "expense ratio", "mutual fund fees",
+        "fees kya hote hain", "एक्सपेंस रेशियो"],
+      "answer": {
+        "en": "NAV (net asset value) is the price of one mutual-fund unit. A low NAV isn't cheap; what matters is the percentage change and the fund's yearly expense ratio (its running cost).",
+        "hi": "NAV एक म्यूचुअल फंड यूनिट की कीमत है। कम NAV का मतलब सस्ता नहीं है; असली बात % बदलाव और फंड की सालाना एक्सपेंस रेशियो (चलाने की लागत) है।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Teach me more about this", "What is a @valid UPI ID?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "@valid UPI ID क्या होता है?"]
+      }
+    },
+    {
+      "id": "learn_account_basics",
+      "patterns": ["what is demat", "demat account kya hai", "डीमैट अकाउंट क्या है", "what is kyc",
+        "kyc kya hai", "केवाईसी क्या है", "nomination kya hai", "नॉमिनेशन क्या है"],
+      "answer": {
+        "en": "A demat account (at NSDL or CDSL) holds your real securities; trust its statement, not an app's dashboard. KYC verifies your identity. A nominee holds your holdings for your legal heirs, not as the new owner.",
+        "hi": "डीमैट अकाउंट (NSDL या CDSL में) आपकी असली सिक्योरिटीज़ रखता है; उसके स्टेटमेंट पर भरोसा करें, ऐप के डैशबोर्ड पर नहीं। KYC आपकी पहचान जाँचता है। नॉमिनी मालिक नहीं बनता, सिर्फ़ कानूनी वारिसों के लिए रखता है।"
+      },
+      "actions": ["lesson_fake_apps"],
+      "chips": {
+        "en": ["Is this app real?", "Teach me more about this"],
+        "hi": ["क्या यह ऐप असली है?", "मुझे इसके बारे में और सिखाएं"]
+      }
+    },
+    {
+      "id": "learn_sip",
+      "patterns": ["what is sip", "sip kya hai", "sip ka matlab", "एसआईपी क्या है"],
+      "answer": {
+        "en": "SIP (Systematic Investment Plan) means investing a fixed amount regularly into a mutual fund, instead of one lump sum. It does not guarantee a return.",
+        "hi": "SIP का मतलब है हर महीने एक तय रकम म्यूचुअल फंड में डालना, एक साथ पूरा पैसा लगाने के बजाय। यह मुनाफ़े की गारंटी नहीं देता।"
+      },
+      "actions": ["lesson_compounding"],
+      "chips": {
+        "en": ["Teach me more about this", "Guaranteed returns?"],
+        "hi": ["मुझे इसके बारे में और सिखाएं", "गारंटीड रिटर्न?"]
+      }
+    },
+    {
+      "id": "learn_ipo",
+      "patterns": ["what is ipo", "ipo kya hai", "ipo ka matlab", "आईपीओ क्या है"],
+      "answer": {
+        "en": "An IPO (Initial Public Offering) is when a company sells shares to the public for the first time. Apply only through your own bank or broker.",
+        "hi": "IPO का मतलब है जब कोई कंपनी पहली बार अपने शेयर आम लोगों को बेचती है। इसके लिए सिर्फ़ अपने बैंक या ब्रोकर से ही अप्लाई करें।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Why is this risky?", "Teach me more about this"],
+        "hi": ["यह ख़तरनाक क्यों है?", "मुझे इसके बारे में और सिखाएं"]
+      }
+    },
+    {
+      "id": "stock_tip_refusal",
+      "patterns": ["which stock should i buy", "kaunsa share lu", "share bata do", "stock tip do",
+        "buy kare ya sell", "कौनसा शेयर लूँ", "शेयर बता दो", "टिप दे दो", "कौन सा शेयर", "शेयर ऊपर जाएगा", "kaun sa share", "konsa stock"],
+      "answer": {
+        "en": "We never suggest stocks or give buy, sell or hold tips. Here is how to judge any tip safely instead.",
+        "hi": "हम कभी किसी शेयर की टिप या ख़रीदने-बेचने की सलाह नहीं देते। इसके बजाय, किसी भी टिप को सुरक्षित तरीक़े से जाँचना सीखें।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["How do I verify an adviser?", "Teach me more about this"],
+        "hi": ["मैं एडवाइज़र को कैसे जाँचूँ?", "मुझे इसके बारे में और सिखाएं"]
+      }
+    },
+    {
+      "id": "who_are_you",
+      "patterns": ["who are you", "what is satark", "is my data safe", "privacy", "data store", "aap kaun ho",
+        "आप कौन हैं", "सतर्क क्या है", "डेटा सुरक्षित"],
+      "answer": {
+        "en": "Satark checks a message against official records and explains the result. We don't ask you to log in, and we don't store your messages.",
+        "hi": "Satark किसी मैसेज को सरकारी रिकॉर्ड से जाँचता है और नतीजा बताता है। हम लॉगिन नहीं माँगते, और आपके मैसेज सेव नहीं करते।"
+      },
+      "actions": [],
+      "chips": {
+        "en": ["Where does this information come from?", "What should I do now?"],
+        "hi": ["यह जानकारी कहाँ से आई है?", "अब मुझे क्या करना चाहिए?"]
+      }
+    },
+    {
+      "id": "dabba_trading",
+      "patterns": ["dabba trading", "dabba", "parallel trading", "no demat needed", "डब्बा ट्रेडिंग",
+        "डिमैट नहीं चाहिए"],
+      "answer": {
+        "en": "Dabba trading happens outside any exchange, with no protection at all if something goes wrong. It is a criminal offence for the operator.",
+        "hi": "डब्बा ट्रेडिंग किसी एक्सचेंज के बाहर होती है, और कुछ गड़बड़ होने पर कोई सुरक्षा नहीं मिलती। यह ऑपरेटर के लिए अपराध है।"
+      },
+      "actions": ["learn"],
+      "chips": {
+        "en": ["Why is this risky?", "Where do I report this?"],
+        "hi": ["यह ख़तरनाक क्यों है?", "मैं इसकी शिकायत कहाँ करूँ?"]
+      }
+    }
+  ],
+  "fallback": {
+    "answer": {
+      "en": "I'm not sure I understood. You can ask me to verify an adviser, check a UPI ID, or ask what to do if you already paid.",
+      "hi": "मुझे ठीक से समझ नहीं आया। आप मुझसे एडवाइज़र जाँचने, UPI ID चेक करने, या पैसे भेज चुके हैं तो क्या करें — पूछ सकते हैं।"
+    },
+    "chips": {
+      "en": ["How do I verify an adviser?", "I already paid — help", "What should I do now?"],
+      "hi": ["मैं एडवाइज़र को कैसे जाँचूँ?", "मैंने पैसे भेज दिए — मदद करें", "अब मुझे क्या करना चाहिए?"]
+    }
+  }
+}

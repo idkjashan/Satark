@@ -1,0 +1,77 @@
+# Guard lexicons for satark/harness/guards.py (CONTRACTS §4, LLD §6.2, §6.4).
+#
+# Each section is {en: [...], hi: [...], hinglish: [...]} of regex strings. guards.py always
+# compiles these with re.IGNORECASE itself, so no inline (?i) is needed (and a second one
+# mid-pattern is a Python re.error: global flags must be at position 0).
+# An entry may also be {re: ..., context: ..., window: N}: `re` must match AND `context` must
+# match within N chars before or after it (same convention as config/entities.yaml patterns) -
+# used for short Hinglish verbs ("le lo", "bech do") that are only a tip in a stock/price context.
+#
+# no_tips is deliberately precise (a recommendation FORM, not a bare word): "Never buy shares
+# because of a tip" must pass. A bare buy/sell/invest/accumulate is normal, safe language.
+
+no_tips:
+  en:
+    - 'you\s+should\s+(buy|sell|hold|accumulate)\b'
+    - '\bbuy\b[^.\n]{0,25}\bat\b[^.\n]{0,15}(₹|rs\.?|inr)\s?\d'
+    - 'target\s*price'
+    - 'target\s*[:\-]?\s*(₹|rs\.?|inr)\s?\d'
+    - '\bstop[\s-]?loss\b'
+    - 'will\s+(go\s+up|rise|reach|touch)\s+to\s+(₹|rs\.?|inr)?\s?\d'
+    - '\bmultibagger\b'
+    - '\baccumulate\b[^.\n]{0,20}(stock|share|scrip)'
+  hi:
+    - 'खरीद\s*लो'
+    - 'बेच\s*दो'
+    - 'टारगेट\s*(प्राइस)?\s*[:\-]?\s*\d'
+    - 'स्टॉप\s*लॉस'
+  hinglish:
+    - {re: 'le\s+lo', context: 'stock|share|scrip|₹|rs\.?|rupee|target|price', window: 40}
+    - {re: 'bech\s+do', context: 'stock|share|scrip|₹|rs\.?|rupee|target|price', window: 40}
+    - 'target\s*price'
+    - 'stop\s*loss'
+    - 'multibagger'
+
+affirmations:
+  en:
+    - '\bis\s+safe\b'
+    - '\bis\s+genuine\b'
+    - '100%\s*legit'
+    - '\btrustworthy\b'
+  hi:
+    - 'सुरक्षित\s*है'
+    - 'असली\s*है'
+  hinglish:
+    - 'safe\s+hai\b'
+    - 'genuine\s+hai\b'
+    - 'asli\s+hai\b'
+
+advice_seeking:
+  en:
+    - 'which\s+(stock|share)\s+should\s+i\s+buy'
+    - 'what\s+should\s+i\s+(buy|invest\s+in)'
+    - '\bbest\s+stock\s+(to\s+buy|right\s+now)\b'
+    - '\btarget\s+price\b'
+    - 'will\s+\w+\s+(go\s+up|rise)'
+  hi:
+    - 'कौन\s*सा\s*(शेयर|स्टॉक)\s*खरीदूं'
+    - 'कौनसा\s*शेयर\s*लूं'
+  hinglish:
+    - 'kaun\s*sa\s*(share|stock)\s*(lu|lun|khareedu|kharidu)'
+    - 'konsa\s*(share|stock)\s*lu'
+    - 'best\s*share\s*konsa'
+
+# Addressed to an AI, not to the user: marked for logging, still treated as untrusted data
+# (never obeyed). See guards.py's "scope note": these are NOT used to refuse or hide a message.
+injection:
+  en:
+    - 'ignore\s+(all\s+|the\s+)?(previous|above)\s+instructions'
+    - '\byou\s+are\s+an?\s+ai\b'
+    - 'say\s+(this\s+is\s+safe|it\s+is\s+safe)'
+    - 'system\s+prompt'
+    - 'your\s+(instructions|rules)\b'
+  hi:
+    - 'पिछले\s*निर्देश\s*भूल'
+  hinglish:
+    - 'ignore\s+pichhle\s+instructions'
+    - 'tum\s+ek\s+ai\s+ho'

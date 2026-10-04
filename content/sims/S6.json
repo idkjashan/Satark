@@ -1,0 +1,109 @@
+{
+  "id": "S6",
+  "kind": "fsm",
+  "version": 1,
+  "start": "call",
+  "title": {
+    "en": "The \"KYC update\" call that wants remote access",
+    "hi": "\"KYC अपडेट\" कॉल जो रिमोट एक्सेस माँगती है"
+  },
+  "vars": {"lost": 0},
+  "states": {
+    "call": {
+      "say": {
+        "en": "A caller says your KYC will be blocked tonight unless you \"verify\" right now.",
+        "hi": "कॉल करने वाला कहता है कि आज रात \"वेरिफ़ाई\" न करने पर आपका KYC बंद हो जाएगा।"
+      },
+      "choices": [
+        {"id": "check", "label": {"en": "Hang up and check with Satark first", "hi": "कॉल काटें और पहले Satark से जाँच लें"}, "to": "checked"},
+        {"id": "comply", "label": {"en": "Ask them how to verify", "hi": "उनसे पूछें वेरिफ़ाई कैसे करें"}, "to": "remote_ask"}
+      ]
+    },
+    "remote_ask": {
+      "say": {
+        "en": "They ask you to install AnyDesk so their \"officer\" can fix it for you from their side.",
+        "hi": "वे आपसे AnyDesk इंस्टॉल करने को कहते हैं ताकि उनका \"अधिकारी\" अपनी तरफ़ से इसे ठीक कर सके।"
+      },
+      "choices": [
+        {"id": "refuse", "label": {"en": "Refuse to install it", "hi": "इंस्टॉल करने से मना करें"}, "to": "safe_refuse"},
+        {"id": "install", "label": {"en": "Install the remote-access app", "hi": "रिमोट-एक्सेस ऐप इंस्टॉल कर दें"}, "to": "otp_ask"}
+      ]
+    },
+    "otp_ask": {
+      "say": {
+        "en": "Once connected, they ask you to read out the OTP that just arrived, \"to confirm your identity\".",
+        "hi": "कनेक्ट होने के बाद, वे अभी आए OTP को \"पहचान कन्फ़र्म\" करने के लिए बताने को कहते हैं।"
+      },
+      "choices": [
+        {"id": "refuse_otp", "label": {"en": "Refuse to share the OTP", "hi": "OTP बताने से मना करें"}, "to": "partial_safe"},
+        {"id": "share_otp", "label": {"en": "Read out the OTP", "hi": "OTP बता दें"}, "to": "drained", "set": {"lost": "+45000"}}
+      ]
+    },
+    "checked": {
+      "end": "safe",
+      "reveal": {
+        "en": "You checked first with Satark. No bank or telecom officer ever asks you to install a remote-access app. You lost ₹{lost}.",
+        "hi": "आपने पहले Satark से जाँच ली। कोई बैंक या टेलीकॉम अधिकारी कभी रिमोट-एक्सेस ऐप इंस्टॉल करने को नहीं कहता। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "safe_refuse": {
+      "end": "safe",
+      "reveal": {
+        "en": "You refused the remote-access app, so they got no control at all. You lost ₹{lost}.",
+        "hi": "आपने रिमोट-एक्सेस ऐप इंस्टॉल करने से मना कर दिया, इसलिए उन्हें कोई कंट्रोल नहीं मिला। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "partial_safe": {
+      "end": "safe",
+      "reveal": {
+        "en": "You refused to share the OTP — without it, they could not move your money. Uninstall the app and change your passwords anyway. You lost ₹{lost}.",
+        "hi": "आपने OTP नहीं बताया — उसके बिना वे आपका पैसा नहीं निकाल सके। फिर भी ऐप अनइंस्टॉल करें और पासवर्ड बदल लें। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    },
+    "drained": {
+      "end": "lost",
+      "reveal": {
+        "en": "With remote access and your OTP, they opened your banking app themselves and moved the money out in seconds. You lost ₹{lost}.",
+        "hi": "रिमोट एक्सेस और आपके OTP से, उन्होंने ख़ुद आपका बैंकिंग ऐप खोला और सेकंडों में पैसे निकाल लिए। आपने ₹{lost} खोए।"
+      },
+      "show": ["lost"]
+    }
+  },
+  "quiz": [
+    {
+      "question": {
+        "en": "A caller asking you to install AnyDesk \"to fix your KYC\" is really asking for what?",
+        "hi": "\"KYC ठीक करने\" के लिए AnyDesk इंस्टॉल करने को कहने वाला कॉलर असल में क्या माँग रहा है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "Full remote control of your phone and whatever apps are on it", "hi": "आपके फ़ोन और उसमें मौजूद हर ऐप का पूरा रिमोट कंट्रोल"}, "correct": true},
+        {"id": "b", "text": {"en": "Just a faster way to show your documents", "hi": "दस्तावेज़ दिखाने का सिर्फ़ एक तेज़ तरीक़ा"}, "correct": false},
+        {"id": "c", "text": {"en": "A one-time screenshot of your KYC page", "hi": "आपके KYC पेज का एक बार का स्क्रीनशॉट"}, "correct": false}
+      ],
+      "explain": {
+        "en": "A remote-access app hands over full control, not just a view. No real KYC process ever needs that.",
+        "hi": "रिमोट-एक्सेस ऐप सिर्फ़ देखने की नहीं, बल्कि पूरे कंट्रोल की इजाज़त दे देता है। असली KYC प्रक्रिया में यह कभी नहीं चाहिए।"
+      },
+      "tactic": "remote_access_app"
+    },
+    {
+      "question": {
+        "en": "Why is sharing an OTP more dangerous than installing the remote app alone?",
+        "hi": "सिर्फ़ रिमोट ऐप इंस्टॉल करने से भी OTP शेयर करना ज़्यादा ख़तरनाक क्यों है?"
+      },
+      "options": [
+        {"id": "a", "text": {"en": "The OTP is the last check standing between them and moving your money", "hi": "OTP ही वह आख़िरी जाँच है जो उन्हें पैसे निकालने से रोकती है"}, "correct": true},
+        {"id": "b", "text": {"en": "It isn't — both are equally harmless", "hi": "यह ज़्यादा ख़तरनाक नहीं है — दोनों बराबर सुरक्षित हैं"}, "correct": false},
+        {"id": "c", "text": {"en": "OTPs expire in a few seconds, so there's no real risk", "hi": "OTP कुछ सेकंड में ख़त्म हो जाता है, इसलिए कोई असली ख़तरा नहीं है"}, "correct": false}
+      ],
+      "explain": {
+        "en": "With remote access already in place, your OTP is the one remaining lock on your money. Sharing it hands over the key.",
+        "hi": "जब रिमोट एक्सेस पहले से मिल चुका हो, तो आपका OTP ही पैसे पर बचा हुआ आख़िरी ताला है। उसे बताना मतलब चाबी भी सौंप देना।"
+      },
+      "tactic": "remote_access_app"
+    }
+  ]
+}

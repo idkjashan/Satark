@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+data/registry.db
+data/registry.next.db
+data/registry.db-*
+data/cache/
+web/node_modules/
+web/dist/
+web/test-results/
+web/playwright-report/
+.env
+data/models/
