@@ -60,6 +60,7 @@ export function Run({ runId }: RunProps) {
             date: new Date().toISOString(),
             level: next.verdict.level,
             scam_type: next.verdict.scam_type ?? undefined,
+            lesson: next.verdict.lesson ?? undefined,
             lang: prefs.value.lang,
           });
         }

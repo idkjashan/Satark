@@ -152,7 +152,7 @@ Playwright (`npm --prefix web run e2e`) starts its own deterministic server and 
 | `app.py` | FastAPI app factory `create_app` (`uvicorn satark.app:create_app --factory`): mounts the routers, builds the runtime at startup. |
 | `config.py` | `Settings.from_env` (paths, env copy, offline flag) and `Config` (loads and validates every YAML in `config/`). |
 | `check.py` | `python -m satark.check`: runs one check with no server and prints events as JSON lines. |
-| `api/` | HTTP layer. `checks.py` (`POST /v1/checks`), `chat.py` (`/v1/chat`), `runs.py` (SSE event stream), `report.py`, `feedback.py`, `share.py` (Android share target), `meta.py` (`/v1/meta`, health), `limits.py` (body cap, per-IP rate limit), `errors.py`, `static.py` (serves the PWA). |
+| `api/` | HTTP layer. `checks.py` (`POST /v1/checks`), `chat.py` (`/v1/chat`), `practice.py` (`POST /v1/practice`: on-demand 3-question quiz built by `harness/practice.py` from lesson chunks with the `practice` model role, falling back to the lessons' static quizzes), `runs.py` (SSE event stream), `report.py`, `feedback.py`, `share.py` (Android share target), `meta.py` (`/v1/meta`, health), `limits.py` (body cap, per-IP rate limit), `errors.py`, `static.py` (serves the PWA). |
 | `harness/orchestrator.py` | Owns one check or chat run end to end. |
 | `harness/runtime.py` | Builds the shared objects once at startup (config, DB, checkers, model router, scope router, knowledge base). |
 | `harness/extract/` | Turns input into entities: `pipeline.py`, regex `match.py`, `normalise.py`, `fns.py`, `ocr.py` (screenshots), `llm.py` (LLM extraction). |

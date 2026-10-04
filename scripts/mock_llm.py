@@ -152,6 +152,8 @@ def _role(schema: dict, prompt: str) -> str:
     props = set((schema or {}).get("properties", {}))
     if {"reasoning", "risk_factors"} <= props:
         return "assess"
+    if "questions" in props:  # POST /v1/practice
+        return "practice"
     if "done" in props:  # an agent-loop step (agent.py): pick lookups from the menu, or stop
         return "step"
     if {"screen", "visible_text"} <= props:
@@ -433,6 +435,10 @@ async def chat(request: Request):
         out = _extract(untrusted, _has_image(messages))
     elif role == "explain":
         out = _explain(brief, misbehave)
+    elif role == "practice":
+        out = {"questions": [{"message": "Sir, your KYC is expiring today. Send Rs 500 to example-upi@bank to keep your account.",
+                              "options": ["Pay quickly", "Ignore it and report it", "Reply with your OTP"], "correct": 1,
+                              "tactic": "urgency", "explain": "Urgency plus a payment demand is the pressure tactic."}] * 3}
     elif role == "step":
         out = _step(user_text, untrusted, schema)
     elif role == "image":

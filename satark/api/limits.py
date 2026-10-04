@@ -18,7 +18,7 @@ from satark.api.errors import ApiError
 
 MAX_BODY_BYTES = 2_500_000  # CONTRACTS §6 POST /v1/checks; applied to every request, not just that one
 
-_PER_MINUTE = {"checks": 10, "events": 30, "chat": 20, "report": 10, "feedback": 10}
+_PER_MINUTE = {"checks": 10, "events": 30, "chat": 20, "report": 10, "feedback": 10, "practice": 10}
 _IDLE_EVICT_S = 600.0  # CONTRACTS §6: drop buckets idle > 10 min
 
 _413_BODY = json.dumps({"error": {"code": "input_too_large", "message_key": "error.input_too_large", "retryable": False}}).encode()

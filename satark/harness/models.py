@@ -31,7 +31,7 @@ from pydantic_ai.models.fallback import FallbackModel
 log = logging.getLogger(__name__)
 os.environ.setdefault("PYDANTIC_AI_NO_BANNER", "1")  # no promotional banner in server logs
 
-ROLES = ("extract", "assess", "explain", "respond", "image")
+ROLES = ("extract", "assess", "explain", "respond", "practice", "image")
 _EXPLICIT_ONLY = {"image"}  # screenshots may hold the user's own data: only a model named for this role sees them
 
 

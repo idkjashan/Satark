@@ -6,6 +6,7 @@ export interface HistoryEntry {
   date: string; // ISO timestamp
   level: string; // verdict level
   scam_type?: string;
+  lesson?: string; // lesson id the verdict pointed at (drives "For you" and suggestions)
   lang: string;
 }
 
@@ -26,6 +27,39 @@ export async function getHistory(): Promise<HistoryEntry[]> {
 /** History's own "Clear all" (LLD §21.2) - only the checks list, not progress/family/prefs. */
 export async function clearHistory(): Promise<void> {
   await del(HISTORY_KEY);
+}
+
+export interface ChatMsg {
+  role: 'user' | 'assistant';
+  text: string;
+  chips?: string[];
+}
+export interface ChatThread {
+  id: string;
+  title: string; // the first question
+  date: string; // ISO timestamp of the last message
+  messages: ChatMsg[];
+}
+
+const CHATS_KEY = 'chats';
+const CHATS_LIMIT = 30;
+
+export async function getThreads(): Promise<ChatThread[]> {
+  return (await get<ChatThread[]>(CHATS_KEY)) ?? [];
+}
+
+/** Upsert one thread, newest first, capped at 30. Stays on this device (cleared by "Clear my data"). */
+export async function saveThread(thread: ChatThread): Promise<void> {
+  const rest = (await getThreads()).filter((x) => x.id !== thread.id);
+  await set(CHATS_KEY, [thread, ...rest].slice(0, CHATS_LIMIT));
+}
+
+export async function deleteThread(id: string): Promise<void> {
+  await set(CHATS_KEY, (await getThreads()).filter((x) => x.id !== id));
+}
+
+export async function clearThreads(): Promise<void> {
+  await del(CHATS_KEY);
 }
 
 export interface Progress {

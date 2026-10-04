@@ -214,5 +214,15 @@
   "ui.proof.live": "live lookup",
   "ui.proof.result": "Result:",
   "ui.proof.verify": "Verify yourself",
-  "ui.proof.show": "Show proof"
+  "ui.proof.show": "Show proof",
+  "ui.recent_chats": "Recent chats",
+  "ui.delete": "Delete",
+  "ui.for_you": "For you",
+  "ui.practice_this": "Practice this",
+  "ui.make_quiz": "Make me a quiz on…",
+  "ui.start_quiz": "Start quiz",
+  "ui.quiz_loading": "Making your quiz…",
+  "ui.quiz_failed": "Could not make a quiz right now. Try again later.",
+  "ui.suggest_scam": "How do I stay safe from: {type}?",
+  "ui.suggest_lesson": "Tell me more about: {title}"
 }

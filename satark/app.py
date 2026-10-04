@@ -15,7 +15,7 @@ from fastapi import FastAPI
 from starlette.datastructures import MutableHeaders
 from starlette.middleware.gzip import GZipMiddleware
 
-from satark.api import chat, checks, feedback, meta, report, runs, share, static
+from satark.api import chat, checks, feedback, meta, practice, report, runs, share, static
 from satark.api.errors import install as install_error_handlers
 from satark.api.limits import BodySizeLimitMiddleware
 from satark.config import Settings
@@ -176,7 +176,7 @@ def create_app(settings: Settings | None = None, runtime=None) -> FastAPI:
     app.add_middleware(SecurityHeadersMiddleware)
     app.add_middleware(AccessLogMiddleware)
 
-    for module in (checks, runs, chat, report, meta, feedback, share):
+    for module in (checks, runs, chat, practice, report, meta, feedback, share):
         app.include_router(module.router)
     app.include_router(static.router)  # last: catch-all SPA fallback / no-dist landing page
 

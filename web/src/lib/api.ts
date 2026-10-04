@@ -1,5 +1,6 @@
 // HTTP + SSE client for the Satark API (CONTRACTS §6). Same origin, no cookies, no CORS.
 import { signal } from '@preact/signals';
+import type { QuizQuestion } from './lessons';
 import { RUN_EVENT_TYPES, type RunEventType } from './runReducer';
 
 export type { RunEventType };
@@ -107,6 +108,17 @@ export interface ChatInput {
 
 export async function postChat(input: ChatInput): Promise<RunHandle> {
   return postJSON<RunHandle>('/v1/chat', input);
+}
+
+export interface PracticeResult {
+  questions: QuizQuestion[];
+  source: 'model' | 'lessons';
+  lesson: string | null;
+}
+
+/** POST /v1/practice: a 3-question quiz on a lesson id / free topic / scam type. */
+export async function postPractice(input: { topic?: string; scam_type?: string; lang: string }): Promise<PracticeResult> {
+  return postJSON<PracticeResult>('/v1/practice', input);
 }
 
 export interface ReportDraftInput {

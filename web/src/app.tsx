@@ -13,6 +13,7 @@ const Chat = lazy(() => import('./routes/Chat').then((m) => m.Chat));
 const Learn = lazy(() => import('./routes/Learn').then((m) => m.Learn));
 const LessonPlayer = lazy(() => import('./routes/LessonPlayer').then((m) => m.LessonPlayer));
 const Practice = lazy(() => import('./routes/Practice').then((m) => m.Practice));
+const Quiz = lazy(() => import('./routes/Quiz').then((m) => m.Quiz));
 const SimPlayer = lazy(() => import('./routes/SimPlayer').then((m) => m.SimPlayer));
 const HelpPaid = lazy(() => import('./routes/HelpPaid').then((m) => m.HelpPaid));
 const Settings = lazy(() => import('./routes/Settings').then((m) => m.Settings));
@@ -57,6 +58,7 @@ function Root() {
         <Route path="/learn" component={Learn} />
         <Route path="/learn/:id" component={LessonPlayer} />
         <Route path="/practice" component={Practice} />
+        <Route path="/quiz" component={Quiz} />
         <Route path="/sim/:id" component={SimPlayer} />
         <Route path="/help-paid" component={HelpPaid} />
         <Route path="/settings" component={Settings} />

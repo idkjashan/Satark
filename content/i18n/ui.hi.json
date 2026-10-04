@@ -214,5 +214,15 @@
   "ui.proof.live": "लाइव खोज",
   "ui.proof.result": "नतीजा:",
   "ui.proof.verify": "खुद जाँचें",
-  "ui.proof.show": "प्रमाण देखें"
+  "ui.proof.show": "प्रमाण देखें",
+  "ui.recent_chats": "हाल की बातचीत",
+  "ui.delete": "हटाएँ",
+  "ui.for_you": "आपके लिए",
+  "ui.practice_this": "इसका अभ्यास करें",
+  "ui.make_quiz": "मेरे लिए क्विज़ बनाएँ…",
+  "ui.start_quiz": "क्विज़ शुरू करें",
+  "ui.quiz_loading": "आपका क्विज़ बन रहा है…",
+  "ui.quiz_failed": "अभी क्विज़ नहीं बन सका। बाद में फिर कोशिश करें।",
+  "ui.suggest_scam": "{type} से कैसे बचें?",
+  "ui.suggest_lesson": "इस बारे में और बताइए: {title}"
 }

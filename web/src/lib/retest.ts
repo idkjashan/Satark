@@ -7,7 +7,7 @@ import { sims } from './sims';
 
 const KEY = 'missed_tactics';
 
-function readMissed(): string[] {
+export function readMissed(): string[] {
   try {
     const raw = localStorage.getItem(KEY);
     return raw ? (JSON.parse(raw) as string[]) : [];

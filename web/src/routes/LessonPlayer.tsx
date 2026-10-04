@@ -6,6 +6,7 @@ import { getLesson, pick, quizQuestions } from '../lib/lessons';
 import { prefs } from '../lib/signals';
 import { t } from '../lib/i18n';
 import { markLessonDone } from '../lib/idb';
+import { setLastLesson } from '../lib/personal';
 import { Visual } from '../components/visuals';
 import { SpeakerButton } from '../components/SpeakerButton';
 import { QuizFlow } from '../components/QuizFlow';
@@ -17,6 +18,7 @@ interface LessonPlayerProps {
 
 export function LessonPlayer({ id }: LessonPlayerProps) {
   const lesson = getLesson(id);
+  if (lesson) setLastLesson(id);
   const [step, setStep] = useState(0);
   const [showQuiz, setShowQuiz] = useState(false);
   const lang = prefs.value.lang;

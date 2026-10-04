@@ -76,3 +76,18 @@ describe('clearAllData', () => {
     expect(mockClear).toHaveBeenCalledTimes(1);
   });
 });
+
+describe('chat threads', () => {
+  const th = (id: string) => ({ id, title: `q ${id}`, date: '2026-10-04', messages: [{ role: 'user' as const, text: 'hi' }] });
+
+  it('saves newest first, upserts by id, and deletes one or all', async () => {
+    const { saveThread, deleteThread, clearThreads } = await import('./idb');
+    mockGet.mockResolvedValue([th('a'), th('b')]);
+    await saveThread(th('b'));
+    expect(mockSet).toHaveBeenCalledWith('chats', [th('b'), th('a')]);
+    await deleteThread('a');
+    expect(mockSet).toHaveBeenLastCalledWith('chats', [th('b')]);
+    await clearThreads();
+    expect(mockDel).toHaveBeenCalledWith('chats');
+  });
+});

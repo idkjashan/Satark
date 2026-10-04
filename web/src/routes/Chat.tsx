@@ -18,6 +18,8 @@ import { Icon } from '../components/Icon';
 import { Shield } from '../components/Shield';
 import { ChatArt } from '../components/Illustrations';
 import { getLesson, pick } from '../lib/lessons';
+import { suggestions } from '../lib/personal';
+import { getThreads, saveThread, deleteThread, clearThreads, type ChatThread } from '../lib/idb';
 import { getSim } from '../lib/sims';
 
 // Same examples Home's "Ask a question" chips use (content/i18n/content.<lang>.json) -
@@ -74,10 +76,33 @@ export function Chat({ caseId = NEW_CASE }: ChatProps) {
   // of Simple mode - once on, every answer is spoken and the mic re-opens automatically after.
   const handsFree = useSignal(false);
   const listening = useSignal(false);
+  const threadId = useRef(Date.now().toString(36));
+  const threads = useSignal<ChatThread[]>([]);
+  const suggested = useSignal<string[]>(EMPTY_STATE_CHIPS.map((k) => t(k)));
   const listRef = useRef<HTMLDivElement>(null);
   const dictationRef = useRef<ReturnType<typeof startDictation>>(null);
   const autoSent = useRef(false);
   const silentTurns = useRef(0);
+
+  useEffect(() => {
+    void getThreads().then((list) => {
+      threads.value = list;
+      const open = query.thread && list.find((x) => x.id === query.thread);
+      if (open) openThread(open);
+    });
+    void suggestions(EMPTY_STATE_CHIPS.map((k) => t(k))).then((s) => (suggested.value = s));
+  }, []);
+
+  function openThread(th: ChatThread) {
+    threadId.current = th.id;
+    bubbles.value = th.messages.map((m) => ({ id: nextBubbleId++, ...m }));
+  }
+
+  async function persist() {
+    const messages = bubbles.value.map(({ role, text, chips }) => ({ role, text, chips }));
+    const first = messages.find((m) => m.role === 'user');
+    if (first) await saveThread({ id: threadId.current, title: first.text.slice(0, 120), date: new Date().toISOString(), messages });
+  }
 
   useEffect(() => {
     listRef.current?.scrollTo(0, listRef.current.scrollHeight);
@@ -191,6 +216,7 @@ export function Chat({ caseId = NEW_CASE }: ChatProps) {
       }
     } finally {
       busy.value = false;
+      void persist();
     }
   }
 
@@ -295,13 +321,52 @@ export function Chat({ caseId = NEW_CASE }: ChatProps) {
             <h1>{t('ui.chat_empty_title')}</h1>
             <p>{t('ui.ask_hint')}</p>
             <div class="prompt-list">
-              {EMPTY_STATE_CHIPS.map((key) => (
-                <button key={key} type="button" class="chip chip-prompt" onClick={() => void send(t(key))}>
-                  <span>{t(key)}</span>
+              {suggested.value.map((q) => (
+                <button key={q} type="button" class="chip chip-prompt" onClick={() => void send(q)}>
+                  <span>{q}</span>
                   <Icon name="arrowRight" size={16} />
                 </button>
               ))}
             </div>
+            {threads.value.length > 0 && (
+              <section class="recent-chats" data-testid="recent-chats">
+                <div class="home-history-head">
+                  <h2>{t('ui.recent_chats')}</h2>
+                  <button
+                    type="button"
+                    class="btn-link"
+                    data-testid="chats-clear"
+                    onClick={async () => {
+                      await clearThreads();
+                      threads.value = [];
+                    }}
+                  >
+                    {t('ui.clear_all')}
+                  </button>
+                </div>
+                <ul class="history-list">
+                  {threads.value.map((th) => (
+                    <li key={th.id} class="history-row">
+                      <button type="button" class="recent-chat-open" data-testid="chat-thread" onClick={() => openThread(th)}>
+                        <span class="history-level">{th.title}</span>
+                        <span class="history-date">{new Date(th.date).toLocaleDateString()}</span>
+                      </button>
+                      <button
+                        type="button"
+                        class="recent-chat-del"
+                        aria-label={t('ui.delete')}
+                        onClick={async () => {
+                          await deleteThread(th.id);
+                          threads.value = threads.value.filter((x) => x.id !== th.id);
+                        }}
+                      >
+                        <Icon name="close" size={16} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
           </div>
         )}
         {bubbles.value.map((b) => (

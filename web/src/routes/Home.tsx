@@ -8,6 +8,7 @@ import { t } from '../lib/i18n';
 import { getHistory, type HistoryEntry } from '../lib/idb';
 import { Icon } from '../components/Icon';
 import { HeroArt } from '../components/Illustrations';
+import { suggestions } from '../lib/personal';
 import { speak } from '../lib/voice';
 
 /** Small speaker under a tile: reads what the tile does aloud, so it can be used without reading. */
@@ -26,9 +27,11 @@ const ASK_EXAMPLES = ['chip.what_is_sip', 'chip.is_rate_possible', 'chip.spot_fa
 
 export function Home() {
   const history = useSignal<HistoryEntry[]>([]);
+  const asks = useSignal<string[]>(ASK_EXAMPLES.map((k) => t(k)));
 
   useEffect(() => {
     void getHistory().then((h) => (history.value = h));
+    void suggestions(ASK_EXAMPLES.map((k) => t(k))).then((s) => (asks.value = s));
   }, []);
 
   return (
@@ -77,9 +80,9 @@ export function Home() {
       </section>
 
       <div class="chips ask-chips">
-        {ASK_EXAMPLES.map((key) => (
-          <a key={key} class="chip" href={`/chat/new?q=${encodeURIComponent(t(key))}`}>
-            {t(key)}
+        {asks.value.map((q) => (
+          <a key={q} class="chip" href={`/chat/new?q=${encodeURIComponent(q)}`}>
+            {q}
           </a>
         ))}
       </div>

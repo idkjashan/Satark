@@ -117,6 +117,11 @@ export function VerdictCard({ verdict, caseId }: { verdict: VerdictEvent; caseId
             {t('ui.see_how_this_trap_works')} <Icon name="chevronRight" size={16} />
           </a>
         )}
+        {verdict.scam_type && (
+          <a class="btn btn-link" data-testid="practice-this" href={`/quiz?scam_type=${verdict.scam_type}`}>
+            {t('ui.practice_this')} <Icon name="chevronRight" size={16} />
+          </a>
+        )}
         {verdict.lesson && (
           <a class="btn btn-link" href={`/learn/${verdict.lesson}`}>
             {t('ui.learn_more')}

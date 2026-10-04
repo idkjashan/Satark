@@ -9,6 +9,8 @@ import { lessons, pick } from '../lib/lessons';
 import { getProgress } from '../lib/idb';
 import { getQuickCheck, recordMiss, clearMiss } from '../lib/retest';
 import { Icon, type IconName } from '../components/Icon';
+import { QuizPicker } from '../components/QuizPicker';
+import { recommendations } from '../lib/personal';
 import { LearnArt } from '../components/Illustrations';
 
 // Lesson topic -> icon (the lesson JSON ships an emoji; a consistent line-icon set reads as designed).
@@ -33,8 +35,10 @@ export function Learn() {
   const [quick] = useState(() => getQuickCheck());
   const [answered, setAnswered] = useState<string | null>(null);
   const lang = prefs.value.lang;
+  const rec = useSignal<Awaited<ReturnType<typeof recommendations>> | null>(null);
 
   useEffect(() => {
+    void recommendations().then((r) => (rec.value = r));
     void getProgress().then((p) => {
       const next: Record<string, boolean> = {};
       for (const [id, entry] of Object.entries(p.lessons)) next[id] = entry.done;
@@ -85,6 +89,26 @@ export function Learn() {
           {answered && quick.explain && <p class="quiz-explain">{pick(quick.explain, lang)}</p>}
         </section>
       )}
+
+      {rec.value && rec.value.lessons.length > 0 && (
+        <section class="for-you card" data-testid="for-you">
+          <p class="eyebrow">{t('ui.for_you')}</p>
+          <div class="chips">
+            {rec.value.lessons.map((l) => (
+              <a key={l.id} class="chip" href={`/learn/${l.id}`}>
+                <Icon name={LESSON_ICON[l.id] ?? 'learn'} size={14} /> {pick(l.title, lang)}
+              </a>
+            ))}
+            {rec.value.sims.map((s) => (
+              <a key={s.id} class="chip" href={`/sim/${s.id}`}>
+                <Icon name="practice" size={14} /> {pick(s.title, lang) || s.id}
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <QuizPicker />
 
       {lessons.length === 0 && <p class="empty-state">{t('ui.no_lessons_yet')}</p>}
       <ul class="lesson-list card-grid">

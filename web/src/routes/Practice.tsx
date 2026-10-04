@@ -3,6 +3,7 @@ import { t } from '../lib/i18n';
 import { prefs } from '../lib/signals';
 import { sims } from '../lib/sims';
 import { pick } from '../lib/lessons';
+import { QuizPicker } from '../components/QuizPicker';
 import { Icon, type IconName } from '../components/Icon';
 
 // sims.json carries no icon/description field (G's content, CONTRACTS §7.3 SimMeta = id/kind/title
@@ -25,6 +26,7 @@ export function Practice() {
         <h1>{t('ui.practice')}</h1>
         <p class="lead">{t('ui.practice_sub')}</p>
       </header>
+      <QuizPicker />
       {sims.length === 0 && <p class="empty-state">{t('ui.no_sims_yet')}</p>}
       <ul class="lesson-list card-grid">
         {sims.map((sim) => (
