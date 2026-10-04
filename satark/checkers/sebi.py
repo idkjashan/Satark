@@ -78,7 +78,7 @@ class SebiRegLookup(BaseChecker):
             return clear()  # sebi.reg.format already reports the format problem
         if ctx.db is None or not ctx.db.one("SELECT 1 FROM intermediary LIMIT 1"):
             return unknown("source_missing")
-        # ponytail: a reg_no can appear once per segment file (schema.sql comment); we take the
+        # note: a reg_no can appear once per segment file (schema.sql comment); we take the
         # first row. Upgrade to "any non-expired row wins" if a real duplicate causes a bad verdict.
         rows = ctx.db.query(
             "SELECT category, name, trade_name, valid_to FROM intermediary WHERE reg_no = ?", (raw,)

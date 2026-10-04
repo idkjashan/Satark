@@ -210,7 +210,7 @@ class TextRedflags(BaseChecker):
 
 _DEFAULT_N_PER_YEAR = {"day": 250, "week": 52, "month": 12, "year": 1}
 _DEFAULT_IMPOSSIBLE_THRESHOLD = 0.5
-_MULTIPLE_CAP = 1e12  # ponytail: a sane display cap instead of float('inf') for absurd inputs
+_MULTIPLE_CAP = 1e12  # note: a sane display cap instead of float('inf') for absurd inputs
 
 
 def _compound(rate: float, n: int) -> float:

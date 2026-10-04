@@ -37,7 +37,7 @@ flowchart LR
 ```
 
 - **Accuracy runs:** network off, so they repeat exactly. Live lookups were tested separately with real and fake identifiers (§4.4).
-- **Model ceiling:** a stand-in run with a hosted model (Claude Haiku, through an OpenAI-compatible shim) measured how much of the remaining error comes from the small local model.
+- **Model ceiling:** a stand-in run with a larger hosted model (through an OpenAI-compatible shim) measured how much of the remaining error comes from the small local model.
 
 ## 3. Results by gate
 
@@ -64,7 +64,7 @@ flowchart LR
 
 Notes:
 - Run-to-run variance at this model size is about ±4 messages out of 36. An earlier run of qwen3 on blind set 3 caught 36/36.
-- **Model ceiling:** with Claude Haiku as the stand-in, 49 of the first 50 blind-set-3 messages were judged correctly. The remaining blind-set misses (mostly Hindi pig-butchering and crypto-airdrop messages) are a model-size limit, not a pipeline limit.
+- **Model ceiling:** with a larger hosted model as the stand-in, 49 of the first 50 blind-set-3 messages were judged correctly. The remaining blind-set misses (mostly Hindi pig-butchering and crypto-airdrop messages) are a model-size limit, not a pipeline limit.
 - **"About a scam" for news:** the 9/40 was measured before the judge got an explicit "is this text about a scam?" field. In a spot check after the change, 2 more of 6 news stories were marked, and 0 of 4 ordinary money explainers were wrongly marked. The full set was not re-run.
 
 ### 4.2 Chat (Track C), 20 questions

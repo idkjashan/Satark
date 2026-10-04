@@ -10,7 +10,7 @@ Rules for every contributor:
    types, signal codes, event names, JSON fields, i18n key prefixes). Add freely.
 2. **Edit only the files your task owns.** If you need a change in someone else's file, put it
    in your final report instead of editing it.
-3. **Keep it small** (ponytail): stdlib first, no new dependency unless unavoidable, no
+3. **Keep it small**: stdlib first, no new dependency unless unavoidable, no
    abstractions with one implementation, no speculative config.
 4. **Every non-trivial piece ships with tests**, and tests never touch the network
    (`Settings(network=False)`, `respx`, fake checkers, PydanticAI `FunctionModel`/`TestModel`).

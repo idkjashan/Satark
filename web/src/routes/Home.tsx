@@ -20,7 +20,7 @@ function HearButton({ text }: { text: string }) {
   );
 }
 
-// content.<lang>.json already has these exact examples (engineer G) - reusing them means one
+// content.<lang>.json already has these exact examples - reusing them means one
 // fewer set of strings to keep translated, and they match the chips a real answer would use.
 const ASK_EXAMPLES = ['chip.what_is_sip', 'chip.is_rate_possible', 'chip.spot_fake_adviser'];
 

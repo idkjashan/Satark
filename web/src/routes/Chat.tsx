@@ -20,7 +20,7 @@ import { ChatArt } from '../components/Illustrations';
 import { getLesson, pick } from '../lib/lessons';
 import { getSim } from '../lib/sims';
 
-// Same examples Home's "Ask or learn" chips use (content/i18n/content.<lang>.json, engineer G) -
+// Same examples Home's "Ask a question" chips use (content/i18n/content.<lang>.json) -
 // shown here too so a user who reached /chat/new straight from the Ask tab (no ?q= prefill) still
 // has something to tap on instead of a blank screen.
 const EMPTY_STATE_CHIPS = ['chip.what_is_sip', 'chip.is_rate_possible', 'chip.spot_fake_adviser'];

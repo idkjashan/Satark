@@ -52,7 +52,7 @@ _RDAP_IN_FAMILY = (
     "firm.in", "ind.in", "gen.in", "ac.in",
 )
 _RDAP_IN_BASE = "https://rdap.nixiregistry.in/rdap/"
-# ponytail: used only if data/manual/misc/iana_rdap_dns.json (B's job) is missing or not yet in
+# note: used only if data/manual/misc/iana_rdap_dns.json (B's job) is missing or not yet in
 # IANA bootstrap shape; extend when more TLDs matter for the demo set.
 _RDAP_FALLBACK = {
     "com": "https://rdap.verisign.com/com/v1/",
@@ -108,7 +108,7 @@ def _official_rows(db: Any) -> list[Any]:
     rows = _OFFICIAL_CACHE.get(key)
     if rows is None:
         rows = db.query("SELECT domain, entity_name, category, brand_id FROM official_domain")
-        _OFFICIAL_CACHE.clear()  # ponytail: one entry is enough for a single-process hackathon demo
+        _OFFICIAL_CACHE.clear()  # note: one entry is enough for a single-process hackathon demo
         _OFFICIAL_CACHE[key] = rows
     return rows
 
@@ -297,7 +297,7 @@ def _rdap_bootstrap(root: Path = ROOT) -> dict[str, str]:
                 base = urls[0].rstrip("/") + "/"
                 table.update({t.lower(): base for t in tlds})
     except Exception:
-        pass  # ponytail: a missing/malformed bootstrap snapshot falls back to the table above
+        pass  # note: a missing/malformed bootstrap snapshot falls back to the table above
     table.update({tld: _RDAP_IN_BASE for tld in _RDAP_IN_FAMILY})
     return table
 

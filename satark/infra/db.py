@@ -11,7 +11,7 @@ from typing import Any
 class RegistryDB:
     """One read-only SQLite connection. Lookups take well under 1 ms and run inline on the event loop.
 
-    ponytail: one shared connection behind a lock; use a connection per thread if p99 query time grows.
+    note: one shared connection behind a lock; use a connection per thread if p99 query time grows.
     """
 
     def __init__(self, path: Path | str):

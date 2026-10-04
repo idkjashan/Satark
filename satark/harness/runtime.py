@@ -133,7 +133,7 @@ def _build_http(network: bool):
 
 
 async def _close_http(http) -> None:
-    # ponytail: SafeHttpClient has no public close/aclose today, so fall back to its private
+    # note: SafeHttpClient has no public close/aclose today, so fall back to its private
     # httpx client; add a public aclose() there and drop this fallback.
     for name in ("aclose", "close"):
         fn = getattr(http, name, None)

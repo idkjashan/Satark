@@ -2,7 +2,7 @@
   "name": "satark-web",
   "private": true,
   "version": "1.0.0",
-  "description": "Satark PWA (engineer F)",
+  "description": "Satark PWA",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -38,7 +38,7 @@ class _Breaker:
     opened_at: float | None = None
 
     def allow(self) -> bool:
-        # ponytail: a global per-source flag, not a single-slot semaphore, so several steps that
+        # note: a global per-source flag, not a single-slot semaphore, so several steps that
         # all land right as the 30s window ends can probe concurrently instead of just one. Add a
         # "probing" bool here if a source ever gets hammered by a whole wave at reopen time.
         if self.opened_at is None:
@@ -72,7 +72,7 @@ class _Bucket:
 
 
 def _parse_rate(rate: str) -> _Bucket:
-    """"1/5s" -> 1 token / 5s; "3/s" -> 3 tokens / s. ponytail: seconds only; extend if a source needs minutes/days."""
+    """"1/5s" -> 1 token / 5s; "3/s" -> 3 tokens / s. note: seconds only; extend if a source needs minutes/days."""
     n, _, per = rate.partition("/")
     secs = 1.0 if per in ("s", "") else float(per[:-1])
     tokens = float(n)

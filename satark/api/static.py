@@ -30,7 +30,7 @@ def _cache_headers(rel_path: str) -> dict[str, str]:
 
 
 async def _serve(full_path: str, request: Request) -> Response:
-    # ponytail: sync local-disk stat()/resolve() calls inline on the event loop, same trade-off
+    # note: sync local-disk stat()/resolve() calls inline on the event loop, same trade-off
     # satark/infra/db.py makes for SQLite; move to asyncio.to_thread if p99 ever shows it mattering.
     rt = get_rt(request)
     web_dist: Path = rt.settings.web_dist

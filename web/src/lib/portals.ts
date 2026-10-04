@@ -1,4 +1,4 @@
-// Typed access to content/portals.json (CONTRACTS §9/§7, read-only - engineer G owns the file).
+// Typed access to content/portals.json (CONTRACTS §9/§7, read-only).
 import data from '@content/portals.json';
 
 export interface PortalDef {

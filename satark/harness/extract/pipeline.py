@@ -86,7 +86,7 @@ def _worse(a: _Cand, b: _Cand) -> _Cand:
 
 
 def _resolve_overlaps(cands: list[_Cand]) -> list[_Cand]:
-    # ponytail: O(n^2) pairwise sweep; fine at the <=4,000-char / dozens-of-matches scale this
+    # note: O(n^2) pairwise sweep; fine at the <=4,000-char / dozens-of-matches scale this
     # runs at, switch to a sorted-interval sweep if a pathological input makes this show up.
     dropped: set[int] = set()
     for i, a in enumerate(cands):
@@ -165,7 +165,7 @@ def _trim_role_words(words: list[str]) -> list[str]:
 
 
 def _name_candidate(window: str) -> str | None:
-    # ponytail: a naive Title-Case-run + stoplist heuristic, not a real NER (named-entity
+    # note: a naive Title-Case-run + stoplist heuristic, not a real NER (named-entity
     # recognition) model. Deliberately conservative (a missed name beats a wrong one, per
     # spec); upgrade path is the LLM extraction path, which already handles this better when on.
     matches = list(_NAME_RUN.finditer(window))

@@ -2,7 +2,7 @@
 token buckets. Plain module-level dicts — matches the harness's own single-instance, single
 -worker design (LLD §3.7); move to Redis if this ever runs with more than one worker (LLD §19.3).
 
-ponytail: a dict with a lazy sweep on every call, not a background task; fine at hackathon
+note: a dict with a lazy sweep on every call, not a background task; fine at hackathon
 scale (a handful of buckets), revisit if the bucket count ever grows unbounded.
 """
 

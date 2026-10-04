@@ -14,3 +14,9 @@ web/test-results/
 web/playwright-report/
 .env
 data/models/
+
+# local tooling and notes
+.claude/
+CLAUDE.md
+.archify/
+graphify-out/

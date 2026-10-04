@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 const contentDir = fileURLToPath(new URL('../content', import.meta.url));
 
-// Satark PWA (engineer F). See docs/CONTRACTS.md and docs/reference/Satark-LLD.md Part D.
+// Satark PWA. See docs/CONTRACTS.md and docs/reference/Satark-LLD.md Part D.
 export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   resolve: {

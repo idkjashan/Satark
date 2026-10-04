@@ -1,6 +1,6 @@
 """CaseStore: in-memory cases with a 30-minute TTL, plus one asyncio.Lock per case (LLD §3.7, §14.4).
 
-ponytail: the content-hash cache (sha256 of normalised text + lang -> cached verdict/explanation,
+note: the content-hash cache (sha256 of normalised text + lang -> cached verdict/explanation,
 6 h, LLD §14.4) is skipped. It only pays off once two people share byte-identical text, and reusing
 it correctly requires the *new* case's regex entity ids to line up with the cached Verdict's
 `entity_ids` (same extraction order) plus care that nothing in the cached payload is ever a raw

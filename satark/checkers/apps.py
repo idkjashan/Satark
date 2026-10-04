@@ -59,7 +59,7 @@ def _fuzzy_contains(developer: str, candidates: list[str]) -> bool:
     if not developer or not candidates:
         return False
     dn = name_norm(developer)
-    # ponytail: 0.6 is a seed threshold (same band as the QR payee-name check); tune on the golden set.
+    # note: 0.6 is a seed threshold (same band as the QR payee-name check); tune on the golden set.
     return any(fuzz.token_set_ratio(dn, name_norm(c)) / 100 >= 0.6 for c in candidates)
 
 

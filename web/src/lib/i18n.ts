@@ -1,5 +1,5 @@
 // i18n (CONTRACTS §7.1): t(key, vars) over merged ui.<lang>.json (ours) + content.<lang>.json
-// (engineer G's, written in parallel - may be empty or missing keys right now).
+// (may be empty or missing keys).
 // Lookup order per key: current language -> English -> the key itself, so a missing translation
 // is visible (shows the key) instead of crashing or showing "undefined".
 import { prefs } from './signals';
